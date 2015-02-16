@@ -1,0 +1,36 @@
+@(message: String)
+
+@Main("Welcome to Envived") {
+
+    @message
+    <br>
+    <form action="@routes.Application.AddUser()" method="POST">
+
+    <div class="col-md-offset-1 col-md-4">
+
+  	<br>
+
+    Email :
+    <input type="input" name="email" class="form-control"><br>
+
+    First Name :
+    <input type="input" name="first_name" class="form-control"><br>
+    Last Name :
+    <input type="input" name="last_name" class="form-control"><br>
+    
+    Password:
+    <input type="password" name="password1" class="form-control"><br>
+    Repeat Password : 
+    <input type="password" name="password2" class="form-control"><br>
+    <br>
+    <input type="submit"  class="btn">
+    <br><br><br><br>
+   <h2> ^_^ : have fun .</h2>
+    </div>
+ 	
+    </form>
+
+
+
+
+}

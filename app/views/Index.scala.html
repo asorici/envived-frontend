@@ -1,0 +1,18 @@
+@(message: String)
+
+
+@Main("Welcome to Envived") {
+
+    @message
+
+    <div class="container">
+	    <div class="row">
+		    <div class="col-offset-2 col-md-4">
+			    <br>
+			    <a href="@routes.Application.LoginPage()">Login</a><br>
+			    <a href="@routes.Application.Register()">Register</a>
+		    </div>
+	    </div>
+    </div>
+
+}

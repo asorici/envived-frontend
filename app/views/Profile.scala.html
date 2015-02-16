@@ -1,0 +1,21 @@
+@(message: String)
+
+@Main("Welcome to Envived") {
+	Welcome : @message
+	<br>
+	<h2>Profile</h2><br>
+	<a href="#">Edit Profile</a><br>
+
+
+	<br><br>
+	<a href="#">Your Environments</a>
+
+	
+
+<br>
+
+<a href="@routes.Application.AddEnvironment()"> Add new Environment</a>
+
+
+	
+}

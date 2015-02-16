@@ -1,0 +1,47 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+
+# Home page
+GET     /                           controllers.Application.index()
+
+GET		/register					controllers.Application.Register()
+POST	/register				    controllers.Application.AddUser()
+
+#GET     /forgotPass                controllers.Application.ForgotPass()
+#POST    /forgotPass                controllers.Application.ForgotPass()
+
+GET     /login                      controllers.Application.LoginPage()
+POST    /login                      controllers.Application.PostLogin()
+
+GET     /welcome					controllers.Application.welcome()
+GET		/profile					controllers.Application.Profile()
+#GET     /EditProfile               controllers.Application.EditProfile()
+#POST    /EditProfile               controllers.Application.AddEditedProfile()
+
+GET    /addEnvironment				controllers.Application.AddEnvironment()
+POST   /postNewEnvironment          controllers.Application.PostNewEnvironment() 
+#GET    /viewEnvironments            controllers.Application.viewEnvironments(id:String)
+
+#GET		/edit					controllers.Application.Edit()
+GET		/editEnv/:id				controllers.Application.editEnv(id:String)	
+#POST	/saveEnv					controllers.Application.SaveEnv()	
+
+#GET    /addArea    	  			controllers.Application.AddEnvironment()
+#POST   /postNewArea                controllers.Application.PostNewEnvironment()
+
+#GET	/edit						controllers.Application.Edit()
+#GET	/editArea/:id				controllers.Application.EditArea(id:String)	
+#POST	/saveArea					controllers.Application.SaveArea()
+
+#GET     /AddResource             	controllers.Application.Resources()
+#POST    /AddResource             	controllers.Application.AddResource()
+
+#GET     /AddFeature             	controllers.Application.Features()
+#POST    /AddFeature             	controllers.Application.AddFeatures()
+
+#GET     /logout                    controllers.Application.logout()
+	
+
+# Map static resources from the /public folder to the /assets URL path
+GET     /assets/*file               controllers.Assets.at(path="/public", file)
