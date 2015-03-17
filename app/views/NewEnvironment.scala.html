@@ -1,17 +1,30 @@
-@Main("Welcome to Envived") {
+@Main("New Environment") {
 
+<div class="col-md-offset-3 col-md-9">
 
+<h3>Add new Environment:</h3>
+<!-- <div class="border-input-edit"></div> -->
 
 <form method="POST" action="@routes.Application.PostNewEnvironment()">
 
-Name</br>
-<input name="name"></br>
-Tags</br>
-<input name="tags"></br>
+<div class="row">
+	<div class="col-md-8">
+	Name</br>
+	<input name="name" class="form-control"></br>
+	Tags</br>
+	<input name="tags" class="form-control"></br>
+	</div>
+</div>
 
-<input type="submit" name="Add">
+<input type="submit" name="Add" class="btn-edit" value="add">
 
 </form>
 
+</div>
 
+<style type="text/css">
+	h3{
+		font-size: 20px;
+	}
+</style>
 }

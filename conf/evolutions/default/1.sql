@@ -4,13 +4,23 @@
 # --- !Ups
 
 create table area (
-  area_name                 varchar(255),
+  name                      varchar(255),
   tags                      varchar(255))
 ;
 
+create table booth_description (
+  product_id                varchar(255) not null,
+  product_name              varchar(255),
+  product_description       varchar(255),
+  constraint pk_booth_description primary key (product_id))
+;
+
 create table environment (
+  id                        varchar(255) not null,
   name                      varchar(255),
-  tags                      varchar(255))
+  tags                      varchar(255),
+  description               varchar(255),
+  constraint pk_environment primary key (id))
 ;
 
 create table user_profile (
@@ -20,8 +30,13 @@ create table user_profile (
   last_name                 varchar(255),
   password1                 varchar(255),
   password2                 varchar(255),
+  password                  varchar(255),
   constraint pk_user_profile primary key (id))
 ;
+
+create sequence booth_description_seq;
+
+create sequence environment_seq;
 
 create sequence user_profile_seq;
 
@@ -34,11 +49,17 @@ SET REFERENTIAL_INTEGRITY FALSE;
 
 drop table if exists area;
 
+drop table if exists booth_description;
+
 drop table if exists environment;
 
 drop table if exists user_profile;
 
 SET REFERENTIAL_INTEGRITY TRUE;
+
+drop sequence if exists booth_description_seq;
+
+drop sequence if exists environment_seq;
 
 drop sequence if exists user_profile_seq;
 

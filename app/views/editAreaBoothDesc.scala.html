@@ -1,0 +1,38 @@
+@(k:String, idenv:String)
+@Main("view description"){
+
+
+  <div class="col-md-offset-1 col-md-5">
+        <form action="@routes.Application.saveDeleteDescArea(k,idenv)" method="POST">
+        <br><br><br>
+             <h2>Edit Area Booth Description:</h2><br>
+           
+        Tags : <br>
+		<input type="text" name="tags" value="tags" class="form-control"><br>
+		Contact Email : <br>
+		<input name="contact_email" value="contact_email" class="form-control"><br>
+		Contact Website : <br>
+		<input name="contact_website" value="contact_website" class="form-control"><br><br>
+
+		Product id :<br>
+		<input name="product_id" value="product_id" class="form-control"><br>
+		Product Name : <br>
+		<input name="product_name" value="product_name" class="form-control"><br>
+		Product Description : <br>
+		<input name="product_description" value="product_description" class="form-control"> <br>
+
+		 
+       
+		<div class="row">
+			<div class="col-md-6">
+				<input type="submit" name="update" value="save" class="btn liniar-graduent-btn-sml">
+			</div>
+			<div class="col-md-6">
+				<input type="submit" name="update" value="delete" class="btn liniar-graduent-btn-sml">
+			</div>
+		</div>
+
+		</form>
+ </div>
+
+}

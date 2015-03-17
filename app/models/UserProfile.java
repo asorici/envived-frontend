@@ -21,6 +21,8 @@ public class UserProfile{
 	 String last_name;
 	 String password1;
 	 String password2;
+
+	 String password;
 	
   
   public UserProfile(String email, String first_name, String last_name, String password1, String password2) {
@@ -88,5 +90,15 @@ public class UserProfile{
   public void setPassword2(String password2) {
     this.password2 = password2;
   }
+  
+	 
+	 public String getPassword() {
+		return password;
+	}
+
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
 
 }

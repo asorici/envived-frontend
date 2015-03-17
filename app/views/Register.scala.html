@@ -2,12 +2,34 @@
 
 @Main("Welcome to Envived") {
 
-    @message
-    <br>
+<nav id="css" class="navbar navbar-default">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+     <a class="" href="@routes.Application.index()"><img src="@routes.Assets.at("images/env-symbol-index.png")" /></a>
+    </div>
+     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
+      <ul class="nav navbar-nav navbar-right">
+
+        <li><a href="@routes.Application.LoginPage()">Login</a></li> 
+        
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+
+
     <form action="@routes.Application.AddUser()" method="POST">
 
-    <div class="col-md-offset-1 col-md-4">
-
+    <div class="col-md-offset-4 col-md-4">
+         <h2> @message</h2>
   	<br>
 
     Email :
@@ -17,17 +39,17 @@
     <input type="input" name="first_name" class="form-control"><br>
     Last Name :
     <input type="input" name="last_name" class="form-control"><br>
-    
+
     Password:
     <input type="password" name="password1" class="form-control"><br>
     Repeat Password : 
     <input type="password" name="password2" class="form-control"><br>
     <br>
-    <input type="submit"  class="btn">
-    <br><br><br><br>
-   <h2> ^_^ : have fun .</h2>
-    </div>
- 	
+    <input type="submit"  class="btn liniar-graduent-btn" value="done">
+ <br><br><br><br>
+  </div>
+  </div>
+ 	 
     </form>
 
 

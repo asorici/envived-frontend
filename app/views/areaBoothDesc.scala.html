@@ -1,0 +1,45 @@
+@(id:String, idenv:String)
+@Main("Area Booth Description") {
+
+<div class="col-md-offset-1">
+<form action="@routes.Application.PostBoothAreaDesc(id,idenv)" method="POST">
+<div class="row">
+
+<h2>Booth Description </h2>
+<!-- <div class="border-input"></div> -->
+<br>
+
+<div class="col-md-5">
+	<!-- Tags : <br> -->
+	<!-- <input type="text" name="tags" class="form-control"><br> -->
+	Contact Email : <br>
+	<input name="contact_email" class="form-control"><br>
+	Contact Website : <br>
+	<input name="contact_website" class="form-control"><br>
+  Image Url:
+  <input name="image_url" class="form-control"><br>
+ 
+</div>
+
+
+
+<div class="col-md-5">
+	<!-- Product id :<br> -->
+	<!-- <input name="product_id" id="id" class="form-control"><br> -->
+	<!-- <input name="product_name" id="name" class="form-control"><br> -->
+	Product Description : <br>
+	<!-- <input name="product_description" id="description" class="form-control"> <br> -->
+   <textarea class="form-control" name="description" cols="50" rows="10"></textarea>
+</div>
+  <!-- Product Description:<br> -->
+ 
+ 
+
+
+</div><!--row-->
+<input type="submit" class="btn-edit" value="done">
+<br><br><br>
+</div>
+</form>
+</div>
+}

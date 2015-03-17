@@ -1,21 +1,107 @@
 @(message: String)
 
 @Main("Welcome to Envived") {
-	Welcome : @message
-	<br>
-	<h2>Profile</h2><br>
-	<a href="#">Edit Profile</a><br>
+<nav id="css" class="navbar navbar-default">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">Profile</a>
+    </div>
 
+   <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
 
-	<br><br>
-	<a href="#">Your Environments</a>
+        <li><a href="#"><button id="newenv">Add new Environment</button><span class="sr-only">(current)</span></a></li>
+     </ul>
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="#"></a></li> 
+       
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+	        Welcome : 
+			             @message
+          <span class="caret"></span></a>
+	          <ul class="dropdown-menu" role="menu">
+	            <li><a href="@routes.Application.EditProfile()">Edit Profile</a></li>
+	            <li class="divider"></li>
+	            <li><a href="delete-account.html">Settings</a></li>
+	            <li class="divider"></li>
+	            <li><a href="@routes.Application.index()">Log Out</a></li>
+          	  </ul>
+        </li>
 
-	
+      </ul>
+      </div>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
 
-<br>
+<div class="row">
 
-<a href="@routes.Application.AddEnvironment()"> Add new Environment</a>
+<div class="col-md-offset-1">
+Path : <a>Profile </a> 
+<div id="environments-show">
+  <script type="text/javascript">
+      $(function(){
 
+        $("#environments-show").load("@routes.Application.viewEnvironments()");
 
-	
+      });
+    </script>
+</div><!--envshow-->
+
+</div><!--col-md- -->
+</div><!--row-->
+
+<style type="text/css">
+  body{
+   overflow-x: hidden;
+  }
+  #newenv{
+    border: none;
+    background: transparent;
+    outline: none;
+  }
+  #newenv:focus{
+    outline: none;
+  }
+</style>
+
+<!-- add new environmnet modal thing -->
+
+<div id="modal-background-newenv"></div>
+<div id="modal-content-newenv">
+
+<div class="row">
+  <div class="col-md-7">
+  <div class="row">
+    <div class="col-md-1">
+      <div id="modal-header-newenv"><button id="modal-close-newenv"><i class="fa fa-close"></i></button></div>
+    </div>
+    <div class="col-md-2">
+    </div>
+  </div><!--row-->
+  </div>
+
+</div><!--row-->
+  <div id="modal-load-page-newenv"></div> 
+</div><!--modal content-->
+
+<script type="text/javascript">
+$(function(){
+  $("#newenv, #modal-background-newenv, #modal-close-newenv").click(function () {
+    $("#modal-content-newenv,#modal-background-newenv,#modal-header-newenv").toggleClass("active");
+    $("#modal-load-page-newenv").load("@routes.Application.AddEnvironment()");
+  });
+});
+</script>
+<!--end add new environment modal thing -->
 }

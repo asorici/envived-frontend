@@ -1,0 +1,50 @@
+@(description:String, k:String)
+@Main("view description"){
+
+
+  <div class="col-md-offset-1 col-md-7"
+        <form action="@routes.Application.PostEnvDescription(k)" method="POST">
+             Environment Description:<br>
+            <input class=" view-input" value="@description" name="description" readonly>
+           <br>
+
+           <style type="text/css">
+           input, a{
+           	color: #FFF;
+           }
+           button{
+           	background: transparent;
+           	border:none;
+           }
+           </style>
+            <br><br><br>
+            <!-- <a href="#"><button id="viewenvdesc">edit</button></a> -->
+        </form>
+  </div>
+       
+
+<div id="modal-content-viewenvdesc">
+
+<div class="row">
+  <div class="col-md-7">
+  <div class="row">
+    <div class="col-md-1">
+      <div id="modal-header-viewenvdesc"><button id="modal-close-viewenvdesc"><i class="fa fa-close"></i></button></div>
+    </div>
+    <div class="col-md-2">
+    </div>
+  </div><!--row-->
+  </div>
+</div><!--row-->
+  <div id="modal-load-page-viewenvdesc"></div> 
+</div><!--modal content-->
+
+<script type="text/javascript">
+$(function(){
+  $("#Desc, #modal-background-viewenvdesc, #modal-close-viewenvdesc").click(function () {
+    $("#modal-content-viewenvdesc,#modal-background-viewenvdesc,#modal-header-viewenvdesc").toggleClass("active");
+    $("#modal-load-page-viewenvdesc").load("@routes.Application.envDescription(k)");
+  });
+});
+</script>
+}

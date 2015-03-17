@@ -15,32 +15,49 @@ GET     /login                      controllers.Application.LoginPage()
 POST    /login                      controllers.Application.PostLogin()
 
 GET     /welcome					controllers.Application.welcome()
-GET		/profile					controllers.Application.Profile()
-#GET     /EditProfile               controllers.Application.EditProfile()
-#POST    /EditProfile               controllers.Application.AddEditedProfile()
+#GET		/profile					controllers.Application.Profile()
+
+GET     /EditProfile               controllers.Application.EditProfile()
+POST    /EditProfile               controllers.Application.AddEditedProfile()
 
 GET    /addEnvironment				controllers.Application.AddEnvironment()
 POST   /postNewEnvironment          controllers.Application.PostNewEnvironment() 
-#GET    /viewEnvironments            controllers.Application.viewEnvironments(id:String)
+GET    /viewEnvironments            controllers.Application.viewEnvironments()
 
-#GET		/edit					controllers.Application.Edit()
+GET    /viewEnvironment				controllers.Application.viewEnv(id:String)
+
 GET		/editEnv/:id				controllers.Application.editEnv(id:String)	
-#POST	/saveEnv					controllers.Application.SaveEnv()	
+POST	/saveEnv					controllers.Application.saveEnv(id:String)	
 
-#GET    /addArea    	  			controllers.Application.AddEnvironment()
-#POST   /postNewArea                controllers.Application.PostNewEnvironment()
+GET     /envDescription			     controllers.Application.envDescription(id:String)
+POST    /PostEnvDescription          controllers.Application.PostEnvDescription(id:String)
+GET     /viewDescriptionEnv			 controllers.Application.viewDescriptionEnv(id:String)
+POST    /saveDeleteDescEnv			 controllers.Application.saveDeleteDescEnv(id:String)
 
-#GET	/edit						controllers.Application.Edit()
-#GET	/editArea/:id				controllers.Application.EditArea(id:String)	
-#POST	/saveArea					controllers.Application.SaveArea()
+GET     /addArea    	  			 controllers.Application.AddArea(id:String)
+POST    /postNewArea                 controllers.Application.PostNewArea(id:String)
 
-#GET     /AddResource             	controllers.Application.Resources()
-#POST    /AddResource             	controllers.Application.AddResource()
+GET     /viewAreas					controllers.Application.viewAreas(id:String)
+GET     /viewAreasEnv				controllers.Application.viewAreasEnv(id:String)
+GET     /viewArea					 controllers.Application.viewArea(id:String, idenv:String)
 
-#GET     /AddFeature             	controllers.Application.Features()
-#POST    /AddFeature             	controllers.Application.AddFeatures()
+GET		/editArea/:id				controllers.Application.editArea(id:String, idenv:String)	
+POST	/saveArea					controllers.Application.saveArea(id:String, idenv:String)
 
-#GET     /logout                    controllers.Application.logout()
+GET     /areaDescription			 controllers.Application.areaDescription(id:String, idenv:String)
+POST    /PostAreaDescription         controllers.Application.PostAreaDescription(id:String, idenv:String)
+GET     /viewDescription			 controllers.Application.viewDescription(id:String, idenv:String)
+POST    /saveDeleteDescArea			 controllers.Application.saveDeleteDescArea(id:String, idenv:String)				
+
+GET     /areaBoothDes	   	         controllers.Application.areaBothDescription(id:String, idenv:String)
+POST    /PostAreaBoothDesc           controllers.Application.PostBoothAreaDesc(id:String, idenv:String)
+
+GET     /areaConferenceRole          controllers.Application.areaConferenceRole(id:String, idenv:String)
+POST    /areaPostConferenceRole      controllers.Application.areaPostConferenceRole(id:String, idenv:String)
+
+
+
+
 	
 
 # Map static resources from the /public folder to the /assets URL path

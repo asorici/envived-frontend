@@ -2,14 +2,91 @@
 
 @Main("Welcome to Envived") {
 
-    @message
+<nav id="css" class="navbar navbar-default">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+     <a class="envimg" href="@routes.Application.index()"><img src="@routes.Assets.at("images/env-symbol-index.png")" /></a>
+    </div>
+     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 
-<form method="POST" action="@routes.Application.PostLogin()">
-	Email:<br>
-	<input type="text" name="email"></br>
-	Password:</br>
-	<input type="password" name="password"><br>
-	<input type="submit" name="loginButton" value="Login">
+      <ul class="nav navbar-nav navbar-right">
+
+         <li><a href="@routes.Application.Register()">Register</a></li>
+        
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+
+<div class="container">
+<form method="POST" action="@routes.Application.PostLogin()" class="form-horizontal">
+
+<div class=" container-input">
+<div class="row">
+ 
+
+<div class="col-md-offset-4 col-md-4">
+
+<div class="row">
+          <div class="welcome-message">
+            <div class="col-md-offset-2">
+              <img src="@routes.Assets.at("images/welcome.png")" />
+              @message
+            </div>
+          </div><!--welcome message-->
+    	 </div> <!--row-welcome-->
+
+  	<div class="row">
+     <div class="input-group input-user">
+      <span class="input-group-addon"><i class="fa  fa-user fa-shadow"></i></span>
+      <input type="text"  name="email"class="form-control">
+    </div> <!--row-->
+    </div> <!--user input-->
+
+	 <div class="row">
+     <div class="input-group">
+      <span class="input-group-addon"><i class="fa  fa-lock fa-shadow">&nbsp;</i></span>
+      <input type="password" name="password" class="form-control">
+    </div>
+    </div><!--password row--> 
+
+ 	<div class="row">
+        <div class="forgot-pass">
+      	 	&nbsp;<a href="#">Forgot Password</a>
+    	</div>
+    </div><!--forgot password row-->
+
+ <div class="row">
+      <div class="btn-to-submit">
+      <div class="col-md-offset-1 col-md-12 ">
+
+        <div class="col-md-5">
+          <div class="row login-btn">
+
+          <input type="submit" class="btn btn-default liniar-graduent-btn" name="loginButton" value="Login"/>
+
+
+          </div>
+        </div>
+
+        <div class="col-md-offset-1 col-md-5 ">
+          <div class="row">
+          <button type="button" class="btn btn-default liniar-graduent-btn" id="sign-up-btn" onclick="location.href='@routes.Application.Register()'" >Sign up</button>
+        </div>
+        </div>
+      </div>
+    </div>
+    </div><!--submit buttons-->
+    </div><!--colloffset-->
+</div><!--row-->
+</div><!--container input-->
 </form>
-
+</div><!--container-->
 }

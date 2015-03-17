@@ -1,0 +1,171 @@
+@(map: Map[String, String], idenv:String)
+@Main("view area") {
+
+<nav id="css" class="navbar navbar-default">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#"><button id="newarea">Add Area</button></a>
+    </div>
+    
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav navbar-right">
+       <li><a href="@routes.Application.viewEnv(idenv)">Environment <span class="sr-only">(current)</span></a></li>
+        <li><a href="@routes.Application.welcome()">Profile</a></li> 
+        <li><a href="#">Log out</a></li>            
+      </ul>
+
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+
+<div class="container-fluid">
+<div class="row">
+<div class="col-md-offset-1">
+Path : <a href="@routes.Application.welcome()">Profile </a> >> <a  href="@routes.Application.viewEnv(idenv)">View Environmnet</a> >> <a>View Areas</a>
+<h2>Areas:</h2>
+<br><br>
+
+<div class="area-container">
+<div class="row">
+
+    @for((k,v)<- map){
+<tr>
+  <div class="col-md-4" >
+          <ul>
+          <a href = "@routes.Application.viewArea(k,idenv)">
+            <td>
+              <li class="viewEnvcls">
+                 <p>@v </p><br>
+                 <i class="fa fa-puzzle-piece"></i>
+              </li>
+            </td>
+          </a>
+          </ul>
+    </div>
+</tr>
+
+ 
+    }
+</div><!--area-container-->
+</div> 
+    
+</div><!--offset-->
+</div><!--big row-->
+</div><!--container fluuid-->
+<!-- add new area modal thing -->
+
+<div id="modal-background-newarea"></div>
+<div id="modal-content-newarea">
+
+<div class="row">
+  <div class="col-md-7">
+  <div class="row">
+    <div class="col-md-1">
+      <div id="modal-header-newarea"><button id="modal-close-newarea"><i class="fa fa-close"></i></button></div>
+    </div>
+    <div class="col-md-2">
+    </div>
+  </div><!--row-->
+  </div>
+</div><!--row-->
+  <div id="modal-load-page-newarea"></div> 
+</div><!--modal content-->
+
+<script type="text/javascript">
+$(function(){
+  $("#newarea, #modal-background-newarea, #modal-close-newarea").click(function () {
+    $("#modal-content-newarea,#modal-background-newarea,#modal-header-newarea").toggleClass("active");
+    $("#modal-load-page-newarea").load("@routes.Application.AddArea(idenv)");
+  });
+});
+</script>
+<!--end add new area modal thing -->
+
+
+
+ <style type="text/css">
+    h2{
+        font-size: 20px;
+    }
+
+    #newarea{
+      border: none;
+      background: transparent;
+      outline: none;
+    }
+    #newarea:focus{
+      outline: none;
+    }
+ </style>
+
+
+<style type="text/css">
+.viewEnvcls p{
+  opacity: 0.6;
+  padding-left: 15%;
+  padding-top: 13%;
+  font-size: 20px;
+  /*font-size: 4vw;*/
+  -webkit-transition: all 0.5s;
+   transition: all 0.5s; 
+}
+.viewEnvcls p:hover{
+  color:#000;
+  opacity: 0.4;
+  text-shadow: 2px 2px 4px #FFFFC2;
+}
+
+.viewEnvcls i{
+  font-size: 100px;
+  padding-left: 40%;
+/*  padding-bottom: 15%;*/
+}
+
+ul { 
+  list-style:none;
+}
+
+a:hover{
+  text-decoration: none;
+}
+  .viewEnvcls{
+
+  font-family:Georgia,serif,Times; 
+  font-size:18px; 
+  border-left:5px solid rgba(0,0,0,0.1); 
+  border-right:5px solid rgba(0,0,0,0.1);
+    background: rgba(0,0,0,0.05);
+    box-shadow: inset 0 1px rgba(255,255,255,0.3), 
+              inset 0 10px rgba(255,255,255,0.2), 
+              inset 0 10px 20px rgba(255,255,255,0.25), 
+              inset 0 -15px 30px rgba(0,0,0,0.3);
+  color:#FFF;
+  text-shadow: 2px 2px 4px #000000;
+  width: 200px;
+  height: 200px;
+  /*border: 3px solid #000;*/
+  padding-top: 5px;
+   -webkit-transition: all 0.5s;
+   transition: all 0.5s; 
+  }
+
+  .viewEnvcls a:hover{
+    text-decoration: none;
+  }
+  .viewEnvcls:hover{
+  opacity:0.9;
+  color:#FFF;
+  text-shadow: 1px 1px 2px #FFFFC2;
+  box-shadow:  1px 1px 40px   #1A661A;
+  }
+</style>
+
+}

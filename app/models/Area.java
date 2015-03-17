@@ -2,19 +2,21 @@ package models;
 
 import javax.persistence.Entity;
 
+import play.db.ebean.Model;
+
 
 @Entity
-public class Area {
+public class Area extends Model{
 	
-	String areaName ;
+	String name ;
 	String tags;
 	
 	
-	public String getAreaName() {
-		return areaName;
+	public String getName() {
+		return name;
 	}
-	public void setAreaName(String areaName) {
-		this.areaName = areaName;
+	public void setAreaName(String name) {
+		this.name = name;
 	}
 	public String getTags() {
 		return tags;

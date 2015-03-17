@@ -3,16 +3,90 @@
 
 @Main("Welcome to Envived") {
 
-    @message
 
-    <div class="container">
-	    <div class="row">
-		    <div class="col-offset-2 col-md-4">
-			    <br>
-			    <a href="@routes.Application.LoginPage()">Login</a><br>
-			    <a href="@routes.Application.Register()">Register</a>
-		    </div>
-	    </div>
+<nav id="css" class="navbar navbar-default">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+     <a class="" href="@routes.Application.index()"><img src="@routes.Assets.at("images/env-symbol-index.png")" /></a>
     </div>
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 
+      <ul class="nav navbar-nav navbar-right">
+
+        <li><a href="@routes.Application.LoginPage()">Login</a></li> 
+        <li><a href="@routes.Application.Register()">Register</a></li>
+        
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+
+<div class="col-md-offset-4 col-md-4">
+	<div class="row">
+  		 <h2> @message</h2>
+   	</div><!--row-->
+   </div><!--col-md-offse-4-->
+
+     <br>
+
+	<div class="container">
+     <div class="row">
+       <div class="col-sm-10 col-sm-offset-1">
+       <br><br><br>
+     
+       <br>
+      
+       <p><b>Details about envived :<br> 
+       
+       
+       </b> Under construction, beware of  falling bricks and  flying pigs. </p>
+  
+       <br><br>
+       <p><em>Authorization : </em> just make an account (the 'Register' link, from the nav-bar) and you're good to go. </p>
+       <p><em>Authentication : </em> go on the 'Login' link, from the nav-bar and eneter your credentials... </p>
+       <br>
+       <h3>Functionality - pages : </h3>
+       
+       <p><b>Index page : </b> This page contains informations about the envived project and links for registration or login.</p>
+       
+       <p><b>Register page:</b> <del>TODO </del></p>
+       <p><b>Forgot password page:</b> TODO </p>
+       <p><b>Login page:</b> <del>TODO</del></p>
+       <p><b>Home page:</b> <del>TODO</del> </p>
+       
+       <p><b>View Environment page :</b><del> TODO </del> </p>
+       <p><b>Edit Environment page :</b><del> TODO</del> </p>
+
+       <p><b>Create Environment page :</b> <del>TODO</del> </p> 
+
+       <p><b>View Area page :</b> <del>TODO</del> </p>
+       <p><b>Edit Area page :</b> <del>TODO</del> </p>
+
+       <p><b>Create Area page :</b> <del>TODO</del></p>
+
+       <p><b>View/Select Feature/Resources Page:</b> TODO </p>
+      
+
+       <p><b>Logout link:</b> Displayed only to authenticated users.   Logs them out. </p>
+       <h3>Try it out</h3>
+       <p><ul>
+          <li><del>Login in with email "bugs@@bunny.lt" and password "password"</del></li>
+          <li>Just make an account and log in ...</li>
+          
+          
+          </ul>
+       </p>
+       <br><br><br>
+  
+       </div>
+     </div>
+   </div>
 }

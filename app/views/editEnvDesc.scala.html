@@ -1,0 +1,41 @@
+@(description:String, k:String)
+@Main("view description"){
+
+
+ <div class="col-md-offset-1 col-md-11">
+        <form action="@routes.Application.saveDeleteDescEnv(k)" method="POST">
+      
+             <h2>Edit Environment Description</h2>
+               <style type="text/css">
+             	 h2{
+            	font-size: 24px;
+            	}
+             </style>
+<!-- <div class="border-input"></div> -->
+ <div class="edit-input-container">
+	<div class="row">
+	    <div class="col-md-11">
+ 			<textarea class="form-control" cols="60" rows="5" name="textarea">@description</textarea>
+ 		</div>
+ 	</div>
+</div>
+                   
+<div class="edit-btns-save-delete">
+	<div class="row">
+	<div class="col-md-7">
+	<div class="row">
+		<div class="col-md-2">
+			<input type="submit" name="update" value="save" class="btn-edit">
+		</div>
+		<div class="col-md-1">
+			<input type="submit" name="update" value="delete" class="btn-edit">
+		</div>
+
+	</div>
+	</div>	
+	</div>
+	</div>
+	</form>
+ </div>
+
+}
