@@ -2,7 +2,7 @@
 @Main("Edit area") {
 
 
-<div class="col-md-offset-3 col-md-9">
+<div class="col-md-offset-1 col-md-10">
 
 <h2>Edit Area:</h2>
 <!-- <div class="border-input-edit"></div> -->
@@ -10,7 +10,7 @@
 <form method="POST" action="@routes.Application.saveArea(id,idenv)">
 
 <div class="row">
-  <div class="col-md-8">
+  <div class="col-md-11">
     Area Name<br>
     <input type="text" value="@name" name="name" class="form-control"><br>
     Tags<br>
@@ -22,10 +22,10 @@
 <div class="row">
 <div class="col-md-9">
 <div class="row">
-  <div class="col-md-2">
+  <div class="col-md-4">
 		<input type="submit" name="update" value="save" class="btn-edit">
 	</div>
-	<div class="col-md-2">
+	<div class="col-md-4">
 		<input type="submit" name="update" value="delete" class="btn-edit">
   </div>
 </div>

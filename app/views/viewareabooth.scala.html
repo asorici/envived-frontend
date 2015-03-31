@@ -1,0 +1,21 @@
+@(description:String, contact_email:String, contact_website:String, image_url:String, id:String, idenv:String)
+@Main("view booth description"){
+
+<div class="row v-booth">
+	<p>Product Description</p>
+	 @description
+	 <p>Contact email </p> 
+	 @contact_email
+	 <p>Contact website: </p> 
+	 <!-- <a href="@contact_website">click</a>  -->
+	 <label>@contact_website</label>
+	 <p>Image url : </p>
+	 <!-- <a href="@image_url">click</a>  -->
+	 <label>@image_url</label>
+</div>
+<style type="text/css">
+	.v-booth{
+		font-size: 11px;
+	}
+</style>
+}

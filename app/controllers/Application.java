@@ -38,6 +38,7 @@ import play.libs.ws.WS;
 import play.libs.ws.WSRequestHolder;
 import play.libs.ws.WSResponse;
 import play.mvc.*;
+import scala.collection.immutable.Stream.Cons;
 import views.html.*;
 import views.html.helper.form;
 
@@ -52,7 +53,7 @@ public class Application extends Controller {
     
 	public static Result welcome()
 	{	
-	    return ok(Profile.render(session("first_name")));
+	    return ok(Profile.render(session(Constant.first_name)));
 		
 	}
        
@@ -70,24 +71,24 @@ public class Application extends Controller {
       Form<UserProfile> formData = Form.form(UserProfile.class);
       DynamicForm myRegisterForm = Form.form().bindFromRequest();
     	
-      String idReturn = "http://localhost:8080/envived/client/v2/actions/register/";
+      String idReturn = Url.host+ ":" + Url.port + Url.register;
 
-      String registerParam = "email"+"="+myRegisterForm.get("email")
-			   +"&"+"first_name"+"="+myRegisterForm.get("first_name")
-			   +"&"+"last_name"+"="+myRegisterForm.get("last_name")
-			   +"&"+"password1"+"="+myRegisterForm.get("password1")
-		       +"&"+"password2"+"="+myRegisterForm.get("password2");
+      String registerParam = Constant.email + "=" + myRegisterForm.get(Constant.email)
+			   +"&"+Constant.first_name+ "=" +myRegisterForm.get(Constant.first_name)
+			   +"&"+Constant.last_name+ "=" +myRegisterForm.get(Constant.last_name)
+			   +"&"+Constant.password1+ "=" +myRegisterForm.get(Constant.password1)
+		       +"&"+Constant.password2+ "=" +myRegisterForm.get(Constant.password2);
     	  
-      String email = myRegisterForm.get("email");
-      String password1 = myRegisterForm.get("password1");
-      String password2 = myRegisterForm.get("password2");
+      String email = myRegisterForm.get(Constant.email);
+      String password1 = myRegisterForm.get(Constant.password1);
+      String password2 = myRegisterForm.get(Constant.password2);
       
       System.out.println("New user: "+email+" "+" password1: "+password1+" password2: "+password2);
       
   	  WSRequestHolder holder = WS.url(idReturn);
-  	  holder.setContentType("application/x-www-form-urlencoded");
+  	  holder.setContentType(Url.www);
   	  
-  	  holder.setHeader("Cookie","sessionid="+session("sessionid"));
+  	  holder.setHeader("Cookie",Constant.sessionid + "="+session(Constant.sessionid));
   	  WSResponse response = holder.post(registerParam).get(20000);
 
   	System.out.println("rez is: "+ response.getStatus()+response.getBody());
@@ -96,14 +97,14 @@ public class Application extends Controller {
 	 JSONObject out;
 	 JSONObject allData;
 	 String success = "success";
-	 String resources	= "resource_uri";
+	 String resources	= Constant.resource;
 	 String inputs = response.getBody(); 
 	
  try{
 	 		 
 	 out = new JSONObject(inputs.toString());
 	 successYes = out.getBoolean(success);
-	 allData = out.getJSONObject("data");
+	 allData = out.getJSONObject(Constant.data);
 	 
   if(successYes == false){
 		  //TODO:validari
@@ -165,7 +166,7 @@ public class Application extends Controller {
     
     public static Result PostLogin(){
     	
-    	  String idReturn = "http://localhost:8080/envived/client/v2/actions/login/";
+    	  String idReturn = Url.host+ ":" + Url.port + Url.login;
     	  
     	  DynamicForm myLoginForm = Form.form().bindFromRequest();
     	  String loginParam = "email="+myLoginForm.get("email")+"&password="+myLoginForm.get("password");
@@ -176,7 +177,7 @@ public class Application extends Controller {
           System.out.println("The user is: "+email+" "+"\npassword: "+password);
           
           WSRequestHolder holder = WS.url(idReturn);
-          holder.setContentType("application/x-www-form-urlencoded");
+          holder.setContentType(Url.www);
           WSResponse response = holder.post(loginParam).get(20000);
           
           System.out.println("response:  "+ response.getStatus()+response.getBody());
@@ -228,24 +229,23 @@ public class Application extends Controller {
     
     //post the new environment
     public static Result PostNewEnvironment(){
-    	
-   	
+    	  	
         Form<Environment> formData = Form.form(Environment.class);
         Form <Environment> form = formData.bindFromRequest();
         Environment envData = form.get();
                 
-        String idReturn ="http://localhost:8080/envived/client/v2/resources/environment/?clientrequest=true&virtual=true&format=json/";
+        String idReturn = Url.host+ ":"+ Url.port + Url.parent + Url.crTvTfj;
   
         ObjectNode jsonParams = Json.newObject();
         jsonParams.put("name", envData.getName() );
-        jsonParams.put("owner", "/envived/client/v2/resources/user/"+session("userid")+"/");
+        jsonParams.put("owner", Url.owner +session("userid")+"/");
         jsonParams.put("tags", envData.getTags());
         
         String name = envData.getName();
         System.out.println("New environment : " + name);
     
         WSRequestHolder holder=WS.url(idReturn);
-        holder.setContentType("application/json");
+        holder.setContentType(Url.appjson);
         holder.setHeader("Cookie","sessionid="+session("sessionid"));
   
         WSResponse postResult = holder.post(jsonParams).get(20000);
@@ -253,12 +253,12 @@ public class Application extends Controller {
         System.out.println("status result: " + postResult.getStatus());    
         System.out.println("Bello !\n ^_^ i am in 'post new env', and the session id is :\n "+session("sessionid")+ " \nJson result: " + jsonParams);
         
-         idReturn = "http://localhost:8080/envived/client/v2/resources/features/description/?virtual=false&clientrequest=true&format=json/";
+         idReturn = Url.host + ":" + Url.port + Url.description + Url.vFcrTfj;
  		 jsonParams.put("category", "description");
  		 jsonParams.put("description", envData.getDescription());  		 
  		 
  		 holder=WS.url(idReturn);
- 		 holder.setContentType("application/json");
+ 		 holder.setContentType(Url.appjson);
  		 holder.setHeader("Cookie","sessionid="+session("sessionid"));
     	
  		 postResult = holder.post(jsonParams).get(20000);
@@ -272,7 +272,7 @@ public class Application extends Controller {
     //view all environments
     public static Result viewEnvironments(){
  
-     String getEnvUrl = "http://localhost:8080/envived/client/v2/resources/environment/?clientrequest=true&virtual=true&format=json&owner="+session("userid");
+     String getEnvUrl = Url.host + ":" + Url.port + Url.parent + Url.crTvTfjO+ session("userid");
      
    	 WSRequestHolder holder = WS.url(getEnvUrl);
    	 
@@ -301,8 +301,7 @@ public class Application extends Controller {
     }
     
     //edit environment
-    public static Result editEnv(String id){
-    	
+    public static Result editEnv(String id){	
     	
     	 String getEnvUrl = "http://localhost:8080/envived/client/v2/resources/environment/"+id+"/?virtual=true";
     	 WSRequestHolder holder=WS.url(getEnvUrl);
@@ -365,13 +364,11 @@ public class Application extends Controller {
     		 WSResponse rezultatDelete = delHolder.delete().get(20000);
     		 System.out.println("*delete (env) result: "+rezultatDelete.getBody()+"status: "+rezultatDelete.getStatus());
     		 
-//    		break;
     		 return redirect(routes.Application.welcome());
     		default: break;	
     	
     	}
-    	return redirect(routes.Application.viewEnv(id));
-    	
+    	return redirect(routes.Application.viewEnv(id));  	
     }
     
     //view an environment :
@@ -401,19 +398,16 @@ public class Application extends Controller {
 	 session("editid",id);
     
 	 return ok(viewEnv.render(nume.get(0),tags,id));
-		 
-    	
+		    	
     }
-    
-      
+          
     /**
      * Environment Description
      * */
 
 //if i have description return edit page if not return add description page
 public static Result envDescription(String id){
-	
-	
+		
 	 String descrUrl ="http://localhost:8080/envived/client/v2/resources/features/description/?virtual=false&clientrequest=true&format=json&environment="+id;
 	
 	 WSRequestHolder holder=WS.url(descrUrl);
@@ -468,12 +462,11 @@ public static Result PostEnvDescription(String id){
 		 
 		 System.out.println("add environment description status result:" + postResult.getStatus());
 		 System.out.println("userid:" + session("userid") + "\nsessionid:" + session("sessionid") + " \nJson result: " + jsonParams);
-		
-		
+				
 		return redirect(routes.Application.viewEnv(id));
 }
 
-//view area description if it has one, if not redirect to add one :)
+//view env description if it has one, if not redirect to add one :)
 public static Result viewDescriptionEnv(String id){
 	
 	 String descrUrl ="http://localhost:8080/envived/client/v2/resources/features/description/?virtual=false&clientrequest=true&format=json&environment="+id;
@@ -510,7 +503,6 @@ return redirect(routes.Application.envDescription(id));
 
 }
 
-
 //Edit Description Environment : save or delete the environment description
 public static Result saveDeleteDescEnv(String id){
 	DynamicForm mySaveForm;
@@ -532,8 +524,7 @@ public static Result saveDeleteDescEnv(String id){
 		 delHolder.setHeader("Cookie","sessionid="+session("sessionid"));
 		 WSResponse rezultatDelete = delHolder.delete().get(20000);
 		 System.out.println("*delete (old description env, to add the new one) result: "+rezultatDelete.getBody()+"status: "+rezultatDelete.getStatus());
-		 
-		 
+		 		 
 		ObjectNode jsonParams = Json.newObject();
 		
 		jsonParams.put("category", "description");
@@ -550,10 +541,9 @@ public static Result saveDeleteDescEnv(String id){
 	    
 	    System.out.println("status result save new description: "+postResult.getStatus());
 		break;
-		
-		
+				
 	case "delete":
-		  WSRequestHolder delHolder2=WS.url(deleteUrl);
+		 WSRequestHolder delHolder2=WS.url(deleteUrl);
 		 delHolder2.setContentType("application/json");
 		 delHolder2.setHeader("Cookie","sessionid="+session("sessionid"));
 		 WSResponse rezultatDelete2 = delHolder2.delete().get(20000);
@@ -566,8 +556,6 @@ public static Result saveDeleteDescEnv(String id){
 	return redirect(routes.Application.viewEnv(id));
 
 }
-
-
     /**
      * Add Area
      * */
@@ -605,14 +593,13 @@ public static Result saveDeleteDescEnv(String id){
   		 System.out.println("Environment id : "+id);
   		 System.out.println("status result:" + postResult.getStatus());
   		 System.out.println("userid:" + session("userid") + "\nsessionid:" + session("sessionid") + " \nJson result: " + jsonParams);
- 		
-  		
+ 		 		
   		return redirect(routes.Application.viewAreas(id));
     }
     
     //view one area
     public static Result viewArea(String id, String idenv){
-    	//String id = id area ; 
+     //String id = id area ; 
    	 String getUrl = "http://localhost:8080/envived/client/v2/resources/area/"+id+"/?virtual=true&clientrequest=true&format=json";
    	 WSRequestHolder holder=WS.url(getUrl);
    	 
@@ -635,7 +622,6 @@ public static Result saveDeleteDescEnv(String id){
 		 }
 	 System.out.println("area id : "+id);
 	 
-		 
 	 return ok(viewarea.render(nume.get(0),tags,id,idenv));
     	  	
     }
@@ -673,8 +659,7 @@ public static Result saveDeleteDescEnv(String id){
 	   	System.out.println("^_^");   	
        	 
     	return ok(ViewAreas.render(hash,id));
-       	 
-      		
+       	     		
     }
     
     public static Result viewAreasEnv(String id){
@@ -738,15 +723,13 @@ public static Result saveDeleteDescEnv(String id){
 		 while(it.hasNext()){
 			 JsonNode content_keyword=it.next();
 			 tags+=content_keyword.asText()+" ";
-		 }
-	
+		 }	
 		 
 		 session("editid",id);
 	 return ok(editArea.render(nume.get(0),tags,id, idenv));
     	
     }
-    
-    
+       
     //save edited area or delete it
     public static Result saveArea(String id,String idenv){
     	DynamicForm mySaveForm;
@@ -775,6 +758,7 @@ public static Result saveDeleteDescEnv(String id){
     		break;
     		
     	case "delete":
+    		
     		 String deleteUrl = "http://localhost:8080/envived/client/v2/resources/area/"+ session("editid")+"/?clientrequest=true&virtual=true&format=json";
     		 WSRequestHolder delHolder=WS.url(deleteUrl);
     		 delHolder.setContentType("application/json");
@@ -782,7 +766,6 @@ public static Result saveDeleteDescEnv(String id){
     		 WSResponse rezultatDelete = delHolder.delete().get(20000);
     		 System.out.println("*delete (aria) result: "+rezultatDelete.getBody()+"status: "+rezultatDelete.getStatus());
     		 
-//    		break;
     		 return redirect(routes.Application.viewEnv(idenv));
     		 
     		default: break;	
@@ -837,14 +820,12 @@ public static Result saveDeleteDescEnv(String id){
     	mySaveForm = Form.form().bindFromRequest();
     	String saveUrl = "http://localhost:8080/envived/client/v2/resources/features/description/?virtual=false&clientrequest=true&format=json";
     	String deleteUrl = "http://localhost:8080/envived/client/v2/resources/features/description/?virtual=false&clientrequest=true&format=json&area="+id;
-     	
-    	
+     	   	
     	switch (mySaveForm.get("update")){
     	case "save":
     		
     		System.out.println(":) i'm in Save edited description area ");
-    		//System.out.println("userid:" + session("userid") + " sessionid:" + session("sessionid") + "\njson result: " + jsonParams);
-    		
+
     		//delete old description
     		 WSRequestHolder delHolder=WS.url(deleteUrl);
     		 delHolder.setContentType("application/json");
@@ -883,7 +864,7 @@ public static Result saveDeleteDescEnv(String id){
     
     }
     
-    //Post the new area descrption
+    //Post the new area description
     public static Result PostAreaDescription(String id, String idenv){
     	
     	DynamicForm areaData = Form.form().bindFromRequest();
@@ -903,8 +884,7 @@ public static Result saveDeleteDescEnv(String id){
   		 
   		 System.out.println("add area description status result:" + postResult.getStatus());
   		 System.out.println("userid:" + session("userid") + "\nsessionid:" + session("sessionid") + " \nJson result: " + jsonParams);
- 		
-  		
+ 		 		
   		return redirect(routes.Application.viewArea(id,idenv));
     }
     
@@ -939,21 +919,19 @@ public static Result saveDeleteDescEnv(String id){
 	          + "\nHere is where it happened:\n");
 	       ex.printStackTrace(); 
 	     } 
-    	
-    
-    return redirect(routes.Application.areaDescription(id,idenv));
+    	    
+//    return redirect(routes.Application.areaDescription(id,idenv));
+    	   return ok();
     
     }
-    
-   
-    
+       
     /**
      * Area Booth Description
      * */
-    
+        
     public static Result areaBothDescription(String id, String idenv){
     	
-    	 String descrUrl ="http://localhost:8080/envived/client/v2/resources/features/booth_description/?virtual=false&clientrequest=true&format=json&area="+id;
+    	 String descrUrl = Url.host + ":" + Url.port + Url.boo_description + Url.vFcrTfj +"&area="+id;
     	 	
        	 WSRequestHolder holder=WS.url(descrUrl);
        	 holder.setHeader("Cookie","sessionid="+session("sessionid"));
@@ -964,47 +942,48 @@ public static Result saveDeleteDescEnv(String id){
        	 System.out.println("area both descripion response status:"+response.getStatus());
        	
        	 JsonNode content = response.asJson();
-       	 List<String> description = content.findValuesAsText("TODO");
+       	 List<String> description = content.findValuesAsText("description");
+       	 List<String> contact_email = content.findValuesAsText("contact_email");
+       	 List<String> contact_website = content.findValuesAsText("contact_website");
+       	 List<String> image_url = content.findValuesAsText("image_url");
 
        try{
     	   
        	 if(description.get(0) != null){ 		 
-       		 System.out.println("you have a description ...");
-       	   // return ok(editAreaBoothDesc.render(description.get(0),id,idenv));
-       		 return TODO;
+       		 System.out.println("you have booth description ...");
+       		 return ok(editAreaBoothDesc.render(description.get(0),contact_email.get(0),contact_website.get(0),image_url.get(0),id,idenv));
+	    	    
        	 	}
+       	 
        	}catch(InputMismatchException ex){
-//       		 System.out.println("This is your problem (you don't have booth descriptiions so you have to add it): " +  ex.getMessage()   
-//       		          + "\nHere is where it happened:\n");
+
        		System.out.println("I am in ;InputMismatchException; \n(you don't have booth descriptiions so you have to add it)");
        		       ex.printStackTrace();
     		   }catch (IndexOutOfBoundsException ex )
     	    {  
-//    	       System.out.println("This is your problem: " +  ex.getMessage()   
-//    	          + "\nHere is where it happened:\n");
+
     		  System.out.println("I am in ;IndexOutOfBoundsException; \n(you don't have booth descriptiions so you have to add it)");
     	       ex.printStackTrace(); 
     	     } 
         	
-        	return ok(areaBoothDesc.render(id,idenv));
-        	
+        	return ok(areaBoothDesc.render(id,idenv));  	
     }
+    
     //post the new booth description
     public static Result PostBoothAreaDesc(String id, String idenv){
     	
     	DynamicForm areaData = Form.form().bindFromRequest();
     	
-    	String url ="http://localhost:8080/envived/client/v2/resources/features/booth_description/?virtual=false&clientrequest=true&format=json"; 	
+    	String url =Url.host+":"+Url.port+Url.boo_description+Url.vFcrTfj; 	
     	
     	ObjectNode jsonParams = Json.newObject();
-    	jsonParams.put("category", "booth_description");  	
-    	jsonParams.put("image_url", areaData.get("image_url"));
-    	jsonParams.put("contact_email", areaData.get("contact_email"));
-    	jsonParams.put("contact_website", areaData.get("contact_website"));
-    	jsonParams.put("description", areaData.get("description"));
     	
-
-
+    	jsonParams.put(Constant.category, Constant.booth_description);  	
+    	jsonParams.put(Constant.image_url, areaData.get(Constant.image_url));
+    	jsonParams.put(Constant.contact_email, areaData.get(Constant.contact_email));
+    	jsonParams.put(Constant.contact_website, areaData.get(Constant.contact_website));
+    	jsonParams.put(Constant.description, areaData.get(Constant.description));
+    	
     	List<BoothDescription> product = new ArrayList<BoothDescription>();
     	JSONArray array = new JSONArray();
     	for (int i = 0; i < 10; ++i) {
@@ -1021,47 +1000,115 @@ public static Result saveDeleteDescEnv(String id){
     	 // TODO Auto-generated catch block
     	e.printStackTrace();
     	}
-    	System.out.println("Area booth description \n ; json product: "+array);
-    	
-    	jsonParams.put("area", "/envived/client/v2/resources/area/"+id+"/");
+    	System.out.println("Area booth description \n ; json product: "+array);	
+    	jsonParams.put("area",Url.area +id+"/");
     	
     	 WSRequestHolder holder=WS.url(url);
-  		 holder.setContentType("application/json");
+  		 holder.setContentType(Url.appjson);
   		 holder.setHeader("Cookie","sessionid="+session("sessionid"));
      	
   		 WSResponse postResult = holder.post(jsonParams).get(20000);
   		 
   		 System.out.println("Add area booth description status result:" + postResult.getStatus());
   		 System.out.println("userid:" + session("userid") + "\nsessionid:" + session("sessionid") + " \nJson result: " + jsonParams);
- 		
-  		
+ 				
   		return redirect(routes.Application.viewArea(id,idenv));
    
     }
-       
+    
+    //view-booth description if i have one, if not, redirect to add one  
+    public static Result viewBoothArea(String id, String idenv){
+    
+     String descrUrl ="http://localhost:8080/envived/client/v2/resources/features/booth_description/?virtual=false&clientrequest=true&format=json&area="+id;
+     WSRequestHolder holder=WS.url(descrUrl);
+	 holder.setHeader("Cookie","sessionid="+session("sessionid"));
+	 holder.setContentType("application/json");
+	 
+	 WSResponse response = holder.get().get(20000);
+	 System.out.println("i'm in view area booth description");
+	 System.out.println("view description booth area response status:"+response.getStatus());
+	
+	 JsonNode content = response.asJson();
+
+   	 List<String> description = content.findValuesAsText("description");
+   	 List<String> contact_email = content.findValuesAsText("contact_email");
+   	 List<String> contact_website = content.findValuesAsText("contact_website");
+   	 List<String> image_url = content.findValuesAsText("image_url");
+ 
+	 System.out.println("area id : "+id);
+	 
+	return ok(viewareabooth.render(description.get(0),contact_email.get(0),contact_website.get(0),image_url.get(0),id,idenv));
+	    	    
+    }
+    
+    //save-delete booth description:  	
+    public static Result editBoothArea(String id, String idenv){
+    	DynamicForm mySaveForm;
+    	mySaveForm = Form.form().bindFromRequest();
+    	
+    	String saveUrl = Url.host + ":" + Url.port + Url.boo_description + Url.vFcrTfj;
+    	String deleteUrl = saveUrl + "&area=" + id;
+     		
+    	switch (mySaveForm.get("update-bo")){
+    	case "save":
+    		
+    		System.out.println(":) i'm in Save edited booth description area ");
+	
+    		//delete old description
+    		 WSRequestHolder delHolder=WS.url(deleteUrl);
+    		 delHolder.setContentType(Url.appjson);
+    		 delHolder.setHeader("Cookie","sessionid="+session("sessionid"));
+    		 WSResponse rezultatDelete = delHolder.delete().get(20000);
+    		 System.out.println("*delete (old booth description area, to add the new one) result: "+rezultatDelete.getBody()+"status: "+rezultatDelete.getStatus());
+    		 
+    		//add the new one
+    		ObjectNode jsonParams = Json.newObject();
+    		 
+    	   // jsonParams.put(Constant.category, Constant.booth_description);  	
+    	    jsonParams.put(Constant.image_url, mySaveForm.get(Constant.image_url));
+    	    jsonParams.put(Constant.contact_email, mySaveForm.get(Constant.contact_email));
+    	    jsonParams.put(Constant.contact_website, mySaveForm.get(Constant.contact_website));
+    	    jsonParams.put(Constant.description, mySaveForm.get(Constant.description));
+    	    jsonParams.put("area",Url.area +id+"/");
+        	
+       	     WSRequestHolder holder=WS.url(saveUrl);
+     		 holder.setContentType(Url.appjson);
+     		 holder.setHeader("Cookie","sessionid="+session("sessionid"));
+        	
+     		 WSResponse postResult = holder.post(jsonParams).get(20000);
+     		 System.out.println("post edited booth description response : "+ postResult.getStatus());
+     		 break;
+     		 
+    	case "delete":
+    		
+    		 System.out.println("i'm in delete booth description area ! *** ");
+    		 WSRequestHolder delHolder2=WS.url(deleteUrl);
+    		 delHolder2.setContentType("application/json");
+    		 delHolder2.setHeader("Cookie","sessionid="+session("sessionid"));
+    		 WSResponse rezultatDelete2 = delHolder2.delete().get(20000);
+    		 System.out.println("*delete (description area) result: "+rezultatDelete2.getBody()+"status: "+rezultatDelete2.getStatus());
+    		 
+    		break;
+    		default: break;	    	
+    	}
+    	
+    	return redirect(routes.Application.viewArea(id,idenv));
+    	
+    }
+          
     /**
      * Area conference role
      * */
+    
     public static Result areaConferenceRole(String id, String idenv){
     	
-    	String descrUrl ="http://localhost:8080/envived/client/v2/resources/features/conference_role/?virtual=false&clientrequest=true&format=json&area="+id;
-	 	
-      	 WSRequestHolder holder=WS.url(descrUrl);
-      	 holder.setHeader("Cookie","sessionid="+session("sessionid"));
-      	 holder.setContentType("application/json");
-      	 
-      	 WSResponse response = holder.get().get(20000);
-      	 System.out.println("i'm in area conference role");
-      	 System.out.println("area conference role response status:"+response.getStatus());
-       	
-       	return ok(areaConferenceRole.render(id,idenv));
-       	
-  
+       	return ok(areaConferenceRole.render(id,idenv));  
+    	
     }
     
     public static Result areaPostConferenceRole(String id, String idenv){
     
-	DynamicForm areaData = Form.form().bindFromRequest();
+    	DynamicForm areaData = Form.form().bindFromRequest();
     	
     	String url ="http://localhost:8080/envived/client/v2/resources/features/conference_role/?virtual=false&clientrequest=true&format=json"; 	
     	
@@ -1072,21 +1119,331 @@ public static Result saveDeleteDescEnv(String id){
     	jsonParams.put("role", areaData.get("role"));
     	jsonParams.put("area", "/envived/client/v2/resources/area/"+id+"/");
     	
-    	 WSRequestHolder holder=WS.url(url);
-  		 holder.setContentType("application/json");
-  		 holder.setHeader("Cookie","sessionid="+session("sessionid"));
+    	WSRequestHolder holder=WS.url(url);
+  		holder.setContentType("application/json");
+  		holder.setHeader("Cookie","sessionid="+session("sessionid"));
      	
-  		 WSResponse postResult = holder.post(jsonParams).get(20000);
+  		WSResponse postResult = holder.post(jsonParams).get(20000);
   		 
-  		 System.out.println("add area conference-role status result:" + postResult.getStatus());
-  		 System.out.println("userid:" + session("userid") + "\nsessionid:" + session("sessionid") + " \nJson result: " + jsonParams);
- 		
+  		System.out.println("add area conference-role status result:" + postResult.getStatus());
+  		System.out.println("userid:" + session("userid") + "\nsessionid:" + session("sessionid") + " \nJson result: " + jsonParams);	
   		
   		return redirect(routes.Application.viewArea(id,idenv));
    
-    }
+    }  
     
+    /**
+     * Program area
+     * */
     
-    
+   public static Result areaProgram(String id, String idenv){
+	   String descrUrl =Url.host+":"+Url.port+Url.description+Url.vFcrTfj+"&area="+id;
+	 	
+	   WSRequestHolder holder=WS.url(descrUrl);
+	   holder.setHeader("Cookie","sessionid="+session("sessionid"));
+	   holder.setContentType(Url.appjson);
+	   	 
+	   	 WSResponse response = holder.get().get(20000);
+	   	 System.out.println("i'm in area program");
+	   	 System.out.println("area program status response: "+response.getStatus());
+	   	
+	   	 JsonNode content = response.asJson();
+	   	 List<String> description = content.findValuesAsText("description");
+
+	   try{
+		   
+	   	 if(description.get(0) != null){ 		 
+	   		 System.out.println("you have program ...");
+	   	    return ok(editProgramArea.render(description.get(0),id,idenv));
+	   	 	}
+	   	}catch(InputMismatchException ex){
+	   		 System.out.println("This is your problem: " +  ex.getMessage()   
+	   		          + "\nHere is where it happened:\n");
+	   		       ex.printStackTrace();
+			   }catch (IndexOutOfBoundsException ex )
+		    {  
+		       System.out.println("This is your problem: " +  ex.getMessage()   
+		          + "\nHere is where it happened:\n");
+		       ex.printStackTrace(); 
+		     } 
+	    	
+	    	return ok(programArea.render(id,idenv));
+   }
    
+   public static Result postAreaProgram(String id, String idenv){
+	 DynamicForm areaData = Form.form().bindFromRequest();
+   	
+   	 String url = Url.host + ":" + Url.port + Url.program + Url.vFcrTfj; 	
+   	
+   	 ObjectNode jsonParams = Json.newObject();
+   	 jsonParams.put("category","program");
+   	 jsonParams.put("description", areaData.get("description"));
+   	 jsonParams.put("area", Url.area +id+"/");
+   	
+   	 WSRequestHolder holder=WS.url(url);
+ 	 holder.setContentType(Url.appjson);
+ 	 holder.setHeader("Cookie","sessionid="+session("sessionid"));
+   	 WSResponse postResult = holder.post(jsonParams).get(20000);
+ 		 
+ 	 System.out.println("add area program status result:" + postResult.getStatus());
+ 	 System.out.println("userid:" + session("userid") + "\nsessionid:" + session("sessionid") + " \nJson result: " + jsonParams);	
+ 		
+ 	return redirect(routes.Application.viewArea(id,idenv));
+  
+   }
+   
+   public static Result updateDeleteAreaProgram(String id, String idenv){
+	   
+   	DynamicForm mySaveForm;
+   	mySaveForm = Form.form().bindFromRequest();
+   	
+   	String saveUrl = Url.host + ":" + Url.port + Url.program + Url.vFcrTfj;
+   	String deleteUrl = saveUrl + "&area=" + id;
+    		
+   	switch (mySaveForm.get("update-po")){
+   	case "save":
+   		
+   		System.out.println(":) i'm in Save edited program area ");
+	
+   		//delete old description
+   	    WSRequestHolder delHolder=WS.url(deleteUrl);
+   	    delHolder.setContentType(Url.appjson);
+   	    delHolder.setHeader("Cookie","sessionid="+session("sessionid"));
+   	    WSResponse rezultatDelete = delHolder.delete().get(20000);
+   		System.out.println("*delete (old program area, to add the new one) result: "+rezultatDelete.getBody()+"status: "+rezultatDelete.getStatus());
+   		 
+   		//add the new one
+   		ObjectNode jsonParams = Json.newObject();
+   		jsonParams.put("category","program");
+   	   	jsonParams.put("description", mySaveForm.get("description"));
+   	   	jsonParams.put("area", Url.area +id+"/");
+   	   	
+      	WSRequestHolder holder=WS.url(saveUrl);
+    	holder.setContentType(Url.appjson);
+    	holder.setHeader("Cookie","sessionid="+session("sessionid"));
+       	
+    	WSResponse postResult = holder.post(jsonParams).get(20000);
+    	System.out.println("post edited program response : "+ postResult.getStatus());
+    	break;
+    		 
+   	case "delete":
+   		
+   		 System.out.println("i'm in delete program area ! *** ");
+   		 WSRequestHolder delHolder2=WS.url(deleteUrl);
+   		 delHolder2.setContentType(Url.appjson);
+   		 delHolder2.setHeader("Cookie","sessionid="+session("sessionid"));
+   		 WSResponse rezultatDelete2 = delHolder2.delete().get(20000);
+   		 System.out.println("*delete (program area) result: "+rezultatDelete2.getBody()+"status: "+rezultatDelete2.getStatus());
+   		 
+   		break;
+   		default: break;	    	
+   	}
+   	
+   	return redirect(routes.Application.viewArea(id,idenv));
+   	
+   }
+   
+   public static Result viewAreaProgram(String id, String idenv){
+	   
+	     String descrUrl = Url.host + ":" + Url.port + Url.program + Url.vFcrTfj + "&area=" +id;
+	     WSRequestHolder holder=WS.url(descrUrl);
+		 holder.setHeader("Cookie","sessionid="+session("sessionid"));
+		 holder.setContentType(Url.appjson);
+		 
+		 WSResponse response = holder.get().get(20000);
+		 System.out.println("i'm in view area program");
+		 System.out.println("view program area response status:"+response.getStatus());
+		
+		 JsonNode content = response.asJson();
+
+	   	 List<String> description = content.findValuesAsText("description");
+	 
+		 System.out.println("area id : "+id);
+		 
+		return ok(viewAreaProgram.render(description.get(0),id,idenv));
+		   
+   }
+   
+   /***
+    * Order Area
+    * */
+   
+   public static Result orderArea(String id, String idenv){
+	   String descrUrl =Url.host+":"+Url.port+Url.order+Url.vFcrTfj+"&area="+id;
+	 	
+	   	 WSRequestHolder holder=WS.url(descrUrl);
+	   	 holder.setHeader("Cookie","sessionid="+session("sessionid"));
+	   	 holder.setContentType(Url.appjson);
+	   	 
+	   	 WSResponse response = holder.get().get(20000);
+	   	 System.out.println("i'm in area order");
+	   	 System.out.println("area order status response: "+response.getStatus());
+	   	
+	   	 JsonNode content = response.asJson();
+	   	 List<String> description = content.findValuesAsText("description");
+
+//	   try{
+//		   
+//	   	 if(description.get(0) != null){ 		 
+//	   		 System.out.println("you have program ...");
+//	   	    return ok(editProgramArea.render(description.get(0),id,idenv));
+//	   	 	}
+//	   	}catch(InputMismatchException ex){
+//	   		 System.out.println("This is your problem: " +  ex.getMessage()   
+//	   		          + "\nHere is where it happened:\n");
+//	   		       ex.printStackTrace();
+//			   }catch (IndexOutOfBoundsException ex )
+//		    {  
+//		       System.out.println("This is your problem: " +  ex.getMessage()   
+//		          + "\nHere is where it happened:\n");
+//		       ex.printStackTrace(); 
+//		     } 
+//	    	
+	    	return ok(orderarea.render(id,idenv));
+   }
+   
+   public static Result postOrderArea(String id, String idenv){
+		 DynamicForm areaData = Form.form().bindFromRequest();
+		   	
+	   	 String url = Url.host + ":" + Url.port + Url.order + Url.vFcrTfj; 	
+	   	
+	   	 ObjectNode jsonParams = Json.newObject();
+	   	 jsonParams.put("category","order");
+	   	 jsonParams.put("description", areaData.get("description"));
+	   	 jsonParams.put("area", Url.area +id+"/");
+	   	
+	   	 WSRequestHolder holder=WS.url(url);
+	 	 holder.setContentType(Url.appjson);
+	 	 holder.setHeader("Cookie","sessionid="+session("sessionid"));
+	   	 WSResponse postResult = holder.post(jsonParams).get(20000);
+	 		 
+	 	 System.out.println("add area order status result:" + postResult.getStatus());
+	 	 System.out.println("userid:" + session("userid") + "\nsessionid:" + session("sessionid") + " \nJson result: " + jsonParams);	
+	 		
+	 	return redirect(routes.Application.viewArea(id,idenv));
+	  
+   }
+   /**
+    * Social media 
+    * */
+   
+   public static Result socialMediaArea(String id, String idenv){
+	   
+	   String descrUrl =Url.host+":"+Url.port+Url.socialmedia+Url.vFcrTfj+"&area="+id;
+	 	
+	   	 WSRequestHolder holder=WS.url(descrUrl);
+	   	 holder.setHeader("Cookie","sessionid="+session("sessionid"));
+	   	 holder.setContentType(Url.appjson);
+	   	 
+	   	 WSResponse response = holder.get().get(20000);
+	   	 System.out.println("i'm in area social media");
+	   	 System.out.println("area social media status response: "+response.getStatus());
+
+	   	 JsonNode content = response.asJson();
+	   	 List<String> facebook_url = content.findValuesAsText("facebook_url");
+	   	 List<String> twitter_url = content.findValuesAsText("twitter_url");
+	   	 List<String> google_plus_url = content.findValuesAsText("google_plus_url");
+	   	 List<String> internal_forum_url = content.findValuesAsText("internal_forum_url");
+	   	
+
+	   try{
+		   
+	   	 if(facebook_url.get(0) != null || twitter_url.get(0)!= null || google_plus_url.get(0)!=null || internal_forum_url.get(0)!=null){ 		 
+	   		 System.out.println("you have social media ...");
+	   	    return ok(editAreaSocial.render(facebook_url.get(0),twitter_url.get(0),google_plus_url.get(0),internal_forum_url.get(0),id,idenv));
+	   	 	}
+	   	}catch(InputMismatchException ex){
+	   		 System.out.println("This is your problem: " +  ex.getMessage()   
+	   		          + "\nHere is where it happened:\n");
+	   		       ex.printStackTrace();
+			   }catch (IndexOutOfBoundsException ex )
+		    {  
+		       System.out.println("This is your problem: " +  ex.getMessage()   
+		          + "\nHere is where it happened:\n");
+		       ex.printStackTrace(); 
+		     } 
+	  
+	   
+	   return  ok(areasocialmedia.render(id, idenv));
+   }
+   
+   public static Result postSocialArea(String id, String idenv){
+	   
+		 DynamicForm areaData = Form.form().bindFromRequest();
+		   	
+	   	 String url = Url.host + ":" + Url.port + Url.socialmedia + Url.vFcrTfj; 	
+	   	
+	   	 ObjectNode jsonParams = Json.newObject();
+	   	 jsonParams.put("category","social_media");
+	   	 jsonParams.put("facebook_url", areaData.get("facebook_url"));
+	   	 jsonParams.put("twitter_url", areaData.get("twitter_url"));
+	   	 jsonParams.put("google_plus_url", areaData.get("google_plus_url"));
+	   	 jsonParams.put("internal_forum_url", areaData.get("internal_forum_url"));
+	   	 jsonParams.put("area", Url.area +id+"/");
+	   	
+	   	 WSRequestHolder holder=WS.url(url);
+	 	 holder.setContentType(Url.appjson);
+	 	 holder.setHeader("Cookie","sessionid="+session("sessionid"));
+	   	 WSResponse postResult = holder.post(jsonParams).get(20000);
+	 		 
+	 	 System.out.println("add area social media status result:" + postResult.getStatus());
+	 	 System.out.println("userid:" + session("userid") + "\nsessionid:" + session("sessionid") + " \nJson result: " + jsonParams);	
+	 		
+	 	return redirect(routes.Application.viewArea(id,idenv));
+   }
+   
+   public static Result editSocialArea(String id, String idenv){
+	   	DynamicForm mySaveForm;
+	   	mySaveForm = Form.form().bindFromRequest();
+	   	
+	   	String saveUrl = Url.host + ":" + Url.port + Url.socialmedia + Url.vFcrTfj;
+	   	String deleteUrl = saveUrl + "&area=" + id;
+	    		
+	   	switch (mySaveForm.get("update")){
+	   	case "save":
+	   		
+	   		System.out.println(":) i'm in edit social media area ");
+		
+	   		//delete old description
+	   	    WSRequestHolder delHolder=WS.url(deleteUrl);
+	   	    delHolder.setContentType(Url.appjson);
+	   	    delHolder.setHeader("Cookie","sessionid="+session("sessionid"));
+	   	    WSResponse rezultatDelete = delHolder.delete().get(20000);
+	   		System.out.println("*delete (old social media-area, to add the new one) result: "+rezultatDelete.getBody()+"status: "+rezultatDelete.getStatus());
+	   		 
+	   		//add the new one
+	   		ObjectNode jsonParams = Json.newObject();
+		   	 jsonParams.put("category","social_media");
+		   	 jsonParams.put("facebook_url", mySaveForm.get("facebook_url"));
+		   	 jsonParams.put("twitter_url", mySaveForm.get("twitter_url"));
+		   	 jsonParams.put("google_plus_url", mySaveForm.get("google_plus_url"));
+		   	 jsonParams.put("internal_forum_url", mySaveForm.get("internal_forum_url"));
+		   	 jsonParams.put("area", Url.area +id+"/");
+	   	   	
+	      	WSRequestHolder holder=WS.url(saveUrl);
+	    	holder.setContentType(Url.appjson);
+	    	holder.setHeader("Cookie","sessionid="+session("sessionid"));
+	       	
+	    	WSResponse postResult = holder.post(jsonParams).get(20000);
+	    	System.out.println("post edited social media[area] response : "+ postResult.getStatus());
+	    	break;
+	    		 
+	   	case "delete":
+	   		
+	   		 System.out.println("i'm in delete social media area ! *** ");
+	   		 WSRequestHolder delHolder2=WS.url(deleteUrl);
+	   		 delHolder2.setContentType(Url.appjson);
+	   		 delHolder2.setHeader("Cookie","sessionid="+session("sessionid"));
+	   		 WSResponse rezultatDelete2 = delHolder2.delete().get(20000);
+	   		 System.out.println("*delete (social media area) result: "+rezultatDelete2.getBody()+"status: "+rezultatDelete2.getStatus());
+	   		 
+	   		break;
+	   		default: break;	    	
+	   	}
+	   	
+	   	return redirect(routes.Application.viewArea(id,idenv));
+   }
 }
+
+
+ 

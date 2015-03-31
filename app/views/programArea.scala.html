@@ -1,0 +1,12 @@
+@(id:String, idenv:String)
+@Main("Program Area") {
+<form action="@routes.Application.postAreaProgram(id,idenv)" method="POST">
+
+Insert Program 
+
+<textarea class="form-control" name="description" rows="5" cols="40"></textarea>
+<br>
+<input type="submit" class="btn-edit" value="done">
+</form>
+
+}

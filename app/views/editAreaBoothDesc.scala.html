@@ -1,38 +1,39 @@
-@(k:String, idenv:String)
+@(description:String, contact_email:String, contact_website:String, image_url:String, id:String, idenv:String)
 @Main("view description"){
 
 
-  <div class="col-md-offset-1 col-md-5">
-        <form action="@routes.Application.saveDeleteDescArea(k,idenv)" method="POST">
-        <br><br><br>
-             <h2>Edit Area Booth Description:</h2><br>
-           
-        Tags : <br>
-		<input type="text" name="tags" value="tags" class="form-control"><br>
-		Contact Email : <br>
-		<input name="contact_email" value="contact_email" class="form-control"><br>
+  <!-- <div class="col-md-offset-1 col-md-5"> -->
+        <form action="@routes.Application.editBoothArea(id,idenv)" method="POST">
+<div class="col-md-offset-1 col-md-10">
+        <!-- <div class="row"> -->
+        <br>
+        Contact Email : <br>
+		<input name="contact_email" class="form-control" value="@contact_email"><br>
 		Contact Website : <br>
-		<input name="contact_website" value="contact_website" class="form-control"><br><br>
+		<input name="contact_website" class="form-control" value="@contact_website"><br>
+		Image Url:
+	    <input name="image_url" class="form-control" value="@image_url"><br>
 
-		Product id :<br>
-		<input name="product_id" value="product_id" class="form-control"><br>
-		Product Name : <br>
-		<input name="product_name" value="product_name" class="form-control"><br>
-		Product Description : <br>
-		<input name="product_description" value="product_description" class="form-control"> <br>
+	    	Product Description : <br>
+	
+   			<textarea class="form-control" name="description" cols="50" rows="10">@description</textarea>
+   			<br><br>
+   		<!-- </div> -->
 
-		 
-       
-		<div class="row">
-			<div class="col-md-6">
-				<input type="submit" name="update" value="save" class="btn liniar-graduent-btn-sml">
-			</div>
-			<div class="col-md-6">
-				<input type="submit" name="update" value="delete" class="btn liniar-graduent-btn-sml">
-			</div>
+   		<div class="row">
+   		
+   		<div class="col-md-4">
+		<input type="submit" name="update-bo" value="save" class="btn-edit">
+		<br>
+		</div>
+		<div class="col-md-4">
+		<input type="submit" name="update-bo" value="delete" class="btn-edit">
+		<br>
 		</div>
 
-		</form>
- </div>
+		</div>
+</div>	 
+        </form>
+ 
 
 }

@@ -1,262 +1,96 @@
 @(id:String, idenv:String)
 @Main("Add area") {
-
-<!-- <div class="container-fluid"> -->
-<!-- <div class="row"> -->
-<!-- <div class="col-md-offset-1"> -->
 <form action="@routes.Application.areaPostConferenceRole(id,idenv)" method="POST">
-<!-- <div class="row"> -->
+<div class="row">
+<div class="col-md-offset-1 col-md-10">
+    First Name<br>
+    <input type="text" name="first_name" id="first" class="form-control"><br>
+    Last Name  <br>
+    <input name="last_name" class="form-control"><br>
+    <!-- Role<br> -->
+     	<div class="form-group">
+		  <label for="sel1">Select Role</label>
+		  <select class="form-control" id="sel1">
+		    <option>participant</option>
+		    <option>speaker</option>
+		    <option>session_chair</option>
+		  </select>
+		</div>
 
-<!-- <h2>Conference Role</h2><br> -->
-
-<!-- <div class="border-input"></div> -->
-
-<div class="col-md-offset-1 col-md-9">	
-		First Name: <br>
-		<input type="text" name="first_name" class="form-control"><br>
-		Last Name : <br>
-		<input name="last_name" class="form-control"><br>
-		Role:
-		<input name="role" class="form-control"><br>
-
-		
-<input type="submit" value="done" class="btn-edit">
-
+     <input type="submit" class="btn-edit" value="add" >
+<br><br>
 </div>
-<style type="text/css">
-	form{
-		color: #000;
-	}
-	.btn-edit{
-		color: #000;
-	}
-</style>
+</div>
+    <!-- <h1><b>Role:</b> <input id="addRole" name="role" value="" > </h1> -->
+    <!-- <p><a id="showradbtn"><small><u><i>Chose role</i></u></small></a><p>  -->
 
-<!-- <div class="col-md-6">   -->
+<!-- <div class="radio-buttons">
+   <div class="p">
+    <input class="radbtn" type="radio" name="rol" id="participant" value="2"><label for="participant"><small><i class="fa fa-circle-o"> participant</small></i> </label>
+   </div>
 
-<!-- <h1><b>Role:</b> <input id="addRole" name="role" value="" > </h1> -->
+   <div class="s">
+    <input class="radbtn" type="radio" name="rol" id="speaker" value="1" ><label for="speaker"><small><i class="fa fa-circle-o"> speaker</small></i></label>
+   </div>
 
-<!-- <div class="row"> -->
-<!-- <div class="col-md-3"> -->
-<!-- <p><a id="showradbtn"><small><u><i>Chose role</i></u></small></a><p> -->
+   <div class="sc">
+    <input class="radbtn" type="radio" name="rol" id="session_chair" value="0" ><label for="session_chair"><small><i class="fa fa-circle-o"> session chair</small></i></label>
+   </div>
+</div> -->
+<!--radio buttons-->
 
-<script type="text/javascript">
-	$(document).ready(function(){
-    $("#showradbtn").click(function(){
-        $(".radio-buttons").fadeToggle();
-    });
-});
+
+ <script type="text/javascript">
+
+// $( document ).ready(function() {
+//   // Handler for .ready() called.
+//     $( "#first" ).focus(function() {
+//   alert( "Handler for .focus() called." );
+// });
+
+// });
+
+
+
+// $(document).ready(function(){
+
+  // $('#participant,#speaker,#session_chair').bind('click',radbtn);
+
+  // function radbtn(){
+  //   var valueChecked = $("input[name=rol]:checked").val();
+  //   alert("rrrr");
+  //   if(valueChecked){
+  //     alert("rrrr");
+  //     if(valueChecked == 2){
+  //       // alert("2");
+
+  //       $(".p .fa").removeClass("fa-circle-o").addClass("fa-check-circle-o");
+  //       $(".s .fa").removeClass("fa-check-circle-o").addClass("fa-circle-o");
+  //       $(".sc .fa").removeClass("fa-check-circle-o").addClass("fa-circle-o");    
+  //     }
+
+  //     else if(valueChecked == 1){
+
+  //       $(".p .fa").removeClass("fa-check-circle-o").addClass("fa-circle-o");
+  //       $(".s .fa").removeClass("fa-circle-o").addClass("fa-check-circle-o");
+  //       $(".sc .fa").removeClass("fa-check-circle-o").addClass("fa-circle-o");      
+  //     }
+
+  //     else if(valueChecked == 0){
+  
+  //       $(".p .fa").removeClass("fa-check-circle-o").addClass("fa-circle-o");
+  //       $(".s .fa").removeClass("fa-check-circle-o").addClass("fa-circle-o");
+  //       $(".sc .fa").removeClass("fa-circle-o").addClass("fa-check-circle-o");
+      
+  //     }
+
+  //   }
+  // }
+// });
 </script>
-
-<script type="text/javascript">
-$(document).ready(function(){
-
-	$('#participant,#speaker,#session_chair').bind('click',radbtn);
-
-	function radbtn(){
-		var valueChecked = $("input[name=rol]:checked").val();
-		if(valueChecked){
-			// alert("rrrr");
-			if(valueChecked == 2){
-				// alert("2");
-
-				$(".p .fa").removeClass("fa-circle-o").addClass("fa-check-circle-o");
-				$(".s .fa").removeClass("fa-check-circle-o").addClass("fa-circle-o");
-				$(".sc .fa").removeClass("fa-check-circle-o").addClass("fa-circle-o");		
-			}
-
-			else if(valueChecked == 1){
-
-				$(".p .fa").removeClass("fa-check-circle-o").addClass("fa-circle-o");
-				$(".s .fa").removeClass("fa-circle-o").addClass("fa-check-circle-o");
-				$(".sc .fa").removeClass("fa-check-circle-o").addClass("fa-circle-o");			
-			}
-
-			else if(valueChecked == 0){
-	
-				$(".p .fa").removeClass("fa-check-circle-o").addClass("fa-circle-o");
-				$(".s .fa").removeClass("fa-check-circle-o").addClass("fa-circle-o");
-				$(".sc .fa").removeClass("fa-circle-o").addClass("fa-check-circle-o");
-			
-			}
-
-		}
-	}
-});
-
-$(document).ready(function(){
-$('#participant,#speaker,#session_chair').bind('click',radval);
-	function radval(){
-
-		var valueChecked = $("input[name=rol]:checked").val();
-		if(valueChecked){
-			// alert("rrrr");
-			if(valueChecked == 2){
-				// alert("2");
-				$('input[name=role]').val('Participant');
-				// $('input[name=role]').attr('name', 'participant');
-
-				$('.radio-buttons').fadeToggle();
-			}
-
-			else if(valueChecked == 1){
-
-				$('input[name=role]').val('Speaker');
-				// $('input[name=role]').attr('name', 'speaker');
-
-				$('.radio-buttons').fadeToggle();
-		}
-
-			else if(valueChecked == 0){
-				$('input[name=role]').val('Session chair');
-				// $('input[name=role]').attr('name', 'session_chair');
-
-				$('.radio-buttons').fadeToggle();
-		}
-
-		}
-	}
-});
-</script>
-<!-- </div> -->
-<!-- <div class="col-md-8"> -->
-<div class="radio-buttons">
-	 <div class="p">
-		<input class="radbtn" type="radio" name="rol" id="participant" value="2"><label for="participant"><small><i class="fa fa-circle-o"> participant</small></i> </label>
-	 </div>
-
-	 <div class="s">
-		<input class="radbtn" type="radio" name="rol" id="speaker" value="1" ><label for="speaker"><small><i class="fa fa-circle-o"> speaker</small></i></label>
-	 </div>
-
-	 <div class="sc">
-		<input class="radbtn" type="radio" name="rol" id="session_chair" value="0" ><label for="session_chair"><small><i class="fa fa-circle-o"> session chair</small></i></label>
-	 </div>
-</div><!--radio buttons-->
-<!-- </div> -->
-<!-- </div> -->
-<!--row-->
-
-<!-- </div> -->
-<!--col md 6-->	
-
-<!-- </div> -->
-<!--row-->
 
 </form>
 
-<!-- </div> -->
-<!-- </div> -->
-<!--row-->
-<!-- </div> -->
-<!--container fulid-->
-
-
-
-
-
-<script type="text/javascript">
-$(document).ready(function(){
-
-$("#bunny").click(
-  function () {
-     var someText = "my dynamic text";
-     var newDiv = $(".roleContainer").append(someText).click(function () { alert("click!"); });
-     $(this).append(newDiv);
-  }
-)
-
-function createSlider(resp) {
-    $.each(resp, function(key, val) {
-        var item = "<div class='item' id="+val.id+">";
-
-        item += "<h2>" + val.category + "</h2>";
-        item += "<img src=" + val.image + " alt=" + val.title + ">";
-        item += "</div>";
-        var $item = $(item).click(function() {
-            // Add on click code here
-        });
-        $(".content-conveyor").append($item);
-    });
-}
-
-function appendText() {
-    var txt1 = "<p>Text.</p>";              // Create text with HTML
-    var txt2 = $("<p></p>").text("Text.");  // Create text with jQuery
-    var txt3 = document.createElement("p");
-    txt3.innerHTML = "Text.";               // Create text with DOM
-    $("body").append(txt1, txt2, txt3);     // Append new elements
-}
-
-});
-</script>
-
-<style type="text/css">
-form{
-	/*color: #000;*/
-}
-	.fa-check-circle-o{
-		/*color: #D6EB99;*/
-	}
-	#addRole{
-	/*	border: none;
-		background: transparent;
-		font-size: 17px;*/
-		/*color:#FFF;*/
-	/*	text-shadow: 0.5px 0.5px 1px #000;
-		font-family: inherit;
-		font-weight: 500;
-		line-height: 1.1;
-		color: inherit;*/
-	}
-	h2{
-		font-size: 25px;
-	}
-	h1{
-		font-size: 18px;
-		text-shadow: 0.5px 0.5px 1px #000;
-	}
-	#showradbtn{
-		/*color: #000;*/
-		/*opacity: 0.5;*/
-	}
-
-	.radio-buttons{
-		display: none;
-		opacity: 0.8;
-	}
-
-	.radio-buttons input{
-		display: none;
-	} 
-
-	label:hover, a:hover{
-		cursor: pointer;
-	}
-
-	.conference-add{
-
-	height: 22px;
-	width: 145px;
-	border: 1px;
-	border-radius: 5px;
-	/*color: #002400;*/
-	/*opacity: 0.6;*/
-	background: -webkit-linear-gradient(-149deg, #EAECE9, #DDDEDB, #D6D8D5,#C1C3C0,#B9B9B9); 
-    background: -o-linear-gradient(-149deg, #EAECE9, #DDDEDB, #D6D8D5,#C1D3C0,#B9B9B9); 
-    background: -moz-linear-gradient(-149deg, #EAECE9, #DDDEDB, #B6D8D5,#C1C3C0,#B9B9B9); 
-    background: linear-gradient(-149deg, #EAECE9, #DDDEDB, #D6D8D5,#C1C3C0,#B9B9B9);
-
-    -webkit-transition: all 0.5s;
-	transition: all 0.5s;
-	}
-	.conference-add:hover{
-		opacity: 0.9;
-		/*color: #335C33;*/
-		cursor: pointer;
-	}
-</style>
-
-
 
 }
+

@@ -1,0 +1,11 @@
+@(id:String, idenv:String)
+@Main("Program area") {
+
+
+<form action="@routes.Application.postOrderArea(id,idenv)" method="POST">
+Insert order  
+
+<textarea class="form-control" name="description" rows="5" cols="40"></textarea>
+
+</form>
+}

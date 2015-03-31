@@ -11,13 +11,13 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="@routes.Application.viewEnv(id)">Environment</a>
+      <a class="navbar-brand" href="@routes.Application.viewEnv(id)">Environment</a> 
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li><a href="#"><button id="editenv">Edit Environment</button> <span class="sr-only">(current)</span></a></li>
+        <li><a href="#" data-toggle="modal" data-target="#edit-env">Edit Environment <span class="sr-only">(current)</span></a></li>
 
        <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Areas <span class="caret"></span></a>
@@ -27,40 +27,7 @@
                  View Areas
               </a>
             </li>
-            <li><a href="#"><button id="newarea">Add Area</button></a></li> 
-          </ul>
-        </li>
-
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Features <span class="caret"></span></a>
-          <ul class="dropdown-menu" role="menu">
-            <li role="presentation">
-          
-            <a href="#" data-toggle="modal">
-              <button id="envDesc"> Description </button>
-            </a>
-
-            </li>
-          
-            <li><a href="#">Booth Description</a></li> 
-            <li><a href="#">Conference Role</a></li>
-            <!-- <li class="divider"></li> -->
-            <!-- <li><a href="#">People</a></li> -->
-            <!-- <li><a href="#">Program</a></li> -->
-            <!-- <li><a href="#">Order</a></li> -->
-            <!-- <li class="divider"></li> -->
-            <!-- <li><a href="#">Social Media</a></li> -->
-          </ul>
-        </li>
-
-         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Resources<span class="caret"></span></a>
-          <ul class="dropdown-menu" role="menu">
-            <li><a href="#">Temperature</a></li>
-            <li class="divider"></li>
-            <li><a href="#">Humidity</a></li>
-            <li class="divider"></li>
-            <li><a href="#">Luminosity</a></li>
+            <li><a href="#" data-toggle="modal" data-target="#addarea">Add Area</a></li> 
           </ul>
         </li>
 
@@ -78,549 +45,804 @@
 
 
 <div class="col-md-offset-1 col-md-11">
+<div class="path">
 Path : <a href="@routes.Application.welcome()">Profile </a> >> <a>View Environmnet</a>
+</div>
 <br>
 
+<p> in progress ... : the area section it is almost done ... this will be a copy-paste thing</p>
 <!-- <h2>View Environment</h2><br> -->
 
-<div class="row">
-  <div class="col-md-4">
-    <!-- Environment Name:<br> -->
-    <div class="area-name">
-      <h4><input type="text" value="@name"  class=" view-input" readonly></h4>
-    </div>
 
-  </div>
-
-  <style type="text/css">
-  h4{
-    font-size: 28px;
-    color: white;
-    text-shadow: 2px 2px 4px #000000;
-  }
-  .tags{
-    padding-left: 20px;
-    border-left:2px solid rgba(0,0,0,0.1); 
-    font-size: 15px;
-  }
-  .tags input{
-    border: none;
-    padding-left: 10px;
-    color: #FFF;
-  }
-</style>
-   <div class=" col-md-offset-2 col-md-4">
-    <!--  
-      Tags:<br>
-      <input type="text" value="@tags"  class=" view-input" readonly><br> -->
-  </div>
-</div>
 
 <div class="row">
-  <div class="space"></div>
-</div>
 
-<!-- <div class="row">
-    <div class=" col-md-4">
-    Features (add !! view): 
+  <div class="col-m-4">
+  <!-- Area Name:<br> -->
+  <div class="area-name">
+        <h4> <input type="text" value="@name" name="name" class="view-input" readonly></h4>
+      
+        <div class="row tng">
+              <!--resources-->
+              <div class="row">
 
-    <ul>
+              <div class="col-md-2">
+                <div class="temperature">
+                  <div class="hover-me-tn" data-toggle="tooltip" data-placement="left" title="remove temperature">Temp</div>
+                  <div class="load-temp-area"></div>
+                </div>
+              </div><!--md-4-->
+              <div class="col-md-2">
+                <div class="humity">
+                  <div class="hover-me-tn" data-toggle="tooltip" data-placement="left" title="remove humidity">Hum</div>
+                  <div class="load-hum-area"></div>
+                </div>
+              </div><!--md-4-->
+              <div class="col-md-2">
+                <div class="luminosity">
+                 <div class="hover-me-tn" data-toggle="tooltip" data-placement="left" title="remove luminosity"> Lum</div> 
+                 <div class="load-lum-area"></div>
+                </div>
+              </div><!--md-4-->
 
-     <li>
-        <a href="#">Description</a>
-    </li>
-     <li>
-        <a href="#">Booth Description</a>
-    </li>
-     <li>
-        <a href="#">Conference Role</a>
-    </li>
-     <li>
-        <a href="#">Program</a>
-    </li>
-     <li>
-        <a href="#">Order</a>
-    </li>
+              </div><!--row resorces-->
+        </div><!--row tng-->
 
-     <li>
-        <a href="#">Social Media</a>
-    </li>
 
-    </ul>
-    </div>
 
-    <div class="col-md-offset-2 col-md-4">
-    Resources
-    </div>
+</div><!--area name-->
 
-</div> -->
-<!--row-->
-</div>
-
-<!-- add new area modal thing -->
-
-<div id="modal-background-newarea"></div>
-<div id="modal-content-newarea">
-
-<div class="row">
-  <div class="col-md-7">
-  <div class="row">
-    <div class="col-md-1">
-      <div id="modal-header-newarea"><button id="modal-close-newarea"><i class="fa fa-close"></i></button></div>
-    </div>
-    <div class="col-md-2">
-    </div>
-  </div><!--row-->
-  </div>
+  </div><!--4-->
 </div><!--row-->
-  <div id="modal-load-page-newarea"></div> 
-</div><!--modal content-->
+</div><!--offset-11-->
+<!--: : :  add-ons: : :  -->
 
+<div class="add-on">
+<div class="col-md-offset-1">
+<div class="row">
+
+<div class="col-md-2">
+<div id="add-ons">
+
+  <div class="featrues">
+  <p>Features</p>
+        <div class="feat" id="des" data-toggle="tooltip" data-placement="left" title="add description" ><div data-toggle="modal" data-target="#myModal">Description</div></div>
+        <div class="feat" id="boo" data-toggle="tooltip" data-placement="top" title="add booth description"><div data-toggle="modal" data-target="#menu-boothdescription">Booth Description</div></div>
+        <div class="feat" id="pro" data-toggle="tooltip" data-placement="top" title="add program"><div data-toggle="modal" data-target="#menu-program">Program</div></div>
+        <div class="feat" id="ord" data-toggle="tooltip" data-placement="left" title="add order"><div data-toggle="modal" data-target="#menu-order">Order</div></div>
+        <!-- <div class="feat" id="pep" data-toggle="tooltip" data-placement="left" title="add people">People</div>      -->
+        <div class="feat" id="soc" data-toggle="tooltip" data-placement="bottom" title="add social media"><div data-toggle="modal" data-target="#social-menu">Social media</div></div>
+  </div><!--features-->
+ 
+  <div class="resources">
+  <br>
+  <p>Resources</p>
+        <div class="res" id="lum" data-toggle="tooltip" data-placement="top" title="add luminosity">Luminosity</div>
+        <div class="res" id="temp" data-toggle="tooltip" data-placement="left" title="add temperature">Temperature</div>
+        <div class="hum" id="hum" data-toggle="tooltip" data-placement="bottom" title="add humidity">Humidity</div>
+        
+  </div><!--resources-->
+<!-- Modals Menu-->
+
+
+
+ <!-- tooltip script -->
 <script type="text/javascript">
-$(function(){
-  $("#newarea, #modal-background-newarea, #modal-close-newarea").click(function () {
-    $("#modal-content-newarea,#modal-background-newarea,#modal-header-newarea").toggleClass("active");
-    $("#modal-load-page-newarea").load("@routes.Application.AddArea(id)");
-  });
-});
+  $(function () {
+  $('[data-toggle="tooltip"]').tooltip()
+})
 </script>
-<!-- add new area modal thing -->
+  <!-- </div> -->
+  <!--strange-->
+
+</div><!--add-ons-->
+
+
+</div><!--col-md-2-->
+
+<div class="col-md-10 top-10" id="add-zone">
+
+      <!--features--> 
+      <div class="row za-add">
+        
+<div class="row padding">
+          <div class="col-md-6 adow">
+          <div class="areadescriptioin">
+             <div class="description-area">
+               <script type="text/javascript">
+                $(function(){
+                $(".description-area").load("routes.Application.viewDescriptionenv(id)");
+                 });
+               </script>
+             </div><br>
+
+              <div class="view vi-de fa-desc-edit" id="view" data-toggle="tooltip" data-placement="right" title="edit description">
+                 <a href="#" data-toggle="modal" data-target="#edit-descrption">
+                    <i class="fa fa-edit"></i>
+                  </a>
+                  <style type="text/css">.vi-de{width: 10px;}</style>
+             </div>
+          </div><!--areadescription-->
+         </div><!--md-6 adow-->
+
+        <div class="col-md-6 adow">
+            <div class="booth-description">
+
+            <div class="booth-description-area"></div>
+
+               <script type="text/javascript">
+               $(function(){
+                  $(".booth-description-area").load("routes.Application.viewBoothEnv(id)");
+               });                
+               </script>
+
+              <div class="view vi-de" data-toggle="tooltip" data-placement="right" title="edit booth description">
+              <a href="#" data-toggle="modal" data-target="#modal-boo-edi-vie-p">
+                  <i class="fa fa-edit"></i>   
+              </a>
+              </div>
+            </div><!--booth-description-->
+        </div><!--md-6 adow-->
+</div><!--row padding-->
+
+<div class="row pisi za-add"><style type="text/css">.pisi{position: relative;top: 5px;bottom: 5px;height: 5px;}</style>
+  <!-- some space -->
+</div><!--pisi za-add"-->
+
+<div class="row padd">
+
+        <div class="col-md-6 adow">
+          <div class="view-program"></div>
+
+            <script type="text/javascript">
+              $(function(){
+                  $(".view-program").load("routes.Application.viewEnvProgram(id)");
+             });                
+            </script>
+
+          <div class="view vi-de" data-toggle="tooltip" data-placement="right" title="edit program">
+            <a  href="#" data-toggle="modal" data-target="#edit-program-icon">
+            <i class="fa fa-edit"></i>
+            </a>
+          </div>
+        </div><!--md-6 adow-->
+
+        <div class="col-md-6 adow">
+          <div class="view vi-de" data-toggle="tooltip" data-placement="bottom" title="edit order">
+          <a>
+          <i class="fa fa-edit"></i>
+          </a>
+          </div>
+        </div><!--md-6 adow-->
+
+</div><!--row padd-->
+
+<div class="row pisi za-add"><style type="text/css">.pisi{position: relative;top: 5px;bottom: 5px;height: 5px;}</style>
+  <!-- some space -->
+</div><!--pisi za-add"-->
+
+</div><!--features row-->
+
+</div><!--col-md-9-->
+
+</div><!--row-->
+</div><!--offset-->
+</div><!--add-on-->
+
+<!--: : :  _end add ons : : :  -->
+
+
+<div class="row psy za-add"><style type="text/css">.psy{position: relative;top: 5px;bottom: 5px;height:100px;}</style>
+  <!-- some space -->
+</div><!--pisi za-add"-->
+
+<!-- tags and social -->
+<div class="footer-container">
+
+<div class="row piy za-add"><style type="text/css">.piy{position: relative;top: 5px;bottom: 5px;height: 50px;}</style>
+  <!-- some space -->
+</div><!--pisi za-add"-->
+
+<div class="row tag-pag">
+  <div class="col-md-offset-2 col-md-4">
+     <div class="tags">
+     <div class="row">
+        <p> &nbsp;&nbsp;Tags </p><br>        
+      </div>
+      </div><!--tags-->
+  </div><!--col-md-offset-3 col-md-4-->
+
+<!-- <div class="col-md-4 social-icons"> -->
 
 <style type="text/css">
-     #newarea,#editenv,#envDesc{
-      border: none;
-      background: transparent;
-      outline: none;
-    }
-    #newarea:focus,#editenv:focus,#envDesc:focus{
-      outline: none;
-    }
+.social-icons{
+  position: relative;
+  top: -23px;
+}
+.footer-container{
+  /*border-top: 1px dotted #C1C3C0;*/
+position: relative;
+left: 150px;
+width: 1000px;
+height: 200px;
+}
 </style>
 
-<!-- edit environmnet modal thing -->
+     <!-- <div class="row"> -->
+     <!--social-->
 
-<div id="modal-background-editenv"></div>
-<div id="modal-content-editenv">
+       <!--  <div class="col-md-2">
+          <div class="social social-border" data-toggle="tooltip" data-placement="bottom" title="facebook">
+          <i class="fa fa-facebook-square"></i>
+          </div>
+        </div>
 
-<div class="row">
-  <div class="col-md-7">
-  <div class="row">
-    <div class="col-md-1">
-      <div id="modal-header-editenv"><button id="modal-close-editenv"><i class="fa fa-close"></i></button></div>
+        <div class="col-md-2">
+          <div class="social" data-toggle="tooltip" data-placement="left" title="twitter">
+          <i class="fa fa-twitter"></i>
+          </div>
+        </div>
+
+        <div class="col-md-2">
+          <div class="social" data-toggle="tooltip" data-placement="right" title="google plus">
+          <i class="fa fa-google-plus"></i>
+          </div>
+        </div>
+
+        <div class="col-md-2">
+          <div class="social" data-toggle="tooltip" data-placement="bottom" title="internal forum">
+          <i class="fa fa-weixin"></i>
+          </div>
+        </div>
+ -->
+    <!-- </div> -->
+    <!--row social-->
+
+<!-- </div> -->
+<!--col-md-4-->
+<!-- </div> -->
+<!--row tag-tag-->
+
+<!-- <div class="row"> -->
+   <!-- <div class="col-md-offset-2 col-md-4"> -->
+        @tags
+        <br><br><br><br>
+    <!-- </div> -->
+<!--     <div class="col-md-4">
+        <div class="view vi-de" data-toggle="tooltip" data-placement="bottom" title="edit social media">
+          <a>
+          <i class="fa fa-edit"></i>
+          </a>
+        </div> -->
+        <!--view vi-de-->
+     <!-- </div> -->
+</div>
+
+</div> <!--footer-container-->
+
+<!-- Modal add area-->
+<div class="modal fade" id="addarea" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Add area</h4>
+      </div>
+      <div class="modal-body">
+        <div class="area-adddddd"></div>
+            <script type="text/javascript">
+              $(function(){
+                $(".area-adddddd").load("@routes.Application.AddArea(id)");
+               });                
+            </script>
+          <!-- </div> -->
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      
+      </div>
     </div>
-    <div class="col-md-2">
-    </div>
-  </div><!--row-->
   </div>
-</div><!--row-->
-  <div id="modal-load-page-editenv"></div> 
-</div><!--modal content-->
+</div>
 
-<script type="text/javascript">
-$(function(){
-  $("#editenv, #modal-background-editenv, #modal-close-editenv").click(function () {
-    $("#modal-content-editenv,#modal-background-editenv,#modal-header-editenv").toggleClass("active");
-    $("#modal-load-page-editenv").load("@routes.Application.editEnv(id)");
-  });
-});
-</script>
-<!--edit environmnet modal thing -->
-
-<!-- environmnet description modal thing -->
-
-<div id="modal-background-envDesc"></div>
-<div id="modal-content-envDesc">
-
-<div class="row">
-  <div class="col-md-7">
-  <div class="row">
-    <div class="col-md-1">
-      <div id="modal-header-envDesc"><button id="modal-close-envDesc"><i class="fa fa-close"></i></button></div>
+<!-- Modal add area-->
+<div class="modal fade" id="edit-env" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Edit Environmnet</h4>
+      </div>
+      <div class="modal-body">
+        <div class="ed-env"></div>
+            <script type="text/javascript">
+              $(function(){
+                $(".ed-env").load("@routes.Application.editEnv(id)");
+               });                
+            </script>
+          <!-- </div> -->
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      
+      </div>
     </div>
-    <div class="col-md-2">
-    </div>
-  </div><!--row-->
   </div>
-</div><!--row-->
-  <div id="modal-load-page-envDesc"></div> 
-</div><!--modal content-->
-
-<script type="text/javascript">
-$(function(){
-  $("#envDesc, #modal-background-envDesc, #modal-close-envDesc").click(function () {
-    $("#modal-content-envDesc,#modal-background-envDesc,#modal-header-envDesc").toggleClass("active");
-    $("#modal-load-page-envDesc").load("@routes.Application.envDescription(id)");
-  });
-});
-</script>
-<!--environmnet description modal thing -->
-
-
-<!-- tabs -->
-
-<div id="tabs">
-
-<style type="text/css">
-  #tabs{
-   position: relative;
-   bottom: 30px;
-   left: 200px;
-  }
-</style>
-
-    <ul>
-        <li>
-            <a href="#a">Features</a>
-        </li>
-        <li>
-            <a href="#b">Thngs</a>
-        </li> 
-    </ul>
-
-<div id="a">
-<!-- Features -->
-<!-- tabs feature -->
-<div class="tabs">
-    <ul class="tab-links">
-        <!-- <li class="active"><a href="#tab1">Tab #1</a></li> -->
-        <li class="active"><a href="#tab2">Description</a></li>
-        <li><a href="#tab3">Booth Description</a></li>
-        <li><a href="#tab4">Conference Role</a></li>
-        <!-- <li><a href="#tab5">Program</a></li> -->
-        <!-- <li><a href="#tab6">Order</a></li> -->
-        <!-- <li><a href="#tab7">Social media</a></li> -->
-    </ul>
- 
-    <div class="tab-content">
-
-        <div id="tab2" class="tab active">
-        description
-          <script type="text/javascript">
-            $(function(){
-                $("#tab2").load("@routes.Application.viewDescriptionEnv(id)");
-            });
-          </script>
-        </div><!--2-->
- 
-        <div id="tab3" class="tab">
-        booth description
-          <script type="text/javascript">
+</div>
+<!-- Modal social media-->
+<div class="modal fade" id="social-menu" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Social media</h4>
+      </div>
+      <div class="modal-body">
+      <div class="social-menu-modal"></div>
+        <script type="text/javascript">
           $(function(){
-              // $("#tab3").load("#");
-          });
-          </script>
-        </div><!--3-->
- 
-        <div id="tab4" class="tab">
-        conference role
-           <script type="text/javascript">
-            $(function(){
-                // $("#tab4").load("#");
-            });
-           </script>
-     
+            $(".social-menu-modal").load("routes.Application.socialMediaEnv(id)");
+           });                
+        </script>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        
+      </div>
+    </div>
+  </div>
+</div>
 
-        </div><!--4-->
+<!-- Modal edit area-->
+<div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Edit area</h4>
+      </div>
+      <div class="modal-body modal-body-editarea">
 
-     <!--    <div id="tab5" class="tab">
-           5
-        </div> -->
-        <!--5-->
-
-      <!--   <div id="tab6" class="tab">
-           6
-        </div> -->
-        <!--6-->
-
-     <!--    <div id="tab7" class="tab">
-           7
-        </div> -->
-        <!--7-->
-
-</div><!--tab content-->
-</div><!--tabs-->
-</div><!--id a-->
-<!--end a  -->
-
-<!-- end tabs feature -->
-
-
-<div id="b">
-        <!-- Thngs -->
-        <!-- tab thngs -->
-<div class="tabs">
-    <ul class="tab-links">
-        <!-- <li class="active"><a href="#tab1">Tab #1</a></li> -->
-        <li class="active"><a href="#tab8">Temperature</a></li>
-        <li><a href="#tab9">Humidity</a></li>
-        <li><a href="#tab10">Luminosity</a></li>
-
-    </ul>
- 
-    <div class="tab-content">
-
-        <div id="tab8" class="tab active">
-        Temperature
-        </div><!--8-->
- 
-        <div id="tab9" class="tab">
-        Humidity
-        </div><!--9-->
- 
-        <div id="tab10" class="tab">
-        Luminosity
-        </div><!--10-->
-
-</div><!--tab content-->
-</div> <!--tabs-->
-</div><!--id b-->
-
-</div><!--id tabs-->
-
-
-<script type="text/javascript">
-  
-jQuery(document).ready(function() {
-    jQuery('.tabs .tab-links a').on('click', function(e)  {
-        var currentAttrValue = jQuery(this).attr('href');
- 
-        // Show/Hide Tabs
-        jQuery('.tabs ' + currentAttrValue).show().siblings().hide();
- 
-        // Change/remove current tab to active
-        jQuery(this).parent('li').addClass('active').siblings().removeClass('active');
- 
-        e.preventDefault();
-    });
-});
-
-</script>
-
-
-
-<script type="text/javascript">
-  $('#tabs')
-    .tabs()
-    .addClass('ui-tabs-vertical ui-helper-clearfix');
-
-</script>
-
-
-
-<style type="text/css">
-  
-/*----- Tabs -----*/
-.tabs {
-    width:100%;
-    display:inline-block;
-    padding-top: 10px;
-}
- 
-    /*----- Tab Links -----*/
-    /* Clearfix */
-    .tab-links:after {
-        display:block;
-        clear:both;
-        content:'';
-    }
- 
-    .tab-links li {
-        margin:0px 5px;
-        float:left;
-        list-style:none;
-    }
- 
-        .tab-links a {
-            padding:9px 15px;
-            display:inline-block;
-            /*border-radius:3px 3px 0px 0px;*/
-            /*background:#7FB5DA;*/
-            font-size:16px;
-            font-weight:600;
-            /*color:#4c4c4c;*/
-            color: #C1C3C0;
-            text-shadow: 2px 2px 4px #000000;
-
-        border: 1px solid rgba(0,0,0,0.3);
-        border-radius: 7px;
-        background: rgba(0,0,0,0.05);
-        box-shadow: inset 0 1px rgba(255,255,255,0.3), 
-              inset 0 10px rgba(255,255,255,0.2), 
-              inset 0 10px 20px rgba(255,255,255,0.25), 
-              inset 0 -15px 30px rgba(0,0,0,0.3);
-
-            transition:all linear 0.15s;
-        }
- 
-        .tab-links a:hover {
-            /*background:#a7cce5;*/
-            background: #008F47;
-            text-decoration:none;
-
-        color:#FFF;
-        text-shadow: 0 0 3px #000, 0 0 5px #DDDEDB;
-        }
- 
-    li.active a, li.active a:hover {
-        /*background:#fff;*/
-        /*background: transparent;*/
-        background: #007A00;
-
-        text-decoration: none;
-        color:#4c4c4c;
-        /*background: #007A00;*/
-        opacity: 0.6;
-
-        color:#FFF;
-        text-shadow: 0 0 3px #000, 0 0 5px #DDDEDB;
-    }
- 
-    /*----- Content of Tabs -----*/
-    .tab-content {
-        padding:15px;
-        /*border-radius:3px;*/
-        /*box-shadow:-1px 1px 1px rgba(0,0,0,0.15);*/
-        /*background:#fff;*/
-        background: transparent;
-    }
- 
-        .tab {
-            display:none;
-        }
- 
-        .tab.active {
-            display:block;
-        }
-
-</style>
-
-<!-- left -->
-<style type="text/css">
-body{
-  overflow-x: hidden;
-}
-/*  #a {
-    padding-bottom: 10px;
-  }*/
-  
-  .ui-tabs.ui-tabs-vertical {
-    padding: 0;
-    /*padding-bottom: 10px;*/
-    width: 1200px;
-    height: 500px;
-    background: transparent;
-}
-.ui-widget-content{
-  border: none;
-  background: transparent;
-}
-.ui-tabs.ui-tabs-vertical .ui-widget-header {
-    border: none;
-    background: transparent;
-    padding-bottom: 2px;
-}
-.ui-tabs.ui-tabs-vertical .ui-tabs-nav {
-    float: left;
-    width: 200px;
-    background: transparent;
-    border: none;
-    /*padding-bottom: 2px;*/
-    /*padding-top: 10px;*/
-    /*border-radius: 4px 0 0 4px;*/
-    /*border-right: 1px solid gray;*/
-}
-.ui-tabs.ui-tabs-vertical .ui-tabs-nav li {
-    clear: left;
-    width: 100%;
-    /*margin: 0.2em 0;*/
-    /*border: 1px solid gray;*/
-    border: none;
-    /*border-width: 1px 0 1px 1px;*/
-    /*border-radius: 4px 0 0 4px;*/
-    /*padding-top: 10px;*/
-    overflow: hidden;
-    position: relative;
-    right: -2px;
-    z-index: 2;
-
-        border: 1px solid rgba(0,0,0,0.3);
-        border-radius: 7px;
-        background: rgba(0,0,0,0.05);
-        box-shadow: inset 0 1px rgba(255,255,255,0.3), 
-              inset 0 10px rgba(255,255,255,0.2), 
-              inset 0 10px 20px rgba(255,255,255,0.25), 
-              inset 0 -15px 30px rgba(0,0,0,0.3);
-
-            transition:all linear 0.15s;
-}
-.ui-tabs.ui-tabs-vertical .ui-tabs-nav li a {
-    display: block;
-    /*background: transparent;*/
-    width: 100%;
-    /*padding: 0.6em 1em;*/
-
-   color: #C1C3C0;
-   text-shadow: 2px 2px 4px #000000;
-   outline: none;
+      <script type="text/javascript">
+      $(function(){
+       
+          $(".modal-body-editarea").load("routes.Application.editEnv(id)");
     
+      });
+      </script>
+     
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- _end modal area edit -->
+
+<!-- Modal menu booth description -->
+<div class="modal fade" id="menu-boothdescription" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Booth Description</h4>
+      </div>
+      <div class="modal-body-booth-desc-menu">
+        <div class="menu-modal-booth">
+        <div class="row">
+
+            <script type="text/javascript">
+            $(function(){
+               $(".menu-modal-booth").load("routes.Application.envBothDescription(id)");
+            });
+            </script>
+
+            </div>
+       </div>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Modal description-->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Description</h4>
+      </div>
+      <div class="modal-body-area-desc">
+
+      <script type="text/javascript">
+      $(function(){
+       
+          $(".modal-body-area-desc").load("routes.Application.envDescription(id)");
+    
+      });
+      </script>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+        <!-- Modal edit booth description -->
+        <div class="modal fade" id="modal-boo-edi-vie-p" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Booth Description</h4>
+              </div>
+              <div class="modal-body">
+               <div class="edit-booth-modal-vi">
+
+              <script type="text/javascript">
+                 $(function(){
+                    $(".edit-booth-modal-vi").load("routes.Application.envBothDescription(id)");
+                 });                
+              </script>
+
+               </div><!--edit booth modal vi-->
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+               
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+<!-- Modal Program edit icon-->
+  <div class="modal fade" id="edit-program-icon" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+     <div class="modal-dialog">
+        <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="myModalLabel">Edit program</h4>
+        </div>
+         <div class="modal-body">
+         <div class="edit-program-icon">
+
+         <script type="text/javascript">
+          $(function(){
+          $(".edit-program-icon").load("routes.Application.envProgram(id)");
+           });                
+         </script>
+
+         </div>
+         </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+
+    </div>
+    </div>
+ </div>
+
+<!-- Program Menu -->
+
+<div class="modal fade" id="menu-program" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Program</h4>
+      </div>
+      <div class="modal-body">
+       <div class="modal-program-menu">
+
+          <script type="text/javascript">
+            $(function(){
+               $(".modal-program-menu").load("routes.Application.envProgram(id)");
+            });
+          </script>
+          
+       </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Conference role menu-->
+<div class="modal fade" id="conf-role-menu-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Conference Role</h4>
+      </div>
+      <div class="modal-body-conf-role-menu">
+
+          <script type="text/javascript">
+            $(function(){
+               $(".modal-body-conf-role-menu").load("routes.Application.envConferenceRole(id)");
+            });
+          </script>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+          <!-- Modal edit description-->
+          <div class="modal fade" id="edit-descrption" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                  <h4 class="modal-title" id="myModalLabel">Description</h4>
+                </div>
+                <div class="modal-body-editdescription-area">
+
+                 <script type="text/javascript">
+                      $(function(){
+                         $(".modal-body-editdescription-area").load("routes.Application.envDescription(id)");
+                      });                
+                  </script>
+
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+<!-- Modal Order-->
+<div class="modal fade" id="menu-order" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Order</h4>
+      </div>
+      <div class="modal-body">
+      <div class="order-menu-container"></div>
+
+        <script type="text/javascript">
+          $(function(){
+             $(".order-menu-container").load("routes.Application.orderEnv(id)");
+          });
+        </script>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style type="text/css">
+.top-10{
+  position: relative;
+  top: -12px;
 }
-.ui-tabs.ui-tabs-vertical .ui-tabs-nav li a:hover {
+.tng{
+  border-left:5px solid rgba(0,0,0,0.1);
+  padding-left: 6px;
+  position: relative;
+  left: 30px;
+  bottom:7px;
+  /*top:30px;*/
+}
+.tng {
+  font-size: 11px;
+  position: relative;
+  top: 4px;
+  color: rgba(24, 32, 28, 0.5);
+  text-align: center;
+  -o-text-overflow: clip;
+  text-overflow: clip;
+  text-shadow: 4px 0 9px rgba(255,255,255,0.51) ;
+}
+.hover-me-tn:hover{
+  cursor: pointer;
+}
+.tam-tam{
+  position: relative;
+  top: -15px;
+  left: 25px;
+}
+.view{
+  width: 150px;
+  font-size: 12px;
+  color: #C1C3C0;
+  text-shadow: 2px 2px 4px #000000; 
+}
+.view a{
+  font-size: 12px;
+  color: #141517;
+  text-shadow: 1px 1px 3px #666, -1px -1px 3px #FFF, 1px 1px #666, -1px 1px #FFF ;
+  opacity: 0.7;
+}
+.view:hover, .view a:hover{
+  cursor: pointer;
+  text-decoration: none;
+  color: #3D5200;
+}
+#add-ons,.za-add{
+  position: relative;
+  top: 30px;
+}
+  .add-ons{
+    position: relative;
+    top: 10px;
+    height: 300px;
+  }
+  .booth-description .fa{
+     position: relative;
+     right: 13px;
+   }
+  .padding{
+    padding-top: 20px;
+    padding-bottom: 20px;
+    width: 890px;
+    height: 180px;
+    overflow: scroll;
+    overflow-x:hidden;
+  }
+  .padding::-webkit-scrollbar-track{
+    background: transparent;
+    border-radius:8px;
+  }
+  body{
+    overflow-x:hidden;
+  }
+.social{
+  /*padding-top: 20px;*/
+  padding-top: 20px;
+  width: 15px;
+  font-size: 27px;
+  color: #C1C3C0;
+  opacity: 0.9;
+  -o-text-overflow: clip;
+  text-overflow: clip;
+  text-shadow: -2px -2px 1px rgba(207, 225, 165, 0.6) , 
+              -1px -1px 1px rgba(207, 225, 165, 0.6) , 
+                1px 1px 1px rgba(207, 225, 165, 0.6) ,
+
+                1px 1px 0 rgb(76,125,89) , 
+                2px 2px 0 rgb(75,124,88) , 
+                3px 3px 0 rgb(74,122,86) , 
+                4px 4px 0 rgb(73,120,83) , 
+                5px 5px 0 rgb(72,118,82) , 
+                6px 6px 0 rgb(71,115,79) , 
+                7px 7px 0 rgb(70,112,76) , 
+                8px 8px 0 rgb(69,109,73) , 
+                9px 9px 0 rgb(67,105,69) , 
+                10px 10px 0 rgb(65,101,66) , 
+                11px 11px 0 rgb(64,97,61) , 
+
+                12px 12px 1px rgba(28,67,103,0.498039) , 
+                14px 14px 12px rgba(5,13,20,0.498039) ;
+
+  -webkit-transition: all 201ms cubic-bezier(0.42, 0, 0.30, 1) 10ms;
+  -moz-transition: all 201ms cubic-bezier(0.42, 0, 0.30, 1) 10ms;
+  -o-transition: all 201ms cubic-bezier(0.42, 0, 0.30, 1) 10ms;
+  transition: all 201ms cubic-bezier(0.42, 0, 0.30, 1) 10ms;
+}
+.social:hover{
+  cursor: pointer;
+  color: #FFF;
+
+  text-shadow: -2px -2px 1px rgba(0, 0, 0, 0.4) , 
+               -1px -1px 1px rgba(0, 0, 0, 0.2) , 
+
+                1px 1px 1px rgba(232,247,255,0.901961) , 
+                2px 3px 1px rgba(28,67,103,0.498039) , 
+                5px 5px 12px rgba(5,13,20,0.498039) ;
+
+  -webkit-transition: all 200ms cubic-bezier(0.42, 0, 0.58, 1) 10ms;
+  -moz-transition: all 200ms cubic-bezier(0.42, 0, 0.58, 1) 10ms;
+  -o-transition: all 200ms cubic-bezier(0.42, 0, 0.58, 1) 10ms;
+  transition: all 200ms cubic-bezier(0.42, 0, 0.58, 1) 10ms;
+}
+.adow:hover{
   cursor: pointer;
 
-  color:#FFF;
-  text-shadow: 0 0 3px #000, 0 0 5px #DDDEDB; 
-
-  outline: none;
 }
-.ui-tabs.ui-tabs-vertical .ui-tabs-nav li.ui-tabs-active {
-    /*margin-bottom: 0.2em;*/
-    /*padding-bottom: 0;*/
-    /*border-right: 1px solid white;*/
-    /*background: transparent;*/
-    /*background: #007A00;*/
-    /*opacity: 0.5;*/
-    color:#FFF;
-    text-shadow: 0 0 3px #000, 0 0 5px #DDDEDB; 
-}
-.ui-tabs.ui-tabs-vertical .ui-tabs-nav li:last-child {
-    margin-bottom: 10px;
-    background: transparent;
-}
-.ui-tabs.ui-tabs-vertical .ui-tabs-panel {
-    float: left;
-    /*width:500px;*/
-    background: transparent;
-    border-left: 0;
-    border-radius: 0;
-    position: relative;
-    left: -1px;
+.paddi{
+    height: 100px;
+    overflow: scroll;
+    overflow-x:hidden;
     padding-top: 10px;
-
-  color:#FFF;
-  text-shadow: 0 0 3px #000, 0 0 5px #DDDEDB; 
+    width: 890px;
+}
+  .padd{
+    padding-top: 10px;
+    width: 890px;
+    height: 180px;
+    overflow: scroll;
+    overflow-x:hidden;
+  }
+  .padd::-webkit-scrollbar-track{
+    background: transparent;
+    padding-top: 3px;
+    border-radius:10px;
+  }
+.add-on{
+  position: relative;
+  top: 10px;
+  /*padding-bottom: 60px;*/
+  /*padding-top: 10px;*/
 }
 
-
-</style>
-<!-- _end-tabs -->
-
-
-
-<div class="row">
-  <div class="col-md-9">
-     <div class="tags">
-      Tags : <br>
-      <input type="text" value="@tags" name="tags" class="view-input" readonly><br>
-      </div>
-  </div>
-</div>
-
-<style type="text/css">
+  .featrues p , .resources p{
+   display: inline-block;
+  -webkit-box-sizing: content-box;
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+  border: none;
+  font: "Aladin", Helvetica, sans-serif;
+  color: #141517;
+  text-align: center;
+  text-transform: normal;
+  -o-text-overflow: clip;
+  text-overflow: clip;
+  white-space: pre;
+  text-shadow: 1px 1px 0 rgba(140,140,140,0.6) , -1px -1px 1px rgba(0,0,0,0.67) ;
+  }
+  .feat:hover,.res:hover,.hum:hover{
+  cursor: pointer;
+  font:  "Chau Philomene One", Helvetica, sans-serif;
+  color: #FFF;
+  -o-text-overflow: clip;
+  text-overflow: clip;
+  letter-spacing: 3px;
+  text-shadow: -3px 0 1px rgb(30,242,241) , 3px 0 1px rgb(246,5,10) ;
+  }
+  .feat,.res,.hum{
+    color: #C1C3C0;
+    text-shadow: 2px 2px 4px #000000;
+      
+    -webkit-transition: color 0.5s;
+    transition: color 0.5s; 
+  }
   .tags{
     position: relative;
-     bottom: 30px;
-   left: 200px;
+    width: 800px;
+    height: 70px;
   }
+  .tags p{
+    color: #C1C3C0;
+    text-shadow: 2px 2px 4px #000000;
+    border-left: 1px solid;
+    border-left-style: dotted;
+    border-left-color: #000;
+    /*box-shadow: 0 -8px 20px 2px #DEDEE3;*/
+  }
+  .tags input{
+    color: #FFF;
+  }
+   .social-border i{
+    padding-left: 15px;
+    border-left: 1px solid;
+    border-left-style: dotted;
+    border-left-color: #000;
+   }
 </style>
 
 

@@ -1,35 +1,31 @@
 @(description:String, k:String, idenv:String)
 @Main("view description"){
+<div class="pad">
+    <form action="@routes.Application.PostAreaDescription(k,idenv)" method="POST">
+	           <div class="edit-input-container">
+             <p>Description</p>
+	            @description
+	           </div>      
 
-  <div id ="areadesc" class="col-md-offset-1 col-md-7">
-        <form action="@routes.Application.PostAreaDescription(k,idenv)" method="POST">
-        <div class="description">
-             <h2>Area Description:</h2>
 
-           <div class="border-input"></div>
+<style type="text/css">
+  .pad{
+    position: relative;
+    top:10px;
+  }
+</style>
 
-	           <div class="col-md-7 ">
-	            <input  value="@description" name="description" class="area-desc" readonly>
-	           </div>
-           
-
-          </div>
-
-            <style type="text/css">
-            .description input{
-            	color: #FFF;
-            	background: transparent;
-            	border: none;
+         <style type="text/css">
+           input{
+              color: #FFF;
+              background: transparent;
+              border: none;
             }
 
-            h2{
-            	font-size: 24px;
-            }
-            </style>
-        </form>
+        </style>
 
 
-  </div>
+  <!-- </div> -->
     
 
 }

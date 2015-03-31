@@ -15,3 +15,4 @@ libraryDependencies ++= Seq(
   "com.typesafe.play.plugins" %% "play-plugins-mailer" % "2.3.0",
   "org.json"%"org.json"%"chargebee-1.0"
 )
+
