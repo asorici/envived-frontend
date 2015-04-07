@@ -1,30 +1,178 @@
 @Main("New Environment") {
+<nav id="css" class="navbar navbar-default">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="@routes.Application.welcome()"><i class="fa fa-home"></i>Profile</a>
+    </div>
 
-<div class="col-md-offset-3 col-md-9">
+   <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="#"></a></li> 
+       
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+	      Menu
+          <span class="caret"></span></a>
+	          <ul class="dropdown-menu" role="menu">
+	            <li><a href="@routes.Application.EditProfile()">Edit Profile</a></li>
+	            <li class="divider"></li>
+	            <li><a href="delete-account.html">Settings</a></li>
+	            <li class="divider"></li>
+	            <li><a href="@routes.Application.index()">Log Out</a></li>
+          	  </ul>
+        </li>
+      </ul>
+      </div>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
 
-<h3>Add new Environment:</h3>
-<!-- <div class="border-input-edit"></div> -->
-
-<form method="POST" action="@routes.Application.PostNewEnvironment()">
+<div class="container">
+<div class="col-md-6">
 
 <div class="row">
-	<div class="col-md-8">
-	Name</br>
-	<input name="name" class="form-control"></br>
-	Tags</br>
-	<input name="tags" class="form-control"></br>
+	<div class="path">
+		Path : <a href="@routes.Application.welcome()">Profile </a> >> Add new environment 
+		<br><br>
+	</div><!--path-->
+</div><!--row-->
+
+<div class="row">
+	<form method="POST" action="@routes.Application.PostNewEnvironment()">
+		
+		Name</br>
+		<input name="name" class="form-control" id="name" ></br>
+
+	<div class="row">
+	<div class="col-md-6">
+		Width</br>
+		<input name="width" id="width" class="form-control" onkeypress="return isNumberKey(event)" data-toggle="tooltip" data-placement="bottom" title="insert only numbers" >
 	</div>
-</div>
+	<div class="col-md-6">
+		Height<br>
+		<input name="height" class="form-control" onkeypress="return isNumberKey(event)" data-toggle="tooltip" data-placement="top" title="insert only numbers" >
+	</div>
+	</div><!--row-->
 
-<input type="submit" name="Add" class="btn-edit" value="add">
+		Tags</br>
+		<input name="tags" class="form-control" ></br>
+			
+	    Img thumbnail url</br>
+	   <input name="img_thumbnail_url" class="form-control">
+	<br>
 
-</form>
+	<input type="submit" id="submit" name="Add" class="btn btn-default btn-lg add-new-area-btn" value="add" data-toggle="tooltip" data-placement="bottom" title="add environmnet">
 
-</div>
+	</form>
+</div><!--row form-->
+
+</div><!--offset-->
+</div><!--container-->
+
 
 <style type="text/css">
+.env-show{
+	display: none;
+}
 	h3{
 		font-size: 20px;
 	}
+	.input-group 
+	.form-control:last-child, 
+	.input-group-addon:last-child,
+	.input-group-btn:last-child>.btn, 
+	.input-group-btn:last-child>.btn-group>.btn, 
+	.input-group-btn:last-child>.dropdown-toggle, 
+	.input-group-btn:first-child>.btn:not(:first-child),
+	.input-group-btn:first-child>.btn-group:not(:first-child)>.btn{
+		border-top-left-radius: 0px;
+		border-bottom-left-radius: 0px;
+	}
+	.tags-adds ul li{
+		display: inline;
+		list-style: none;
+		padding-left: 3px;
+		padding-right: 3px;
+		/*border: 1px solid #98A48D;*/
+		/*border-radius: 6px;*/
+		/*border-spacing: 5px;*/
+
+	}
+	.selected-tags{
+		width: 300px;
+		overflow: scroll;
+		overflow-y:hidden;
+	}
+	.fa-times{
+		visibility: hidden;
+	}
+	.container{
+		position: relative;
+		top: 0px;
+	}
 </style>
+
+
+
+<script type="text/javascript">
+
+// $('.form-control').keyup(function() {
+//     $('#submit').removeAttr('disabled', !$('.form-control').val()); 
+// });
+
+
+function isNumberKey(evt){
+    var charCode = (evt.which) ? evt.which : event.keyCode
+    if (charCode > 31 && (charCode < 48 || charCode > 57))
+        return false;
+    return true;
+}
+
+$(function () {
+  $('[data-toggle="tooltip"]').tooltip()
+})
+
+$(function(){
+	$('.input .parent').click().toggle('.env-show');
+});
+	// add tag
+$(document).ready(function(){
+    $('.add-tag-btn').click(function(){
+
+         var feLi = $("#selected-tags-ul-li");
+         var fi = $(".tags-input input").val();
+         if(fi != 0){
+            feLi.append('<li name="tags">'+fi+'</li><i class ="fa fa-times"></i>&nbsp;');
+            $(".tags-input input").val('');
+            }
+            else{
+                alert("Add a tag ...");
+            }
+
+            });
+        });
+</script>
+<script type="text/javascript">
+
+('.tags-list-ul ul li').hover(
+  function () {
+    $('.fa-times').show();
+  }, 
+  function () {
+    $('.fa-times').hide();
+  }
+);
+
+</script>
+
+
 }

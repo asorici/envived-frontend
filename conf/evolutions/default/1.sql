@@ -20,6 +20,9 @@ create table environment (
   name                      varchar(255),
   tags                      varchar(255),
   description               varchar(255),
+  width                     varchar(255),
+  height                    varchar(255),
+  img_thumbnail_url         varchar(255),
   constraint pk_environment primary key (id))
 ;
 

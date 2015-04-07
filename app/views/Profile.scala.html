@@ -11,13 +11,13 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#">Profile</a>
+      <a class="navbar-brand" href="#"><i class="fa fa-home"></i>Profile</a>
     </div>
 
    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
 
-        <li><a href="#"><button id="newenv">Add new Environment</button><span class="sr-only">(current)</span></a></li>
+        <li><a href="@routes.Application.AddEnvironment()"><button id="newenv">Add new Environment</button><span class="sr-only">(current)</span></a></li>
      </ul>
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -50,6 +50,8 @@
 <div class="path">
 Path : Profile  
 </div>
+
+<h2> Your Environments </h2>
 <div id="environments-show">
   <script type="text/javascript">
       $(function(){
@@ -76,34 +78,7 @@ Path : Profile
     outline: none;
   }
 </style>
+<!--here you can  add some style-->
 
-<!-- add new environmnet modal thing -->
 
-<div id="modal-background-newenv"></div>
-<div id="modal-content-newenv">
-
-<div class="row">
-  <div class="col-md-7">
-  <div class="row">
-    <div class="col-md-1">
-      <div id="modal-header-newenv"><button id="modal-close-newenv"><i class="fa fa-close"></i></button></div>
-    </div>
-    <div class="col-md-2">
-    </div>
-  </div><!--row-->
-  </div>
-
-</div><!--row-->
-  <div id="modal-load-page-newenv"></div> 
-</div><!--modal content-->
-
-<script type="text/javascript">
-$(function(){
-  $("#newenv, #modal-background-newenv, #modal-close-newenv").click(function () {
-    $("#modal-content-newenv,#modal-background-newenv,#modal-header-newenv").toggleClass("active");
-    $("#modal-load-page-newenv").load("@routes.Application.AddEnvironment()");
-  });
-});
-</script>
-<!--end add new environment modal thing -->
 }

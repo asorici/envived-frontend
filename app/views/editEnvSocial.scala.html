@@ -1,8 +1,8 @@
-@(facebook_url:String, twitter_url:String, google_plus_url:String, internal_forum_url:String,id:String, idenv:String)
+@(facebook_url:String, twitter_url:String, google_plus_url:String, internal_forum_url:String,id:String)
 
 @Main("social media") {
 
-<form action="@routes.Application.editSocialArea(id,idenv)" method="POST">
+<form action="@routes.Application.editSocialEnv(id)" method="POST">
 
 <div class="row paddy">
 	<div class="col-md-offset-1 col-md-2">

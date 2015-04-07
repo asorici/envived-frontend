@@ -5,17 +5,17 @@
  <div class="col-md-offset-1 col-md-11">
         <form action="@routes.Application.saveDeleteDescEnv(k)" method="POST">
       
-             <h2>Edit Environment Description</h2>
+             <h2>Environment Description</h2>
                <style type="text/css">
              	 h2{
-            	font-size: 24px;
+            	font-size: 17px;
             	}
              </style>
 <!-- <div class="border-input"></div> -->
  <div class="edit-input-container">
 	<div class="row">
 	    <div class="col-md-11">
- 			<textarea class="form-control" cols="60" rows="5" name="textarea">@description</textarea>
+ 			<textarea class="form-control" cols="60" rows="5" name="textarea" data-toggle="tooltip" data-placement="left" title="click to edit">@description</textarea>
  		</div>
  	</div>
 </div>
@@ -24,13 +24,34 @@
 	<div class="row">
 	<div class="col-md-7">
 	<div class="row">
-		<div class="col-md-2">
+		<div class="col-md-3">
 			<input type="submit" name="update" value="save" class="btn-edit">
 		</div>
-		<div class="col-md-1">
+		<div class="col-md-4">
 			<input type="submit" name="update" value="delete" class="btn-edit">
 		</div>
-
+<script type="text/javascript">
+	$(function () {
+  $('[data-toggle="tooltip"]').tooltip()
+})
+</script>
+<style type="text/css">
+.edit-input-container textarea:hover{
+	cursor: pointer;
+}
+.edit-input-container textarea{
+	    /*color: #FFF;*/
+		border: none;
+		background-color: transparent;
+		box-shadow: none;
+	}
+.edit-input-container textarea:focus{
+		color: #000;
+		border: 1px solid #000;
+		background-color: #FFF;
+		border-radius: 7px;
+	}
+</style>
 	</div>
 	</div>	
 	</div>

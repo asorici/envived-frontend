@@ -17,11 +17,17 @@ public class Url {
 	 static String program         = "/envived/client/v2/resources/features/program/";
 	 static String order           = "/envived/client/v2/resources/features/order/";
 	 static String socialmedia     = "/envived/client/v2/resources/features/social_media/";
+	 static String conference_role = "/envived/client/v2/resources/features/conference_role/";
+	 
+	 static String temperature     = "/envived/client/v2/resources/things/temperature/";
+	 static String humidity     = "/envived/client/v2/resources/things/humidity/";
+	 static String luminosity     = "/envived/client/v2/resources/things/luminosity/";
 	 
 	 static String crTvTfj = "?clientrequest=true&virtual=true&format=json/";
 	 static String vFcrTfj = "?virtual=false&clientrequest=true&format=json/";        
-
-	 static String crTvTfjO = "?clientrequest=true&virtual=true&format=json&owner=";
+	 static String vTcrTfJ = "?virtual=true&clientrequest=true&format=json";
+	 
+	 static String crTvTfjO = "?clientrequest=true&virtual=true&format=json"+"&owner=";
 
 	 static String www     = "application/x-www-form-urlencoded";
 	 static String appjson = "application/json";

@@ -1,7 +1,49 @@
 @(k:String)
 @Main("Add area") {
+<nav id="css" class="navbar navbar-default">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
 
-<div class="col-md-offset-3 col-md-9">
+    </div>
+    
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
+      <ul class="nav navbar-nav navbar-right">
+
+           <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Areas <span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu">
+            <li role="presentation">
+              <a href="@routes.Application.viewAreas(k)" data-toggle="modal">
+                 View Areas
+              </a>
+            </li>
+            <!-- <li><a href="@routes.Application.AddArea(k)">Add Area</a></li>  -->
+          </ul>
+        </li>
+        
+       <li><a href="@routes.Application.viewEnv(k)">Environment <span class="sr-only">(current)</span></a></li>
+        <li><a href="@routes.Application.welcome()"><i class="fa fa-home"></i>Profile</a></li> 
+        <li><a href="#">Log out</a></li>            
+      </ul>
+
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+
+<div class="col-md-offset-1 col-md-7">
+
+<div class="path">
+  Path : <a href="@routes.Application.welcome()">Profile </a> >> <a  href="@routes.Application.viewEnv(k)">View Environmnet</a> >> <a href="@routes.Application.viewAreas(k)">View Areas</a> >> Add new Area
+</div>
     <h3>Add New Area</h3>
   <!-- <div class="border-input-edit"></div> -->
 
@@ -10,22 +52,59 @@
     <div class="row">
       <div class="col-md-8">
 
-          Area name <br>
-          <input name="name" class="form-control"><br>
+       Area name <br>
+       <input name="name" class="form-control"><br>
+
+        Area type<br>
+        <div class="row">
+          <div class="col-md-6">   
+            <select name= "areaType" class="typo form-control"> 
+              <option  name= "areaType" value="null" class="typo form-control">----</option>
+              <option  name= "areaType" value="interest" class="typo form-control">interest</option>
+              <option  name= "areaType" value="non-interest" class="typo form-control">non-interest</option>
+            </select>
+          </div>
+        </div>
+
+          Img thumbnail url<br>
+          <input name="img_thumbnail_url" class="form-control">
+
+        <!--   Shape<br>
+          <textarea name="shape" class="form-control" rows="5" cols="40"></textarea> <br> -->
+
           Tags <br>
           <input name="tags" class="form-control"><br>
 
+
     </div>
     </div>
 
-    <input type="submit" class="btn-edit" value="add">
+    <input type="submit" class="btn btn-default btn-lg add-new-area-btn" value="add" data-toggle="tooltip" data-placement="bottom" title="add area">
 
   </form>
 </div>
 
 <style type="text/css">
+option:hover{
+  cursor: pointer;
+}
+.typo:hover{
+  cursor: pointer;
+}
+.areatype input{
+  border: none;
+  background: transparent;
+}
   h3{
     font-size: 20px;
   }
+  label:hover{
+    cursor: pointer;
+  }
 </style>
+<script type="text/javascript">
+  $(function () {
+  $('[data-toggle="tooltip"]').tooltip()
+})
+</script>
 }

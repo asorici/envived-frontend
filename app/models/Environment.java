@@ -13,8 +13,29 @@ public class Environment extends Model{
 	String name ;
 	String tags;
 	String description;
+	String width;
+	String height;
+	String img_thumbnail_url;
 	
 	
+	public String getWidth() {
+		return width;
+	}
+	public void setWidth(String width) {
+		this.width = width;
+	}
+	public String getHeight() {
+		return height;
+	}
+	public void setHeight(String height) {
+		this.height = height;
+	}
+	public String getImg_thumbnail_url() {
+		return img_thumbnail_url;
+	}
+	public void setImg_thumbnail_url(String img_thumbnail_url) {
+		this.img_thumbnail_url = img_thumbnail_url;
+	}
 	public String getDescription() {
 		return description;
 	}

@@ -11,14 +11,14 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#"><button id="newarea">Add Area</button></a>
+      <a class="navbar-brand" href="@routes.Application.AddArea(idenv)">Add Area</a>
     </div>
     
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav navbar-right">
        <li><a href="@routes.Application.viewEnv(idenv)">Environment <span class="sr-only">(current)</span></a></li>
-        <li><a href="@routes.Application.welcome()">Profile</a></li> 
+        <li><a href="@routes.Application.welcome()"><i class="fa fa-home"></i>Profile</a></li> 
         <li><a href="#">Log out</a></li>            
       </ul>
 
@@ -34,7 +34,7 @@
   Path : <a href="@routes.Application.welcome()">Profile </a> >> <a  href="@routes.Application.viewEnv(idenv)">View Environmnet</a> >> 
   View Areas
 </div>
-<h2>Areas:</h2>
+<h2>Areas</h2>
 <br><br>
 
 <div class="area-container">

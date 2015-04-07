@@ -1,22 +1,44 @@
-@(name:String, tags:String, id:String, idenv:String)
+@(name:String, img_thumbnail_url:String, areaType:String, tags:String, id:String, idenv:String)
 @Main("Edit area") {
 
 
 <div class="col-md-offset-1 col-md-10">
 
-<h2>Edit Area:</h2>
+<!-- <h2>Edit Area:</h2> -->
 <!-- <div class="border-input-edit"></div> -->
 
 <form method="POST" action="@routes.Application.saveArea(id,idenv)">
 
 <div class="row">
-  <div class="col-md-11">
-    Area Name<br>
-    <input type="text" value="@name" name="name" class="form-control"><br>
-    Tags<br>
-    <input type="text" value="@tags" name="tags"class="form-control"><br>
-</div>
-</div>
+      <div class="col-md-8">
+<br>
+       Area name <br>
+       <input name="name" class="form-control" value="@name"><br>
+
+        Area type<br>
+        <div class="row">
+          <div class="col-md-6">   
+            <select name= "areaType" class="typo form-control" > 
+              <!-- <option  name= "areaType" value="@areaType" class="typo form-control">@areaType</option> -->
+              <option  name= "areaType" value="interest" class="typo form-control">interest</option>
+              <option  name= "areaType" value="non-interest" class="typo form-control">non-interest</option>
+            </select>
+          </div>
+        </div>
+
+          Img thumbnail url<br>
+          <input name="img_thumbnail_url" class="form-control" value="@img_thumbnail_url">
+
+        <!--   Shape<br>
+          <textarea name="shape" class="form-control" rows="5" cols="40"></textarea> <br> -->
+
+          Tags <br>
+          <input name="tags" class="form-control" value="@tags"><br>
+
+
+    </div>
+    </div>
+
 
 
 <div class="row">

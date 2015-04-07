@@ -1,0 +1,59 @@
+@(description:String, contact_email:String, contact_website:String, image_url:String, id:String)
+@Main("view description"){
+
+
+  <!-- <div class="col-md-offset-1 col-md-5"> -->
+        <form action="@routes.Application.editBoothEnv(id)" method="POST">
+<div class="col-md-offset-1 col-md-10">
+        <!-- <div class="row"> -->
+       <br><br>
+       <div class="inputs">
+	        Contact Email : <br>
+			<input name="contact_email" class="form-control" value="@contact_email" data-toggle="tooltip" data-placement="left" title="click to edit"><br>
+			Contact Website : <br>
+			<input name="contact_website" class="form-control" value="@contact_website" data-toggle="tooltip" data-placement="left" title="click to edit"><br>
+			Image Url:
+		    <input name="image_url" class="form-control" value="@image_url" data-toggle="tooltip" data-placement="left" title="click to edit"><br>
+	    </div>
+
+	    <div class="textarea">
+	    Product Description : <br>
+	
+   		<textarea class="form-control" name="description" cols="50" rows="5" data-toggle="tooltip" data-placement="left" title="click to edit">@description</textarea>
+   		<br><br>
+   		</div>
+
+   		<div class="row">
+   		
+   		<div class="col-md-3">
+		<input type="submit" name="update-bo" value="save" class="btn-edit">
+		<br>
+		</div>
+		<div class="col-md-4">
+		<input type="submit" name="update-bo" value="delete" class="btn-edit">
+		<br>
+		</div>
+
+		</div>
+</div>	 
+        </form>
+        <style type="text/css">
+        .inputs input, .textarea textarea{
+        	background-color: transparent;
+        	border: none;
+        	color: #FFF;
+        	box-shadow: none;
+        }
+       .inputs input:hover, .textarea textarea:hover{
+        	cursor: pointer;
+        }
+        .inputs input:focus, .textarea textarea:focus{
+        	background-color: #FFF;
+        	border: 1px solid #000;
+        	color: #000;
+        }
+
+        </style>
+ 
+
+}

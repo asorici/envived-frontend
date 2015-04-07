@@ -1,15 +1,15 @@
-@(facebook_url:String, twitter_url:String, google_plus_url:String, internal_forum_url:String,id:String, idenv:String)
+@(id:String)
 
 @Main("social media") {
 
-<form action="@routes.Application.editSocialArea(id,idenv)" method="POST">
+<form action="@routes.Application.postSocialEnv(id)" method="POST">
 
 <div class="row paddy">
 	<div class="col-md-offset-1 col-md-2">
 		<i class="fa fa-facebook-square"></i> 
 	</div>
 	<div class="col-md-8">
-		<input type="text" class="form-control" name="facebook_url" value="@facebook_url" placeholder="insert facebook url">
+		<input type="text" class="form-control" name="facebook_url" placeholder="insert facebook url">
 	</div>
 </div>
 <div class="row paddy">
@@ -17,7 +17,7 @@
 		<i class="fa fa-twitter"></i> 
 	</div>
 	<div class="col-md-8">
-		<input type="text" class="form-control" name="twitter_url" value="@twitter_url" placeholder="insert twitter url">
+		<input type="text" class="form-control" name="twitter_url" placeholder="insert twitter url">
 	</div>
 </div>
 <div class="row paddy">
@@ -25,7 +25,7 @@
 		<i class="fa fa-google-plus"></i>
 	</div> 
 	<div class="col-md-8">
-		<input type="text" class="form-control" name="google_plus_url" value="@google_plus_url" placeholder="insert google plus url">
+		<input type="text" class="form-control" name="google_plus_url" placeholder="insert google plus url">
 	</div>
 </div>
 <div class="row paddy">
@@ -33,16 +33,13 @@
 		<i class="fa fa-weixin"></i> 
 	</div>
 	<div class="col-md-8">
-		<input type="text" class="form-control" name="internal_forum_url" value="@internal_forum_url" placeholder="insert internal forum url">
+		<input type="text" class="form-control" name="internal_forum_url" placeholder="insert internal forum url">
 	</div>
 </div>
 <div class="row paddy-but button">
-				<div class="col-md-offset-1 col-md-2">
-					<input type="submit" name="update" value="save" class="btn-edit">
-				</div>
-				<div class="col-md-3">
-					<input type="submit" name="update" value="delete" class="btn-edit">
-				</div>
+<div class="col-md-offset-1">
+	<input type="submit" class="btn-edit" value="done">
+</div>
 </div>
 </form>
 <style type="text/css">
@@ -65,5 +62,4 @@
         text-shadow: 2px 2px 4px #000000;
 	}
 </style>
-
 }

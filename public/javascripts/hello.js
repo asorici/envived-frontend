@@ -2,11 +2,12 @@ if (window.console) {
   console.log("Welcome to your Play application's JavaScript!");
 }
 });
+$('[data-toggle="tooltip"]').tooltip({ container: 'body' }) 
 
 $(function () {
-	  $('[data-toggle="tooltip"]').tooltip()
-	})
-	
+$('[data-toggle="tooltip"]').tooltip()
+})
+
 /*area conference role*/
 $(function(){
     $("#arearole, #modal-background-arearole, #modal-close-arearole").click(function () {

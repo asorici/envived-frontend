@@ -1,0 +1,30 @@
+@(id:String)
+@Main("Booth Description") {
+
+
+<form action="@routes.Application.PostBoothEnvDesc(id)" method="POST">
+
+
+<div class="col-md-offset-1 col-md-10">
+<br><br>
+	Contact Email : <br>
+	<input name="contact_email" class="form-control"><br>
+	Contact Website : <br>
+	<input name="contact_website" class="form-control"><br>
+	  Image Url:
+	  <input name="image_url" class="form-control"><br>
+	 
+	Product Description : <br>
+
+   <textarea class="form-control" name="description" cols="50" rows="10"></textarea>
+
+<br>
+
+
+<input type="submit" class="btn-edit" value="done">
+<br>
+</div>
+
+</form>
+
+}

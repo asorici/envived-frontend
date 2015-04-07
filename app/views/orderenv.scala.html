@@ -1,12 +1,12 @@
-@(id:String, idenv:String)
-@Main("Program area") {
+@(id:String)
+@Main("order") {
+<form action="@routes.Application.postOrderEnv(id)" method="POST">
 
-
-<form action="@routes.Application.postOrderArea(id,idenv)" method="POST">
-Insert order  
+Add Order 
 
 <textarea class="form-control" name="description" rows="5" cols="40"></textarea>
 <br>
 <input type="submit" class="btn-edit" value="done">
 </form>
+
 }

@@ -27,7 +27,6 @@ POST	/saveEnv					 controllers.Application.saveEnv(id:String)
 
 GET     /envDescription			     controllers.Application.envDescription(id:String)
 POST    /PostEnvDescription          controllers.Application.PostEnvDescription(id:String)
-GET     /viewDescriptionEnv			 controllers.Application.viewDescriptionEnv(id:String)
 POST    /saveDeleteDescEnv			 controllers.Application.saveDeleteDescEnv(id:String)
 
 GET     /addArea    	  			 controllers.Application.AddArea(id:String)
@@ -37,7 +36,7 @@ GET     /viewAreas					 controllers.Application.viewAreas(id:String)
 GET     /viewAreasEnv				 controllers.Application.viewAreasEnv(id:String)
 GET     /viewArea					 controllers.Application.viewArea(id:String, idenv:String)
 
-GET		/editArea/:id				 controllers.Application.editArea(id:String, idenv:String)	
+GET		/editArea    				 controllers.Application.editArea(id:String, idenv:String)	
 POST	/saveArea					 controllers.Application.saveArea(id:String, idenv:String)
 
 GET     /areaDescription			 controllers.Application.areaDescription(id:String, idenv:String)
@@ -50,6 +49,10 @@ POST    /PostAreaBoothDesc           controllers.Application.PostBoothAreaDesc(i
 GET     /viewBoothArea		         controllers.Application.viewBoothArea(id:String, idenv:String)
 POST    /editBoothArea			     controllers.Application.editBoothArea(id:String, idenv:String)				
 
+GET     /envBoothDes	   	         controllers.Application.envBothDescription(id:String)
+POST    /PostEnvBoothDesc            controllers.Application.PostBoothEnvDesc(id:String)
+POST    /editBoothEnv			     controllers.Application.editBoothEnv(id:String)				
+
 GET     /areaConferenceRole          controllers.Application.areaConferenceRole(id:String, idenv:String)
 POST    /areaPostConferenceRole      controllers.Application.areaPostConferenceRole(id:String, idenv:String)
 
@@ -58,13 +61,30 @@ POST     /postAreaProgram			 controllers.Application.postAreaProgram(id:String, 
 POST     /updateDeleteAreaProgram    controllers.Application.updateDeleteAreaProgram(id:String, idenv:String)
 GET      /viewAreaProgram			 controllers.Application.viewAreaProgram(id:String, idenv:String)
 
+GET      /envProgram				 controllers.Application.envProgram(id:String)
+POST     /postEnvProgram			 controllers.Application.postEnvProgram(id:String)
+POST     /updateDeleteEnvProgram     controllers.Application.updateDeleteEnvProgram(id:String)
+
 GET       /orderArea                  controllers.Application.orderArea(id:String, idenv:String)
 POST      /postOrderArea 			  controllers.Application.postOrderArea(id:String, idenv:String)
+POST      /updateDeleteAreaOrder       controllers.Application.updateDeleteAreaOrder(id:String, idenv:String)
+
+
+GET       /orderEnv                   controllers.Application.orderEnv(id:String)
+POST      /postOrderEnv 			  controllers.Application.postOrderEnv(id:String)
+POST      /updateDeleteEnvOrder       controllers.Application.updateDeleteEnvOrder(id:String)
 
 GET		 /socialMediaArea             controllers.Application.socialMediaArea(id:String, idenv:String)
 POST	 /postSocialArea			  controllers.Application.postSocialArea(id:String, idenv:String)
 POST     /editSocialArea              controllers.Application.editSocialArea(id:String, idenv:String)
 
+GET		 /socialMediaEnv              controllers.Application.socialMediaEnv(id:String)
+POST	 /postSocialEnv  			  controllers.Application.postSocialEnv(id:String)
+POST     /editSocialEnv               controllers.Application.editSocialEnv(id:String)
+
+GET      /areatemp					  controllers.Application.areatemp(id:String, idenv:String)
+GET      /areahum					  controllers.Application.areahum(id:String, idenv:String)
+GET      /arealum					  controllers.Application.arealum(id:String, idenv:String)
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)
