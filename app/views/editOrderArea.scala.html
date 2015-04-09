@@ -1,0 +1,24 @@
+@(description:String, id:String, idenv:String)
+@Main("order ") {
+<form action="@routes.Application.updateDeleteAreaOrder(id,idenv)" method="POST">
+
+ Order 
+
+<textarea class="form-control" name="description" rows="5" cols="40">@description</textarea>
+<br>
+   		<div class="row">
+   		
+   		<div class="col-md-4">
+		<input type="submit" name="update-po" value="save" class="btn-edit">
+		<br>
+		</div>
+		<div class="col-md-4">
+		<input type="submit" name="update-po" value="delete" class="btn-edit">
+		<br>
+		</div>
+
+		</div>
+
+</form>
+
+}

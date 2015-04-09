@@ -50,6 +50,7 @@ Path : <a href="@routes.Application.welcome()">Profile </a> >> <a  href="@routes
 </div><!--path-->
 </div><!--offset-->
 
+
 <div class="container">
 <div class="row">
 <tr>
@@ -60,6 +61,7 @@ Path : <a href="@routes.Application.welcome()">Profile </a> >> <a  href="@routes
   </td>
 </div>
 <div class="col-md-4">
+
   <td>
   <div id="demo_box"> 
             <div class="pop_ctrl"><i class="fa"></i>
@@ -71,10 +73,12 @@ Path : <a href="@routes.Application.welcome()">Profile </a> >> <a  href="@routes
                 <li class="demo_li"><div data-toggle="modal" data-target="#program-area"><div><br><i class="fa fa-calendar"></i></div>Program</div></li>
                 <li class="demo_li"><div data-toggle="modal" data-target="#order-area"><div><br><i class="fa fa-coffee"></i></div>Order</div></li>
                 <li class="demo_li"><div data-toggle="modal" data-target="#social-area"><div><br><i class="fa fa-users"></i></div>Social Media</div></li>
+                <!-- <li class="demo_li"><div data-toggle="modal" data-target="#social-area"><div><br></div>&nbsp;</div></li> -->
             </ul>
         </div>
   </td>
 </div>
+
 <div class="col-md-4">
   <td>
    <div id="demo_box_2">
@@ -93,10 +97,13 @@ Path : <a href="@routes.Application.welcome()">Profile </a> >> <a  href="@routes
 </div>
     <script>
         $(function(){
-            $('#demo_box').popmenu();
-            $('#demo_box_2').popmenu({'background':'#e67e22','focusColor':'#c0392b','borderRadius':'0'});
+            // $('#demo_box').popmenu({'background':'#002E3D','focusColor':'#00aadc'});
+            // $('#demo_box_2').popmenu({'background':'#b88be5','focusColor':'#FF9FE7'});
+            $('#demo_box').popmenu({'background':'rgba(48, 26, 23, 0.99)','focusColor':'rgba(108, 70, 61, 0.79)'});
+            $('#demo_box_2').popmenu({'background':'rgba(108, 70, 61, 0.98)','focusColor':'rgba(48, 26, 23, 0.79)'});
         })
     </script>
+
 <table class="newTasks" id="newTasks">
 <tr><th></th><th></th><th></th></tr>
 <tr>
@@ -159,8 +166,9 @@ right: 10px
     position: relative;
     top: 90px;
     bottom: 30px;
+    left: 30px;
     background: transparent;
-    background:rgba(0, 153, 0, 0.2);
+    background:rgba(45, 90, 0, 0.5);
     border: 1px solid rgba(0, 61, 0, 0.5);
     border-radius: 7px;
     width: 200px;
@@ -168,8 +176,8 @@ right: 10px
 
     color: #C1C3C0;
     text-shadow: 2px 2px 4px #000000
-  -webkit-transition: all 0.5s;
-  transition: all 0.5s;
+   -webkit-transition: all 0.5s;
+    transition: all 0.5s;
   }
   .container .display:hover{
   /*opacity: 1;*/
@@ -182,9 +190,6 @@ right: 10px
     outline: none;
   }
 </style>
-
-
-
 
 <!-- MODALS:  -->
 <!-- Modal edit area -->
@@ -234,7 +239,6 @@ right: 10px
     </div>
   </div>
 </div>
-
 
 <!-- Modal booth description-->
 <div class="modal fade" id="areaboodesc" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">

@@ -47,8 +47,16 @@
 <div class="col-md-offset-1 col-md-11">
   <div class="path">
   Path : <a href="@routes.Application.welcome()">Profile </a> >> <a>View Environmnet</a>
+
+
+<br><br><br>
+   <a href="@routes.Application.checkfeatenv(id)">test: see your features</a>
+
+
+
   </div>
 </div>
+ <br>
 
 
 <div class="container">
@@ -108,7 +116,8 @@
     <script>
         $(function(){
             $('#demo_box').popmenu();
-            $('#demo_box_2').popmenu({'background':'#e67e22','focusColor':'#c0392b','borderRadius':'0'});
+            // $('#demo_box_2').popmenu({'background':'#e67e22','focusColor':'#c0392b','borderRadius':'0'});
+            $('#demo_box_2').popmenu({'background':'#e67e22','focusColor':'#c0392b'});
         })
     </script>
 <table class="newTasks" id="newTasks">
@@ -172,24 +181,22 @@ right: 10px
     visibility: hidden;
   }
   .container .display{
-  
     position: relative;
     top: 90px;
     bottom: 30px;
+    left: 30px;
     background: transparent;
-    background: rgb(71, 107, 0);
-    border: 1px solid rgba(53, 54, 51, 0.5);
+    background:rgba(45, 90, 0, 0.5);
+    border: 1px solid rgba(0, 61, 0, 0.5);
     border-radius: 7px;
     width: 200px;
     height: 75px;
 
     color: #C1C3C0;
     text-shadow: 2px 2px 4px #000000
-  -webkit-transition: all 0.5s;
-  transition: all 0.5s;
-
+   -webkit-transition: all 0.5s;
+    transition: all 0.5s;
   }
-
   .container .display:hover{
   /*opacity: 1;*/
   color:#FFF;

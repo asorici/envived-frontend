@@ -13,7 +13,7 @@
 		var randomScalingFactor = function(){ return Math.round(Math.random()*100)};
 		var lineChartData = {
 			
-			labels : ["sensed_info"],
+			labels : ["sensed_info","temperature","11","12","13"],
 			datasets : [
 				{
 					label: "My First dataset",
@@ -46,6 +46,16 @@
 		});
 	}
 
+
+	</script>
+
+	<script type="text/javascript">
+
+		$.ajax({
+		  url: 'http://localhost:8080/envived/client/v2/resources/things/temperature/"?virtual=false&clientrequest=true&format=json&area=125/',
+		  type: 'POST',
+		  data: { param0:'hi there!', param1:'blah blah', param2:'temperature' }
+		});
 
 	</script>
 }

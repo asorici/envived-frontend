@@ -1,0 +1,68 @@
+@(message: String)
+@Main("404"){
+<nav id="css" class="navbar navbar-default">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="@routes.Application.welcome()"><i class="fa fa-home"></i>Profile</a>
+    </div>
+
+   <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+
+        <!-- <li><a href="@routes.Application.AddEnvironment()"><button id="newenv">Add new Environment</button><span class="sr-only">(current)</span></a></li> -->
+     </ul>
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="#"></a></li> 
+       
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+	       Menu
+          <span class="caret"></span></a>
+	          <ul class="dropdown-menu" role="menu">
+	            <li><a href="@routes.Application.EditProfile()">Edit Profile</a></li>
+	            <li class="divider"></li>
+	            <li><a href="delete-account.html">Settings</a></li>
+	            <li class="divider"></li>
+	            <li><a href="@routes.Application.index()">Log Out</a></li>
+          	  </ul>
+        </li>
+
+      </ul>
+      </div>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+
+<div class="container">
+<p>@message<br></p>
+<div class="col-md-offset-2">
+	<img src="@routes.Assets.at("images/404.jpg")" />
+</div>
+</div>
+<style type="text/css">
+    .containe{
+    	position: relative;
+    	bottom: 40px;
+    }
+	.container p{
+		font-size: 12px;
+		text-align: center;
+		color: #E6E600;
+	}
+	.container img{
+	box-shadow: 0px 0px 8px #E6E600; 
+   -webkit-box-shadow: 0px 0px 8px #E6E600; 
+   -ms-box-shadow: 0px 0px 8px #E6E600;
+   -o-box-shadow: 0px 0px 8px #E6E600;
+	}
+</style>
+}

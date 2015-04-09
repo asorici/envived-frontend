@@ -29,6 +29,8 @@ a:hover{ text-decoration:underline; }
 
 /*Container*/
 .container{
+	position:relative;
+	left:30px;
 	width:85%;
 	margin:30px auto;
 	/*background:#FFF; */
@@ -38,7 +40,11 @@ a:hover{ text-decoration:underline; }
 	height:auto;	
 }
 
-ul.sticky_notes{ list-style:none; }
+ul.sticky_notes{ 
+	list-style:none;
+	position:relative;
+	left:45px;	
+	 }
 ul.sticky_notes li{
 	width:250px;
 	height:200px;

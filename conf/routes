@@ -12,6 +12,8 @@ GET     /login                      controllers.Application.LoginPage()
 POST    /login                      controllers.Application.PostLogin()
 
 GET     /welcome					controllers.Application.welcome()
+GET     /error   					controllers.Application.error()
+GET     /checkfeatenv               controllers.Application.checkfeatenv(id:String)
 
 GET     /EditProfile                controllers.Application.EditProfile()
 POST    /EditProfile                controllers.Application.AddEditedProfile()
@@ -33,7 +35,6 @@ GET     /addArea    	  			 controllers.Application.AddArea(id:String)
 POST    /postNewArea                 controllers.Application.PostNewArea(id:String)
 
 GET     /viewAreas					 controllers.Application.viewAreas(id:String)
-GET     /viewAreasEnv				 controllers.Application.viewAreasEnv(id:String)
 GET     /viewArea					 controllers.Application.viewArea(id:String, idenv:String)
 
 GET		/editArea    				 controllers.Application.editArea(id:String, idenv:String)	
