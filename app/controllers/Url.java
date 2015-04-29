@@ -7,6 +7,7 @@ public class Url {
 	 
 	 static String register = "/envived/client/v2/actions/register/";
 	 static String login    = "/envived/client/v2/actions/login/";
+	 static String logout   = "/envived/client/v2/actions/logout/";
 	 
 	 static String parent = "/envived/client/v2/resources/environment/";
 	 static String area   = "/envived/client/v2/resources/area/";
@@ -19,9 +20,14 @@ public class Url {
 	 static String socialmedia     = "/envived/client/v2/resources/features/social_media/";
 	 static String conference_role = "/envived/client/v2/resources/features/conference_role/";
 	 
-	 static String temperature     = "/envived/client/v2/resources/things/temperature/";
-	 static String humidity     = "/envived/client/v2/resources/things/humidity/";
-	 static String luminosity     = "/envived/client/v2/resources/things/luminosity/";
+	 //http://localhost:8080/envived/client/v2/resources/things/1/properties?clientrequest=true&virtual=true&format=json&type=
+	 //http://localhost:8080/envived/client/v2/resources/things/1/?clientrequest=true&virtual=true&format=json
+	 
+	 static String thing 			="/envived/client/v2/resources/things/";
+	 
+	 static String temperature      = "/envived/client/v2/resources/things/temperature/";
+	 static String humidity     	= "/envived/client/v2/resources/things/humidity/";
+	 static String luminosity       = "/envived/client/v2/resources/things/luminosity/";
 	 
 	 static String crTvTfj = "?clientrequest=true&virtual=true&format=json/";
 	 static String vFcrTfj = "?virtual=false&clientrequest=true&format=json/";        

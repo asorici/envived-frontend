@@ -1,0 +1,270 @@
+@(id:String, idenv:String)
+
+@Main("Things Area") {
+
+<nav id="css" class="navbar navbar-default">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="@routes.Application.viewArea(id, idenv)">Area</a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <!-- <li><a href="#"><button  id="editarea" data-toggle="modal" data-target="#edit-area">Edit Area </button><span class="sr-only">(current)</span></a></li> -->
+      </ul>
+
+      <ul class="nav navbar-nav navbar-right">
+
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Areas <span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu">
+            <li role="presentation">
+              <a href="@routes.Application.viewAreas(idenv)" data-toggle="modal">
+                 View Areas
+              </a>
+            </li>
+            <li><a href="@routes.Application.AddArea(idenv)">Add Area</a></li> 
+          </ul>
+        </li>
+
+        <li><a href="@routes.Application.viewEnv(idenv)">Environment <span class="sr-only">(current)</span></a></li>
+        <li><a href="@routes.Application.welcome()"><i class="fa fa-home"></i>Profile</a></li> 
+        <li><a href="@routes.Application.index()">Log out</a></li>
+             
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+
+<div class="container-fluid">
+
+<div class="col-md-offset-1 col-md-11">
+<div class="path">
+Path : <a href="@routes.Application.welcome()">Profile </a> >> <a  href="@routes.Application.viewEnv(idenv)">View Environmnet</a> >> <a href="@routes.Application.viewAreas(idenv)">View Areas</a> >> <a href="@routes.Application.viewAreas(idenv)">View Area</a> >> Things
+
+</div><!--path-->
+</div><!--offset-->
+
+
+
+
+  <!-- in the <button> tags below the ID attribute is the value sent to the arduino -->
+  <p>led control</p>
+  <button id="11" class="led">Toggle Pin 11</button> <!-- button for pin 11 -->
+  <button id="12" class="led">Toggle Pin 12</button> <!-- button for pin 12 -->
+  <button id="13" class="led">Toggle Pin 13</button> <!-- button for pin 13 -->
+    
+<p>temperature</p><br>
+<button> turn on temperature</button>
+<button> show twmpwrature</button>
+
+<br>
+
+<p>humidity</p>
+<button> turn on humidity</button>
+<button> show humidity</button>
+
+<br>
+
+<p>luminostiy</p>
+
+<button> turn on luminostiy</button>
+<button> show humidity</button>
+
+  <script type="text/javascript">
+    $(document).ready(function(){
+      $(".led").click(function(){
+        // alert("wooooo");
+        var p = $(this).attr('id'); // get id value (i.e. pin13, pin12, or pin11)
+        // send HTTP GET request to the IP address with the parameter "pin" and value "p", then execute the function
+        $.get("http://192.168.4.1:80/", {pin:p}); // execute get request
+      });
+    });
+  </script>
+
+
+
+
+
+
+<div class="row">
+
+
+<div class="col-md-4">
+
+<div class="thing-container">
+<p>Temperature</p>
+
+<div class="inputs-temp">
+<label>VCC</label>
+<select class="form-control">
+  <option value="vcc">VCC</option>
+  <option value="null">---</option>
+</select>
+
+<label>DATA</label>
+<select class="form-control" placeholder="digital pin">
+  <option value="data-pin">4</option>
+  <option value="data-pin">2</option>
+  <option value="data-pin">~3</option>
+  <option value="data-pin">~5</option>
+  <option value="data-pin">~6</option>
+  <option value="data-pin">7</option>
+  <option value="data-pin">8</option>
+  <option value="data-pin">~9</option>
+  <option value="data-pin">~10</option>
+  <option value="data-pin">~11</option>
+  <option value="data-pin">12</option>
+  <option value="data-pin">13</option>
+</select>
+
+<label>NC</label>
+<select class="form-control">
+  <option value="vcc">empty pin</option>
+  <option value="null">---</option>
+</select>
+
+<label>GND</label>
+<select class="form-control">
+  <option value="vcc">GND</option>
+  <option value="null">---</option>
+</select>
+</div><!--inputs-temp-->
+</div><!--col-md-->
+
+<div class="col-md-4">
+
+<div class="thing-container">
+<p>Humidity</p>
+
+<div class="inputs-temp">
+<label>VCC</label>
+<select class="form-control">
+  <option value="vcc">VCC</option>
+  <option value="null">---</option>
+</select>
+
+<label>DATA</label>
+<select class="form-control" >
+  <option value="data-pin">4</option>
+  <option value="data-pin">2</option>
+  <option value="data-pin">~3</option>
+  <option value="data-pin">~5</option>
+  <option value="data-pin">~6</option>
+  <option value="data-pin">7</option>
+  <option value="data-pin">8</option>
+  <option value="data-pin">~9</option>
+  <option value="data-pin">~10</option>
+  <option value="data-pin">~11</option>
+  <option value="data-pin">12</option>
+  <option value="data-pin">13</option>
+</select>
+
+<label>NC</label>
+<select class="form-control">
+  <option value="vcc">empty pin</option>
+  <option value="null">---</option>
+</select>
+
+<label>GND</label>
+<select class="form-control">
+  <option value="vcc">GND</option>
+  <option value="null">---</option>
+</select>
+</div><!--inputs-temp-->
+
+</div><!--thing container-->
+
+</div><!--col-md-->
+
+<div class="col-md-4">
+
+<div class="thing-container">
+<p>Luminosity</p>
+<br><br>
+<div class="inputs-temp">
+<label>VCC</label>
+<select class="form-control">
+  <option value="vcc">VCC</option>
+  <option value="null">---</option>
+</select>
+
+<label>Analogic PIN</label>
+<select class="form-control">
+  <option value="vcc">A0</option>
+  <option value="null">A1</option>
+  <option value="vcc">A2</option>
+  <option value="null">A3</option>
+  <option value="null">A4</option>
+  <option value="null">A5</option>
+
+</select>
+
+<label>GND</label>
+<select class="form-control">
+  <option value="vcc">GND</option>
+  <option value="null">---</option>
+</select>
+</div><!--inputs-temp-->
+</div><!--thing container-->
+
+</div><!--col md-->
+
+</div><!--container fluid-->
+</div><!--the big row-->
+
+
+<style type="text/css">
+	body{
+	overflow-x:hidden;
+	}
+	select:hover, option:hover{
+		cursor: pointer;
+	}
+	.thing-container{
+		border: solid 1px #C1C3C0;
+		border-radius: 7px;
+		height: 400px;
+	}
+	.thing-container p{
+		margin: 0;
+		border-bottom: solid 1px #C1C3C0;
+		text-align: center;
+	    font-family: 'Open Sans Condensed', sans-serif;
+		font-size: 22px;
+        color: #C1C3C0;
+    	text-shadow: 2px 2px 4px #000;
+    	padding-bottom:20px;
+    	position: relative;
+	}
+
+	.inputs-temp{
+		font-family: 'Open Sans Condensed', sans-serif;
+		color: #fff;
+		position: relative;
+		bottom: 30px;
+		padding-left: 20px;
+		padding-right: 20px;
+	}
+
+	.border{
+		border: solid 1px #C1C3C0;
+		border-radius: 7px;
+	    padding-top: 26px;
+		height: 80px;
+		left: 18px;
+	}
+  .container-fluid button{
+    color: #000;
+  }
+
+</style>
+}

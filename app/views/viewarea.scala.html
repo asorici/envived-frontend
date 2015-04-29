@@ -55,6 +55,12 @@ Path : <a href="@routes.Application.welcome()">Profile </a> >> <a  href="@routes
 
 <div class="container">
 <div class="row">
+
+<!-- <div class="checkareafeat">
+  
+
+</div> -->
+
 <tr>
 <div class="col-md-4">
   <td>
@@ -75,23 +81,30 @@ Path : <a href="@routes.Application.welcome()">Profile </a> >> <a  href="@routes
                 <li class="demo_li"><div data-toggle="modal" data-target="#program-area"><div><br><i class="fa fa-calendar"></i></div>Program</div></li>
                 <li class="demo_li"><div data-toggle="modal" data-target="#order-area"><div><br><i class="fa fa-coffee"></i></div>Order</div></li>
                 <li class="demo_li"><div data-toggle="modal" data-target="#social-area"><div><br><i class="fa fa-users"></i></div>Social Media</div></li>
-                <!-- <li class="demo_li"><div data-toggle="modal" data-target="#social-area"><div><br></div>&nbsp;</div></li> -->
+                <li class="demo_li"><div id="chck-ft"><div><br> <i class="fa fa-eye"></i> </div>your features</div></li>
             </ul>
         </div>
   </td>
 </div>
 
+
+
+
 <div class="col-md-4">
   <td>
    <div id="demo_box_2">
             <div class="pop_ctrl"><i class="fa "></i>
-              <p><input type="button" class="display" id="refreshNotes" value="Things"/></p>
+              <p>
+              <!-- <input type="button" class="display" id="refreshNotes" value="Things"/> -->
+              <input type="button" class="display" id="refreshNotes" value="Things" onclick="location.href='@routes.Application.AreaThing(id,idenv)'"/>
+              
+              <!-- <a href="@routes.Application.AreaThing(id,idenv)">Things</a></p> -->
             </div>
-            <ul id="demo_ul_2">
+<!--             <ul id="demo_ul_2">
                 <li class="demo_li"><a href="@routes.Application.areatemp(id,idenv)"><div><br><i class="fa fa-fire"></i></div><div>Temperature</div></a></li>
                 <li class="demo_li"><div><br><i class="fa fa-lightbulb-o"></i></div><div><a href="@routes.Application.arealum(id,idenv)">Luminosity</a></div></li>
                 <li class="demo_li"><div><br><i class="fa fa-recycle"></i></div><div><a href="@routes.Application.areahum(id,idenv)">Humidity</a></div></li>
-            </ul>
+            </ul> -->
         </div>
   </td>
 </tr>
@@ -337,4 +350,12 @@ right: 10px
     </div>
   </div>
 </div>
+
+   <script type="text/javascript">
+       // $( "#chck-ft" ).click(function() {
+       //    alert( "Handler for .click() called." );
+       //     $(".checkareafeat").load("@routes.Application.checkfeatarea(id,idenv)");
+       //  });
+     </script>
+
 }

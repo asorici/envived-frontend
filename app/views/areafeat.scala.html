@@ -1,10 +1,10 @@
-@(d:String, bd:String, p:String, o:String, s:String, id:String)
+@(d:String, bd:String, p:String, o:String, s:String, id:String, idenv:String)
 
-@Main(" Features Environment") {
+@Main("Features Area") {
 
 <nav id="css" class="navbar navbar-default">
   <div class="container-fluid">
-    <!-- Brand and toggle get grouped for better mobile display -->
+
     <div class="navbar-header">
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
         <span class="sr-only">Toggle navigation</span>
@@ -12,39 +12,38 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="@routes.Application.viewEnv(id)">Environment</a> 
+      <a class="navbar-brand" href="@routes.Application.viewArea(id, idenv)">Area</a>
     </div>
 
-    <!-- Collect the nav links, forms, and other content for toggling -->
+   
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav">
-        <!-- <li><a href="#" data-toggle="modal" data-target="#editEnvironmet">Edit Environment <span class="sr-only">(current)</span></a></li> -->
-
+          <ul class="nav navbar-nav">
+      
        <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Features List <span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
             <li role="presentation">
-              <a data-toggle="modal" data-target="#envdesc">
+              <a data-toggle="modal" data-target="#areadesc">
                 Description
               </a>
             </li>
              <li>
-              <a data-toggle="modal" data-target="#boodesc">
+              <a data-toggle="modal" data-target="#areaboodesc">
                 Booth Description
               </a>
             </li>
              <li >
-              <a data-toggle="modal" data-target="#program-env">
+              <a data-toggle="modal" data-target="#program-area">
                Program
               </a>
             </li>
               <li >
-              <a data-toggle="modal" data-target="#order">
+              <a data-toggle="modal" data-target="#order-area">
                 Order
               </a>
             </li>
               <li >
-              <a data-toggle="modal" data-target="#social">
+              <a data-toggle="modal" data-target="#social-area">
                  Social media
               </a>
             </li>
@@ -55,23 +54,24 @@
       </ul>
 
       <ul class="nav navbar-nav navbar-right">
-
         <li><a href="@routes.Application.welcome()"><i class="fa fa-home"></i>Profile</a></li> 
-        <li><a href="@routes.Application.index()">Log out</a></li>
-             
+        <li><a href="@routes.Application.index()">Log out</a></li>         
       </ul>
-    </div><!-- /.navbar-collapse -->
-  </div><!-- /.container-fluid -->
-</nav>
-
-<div class="col-md-offset-1">
-  <div class="path">
-  Path : <a href="@routes.Application.welcome()">Profile </a> >> <a href="@routes.Application.viewEnv(id)">View Environmnet</a> >> Features
+    </div>
   </div>
+</nav>
+	
+
+<div class="col-md-offset-1 col-md-11">
+<div class="path">
+Path : <a href="@routes.Application.welcome()">Profile </a> >> <a  href="@routes.Application.viewEnv(idenv)">View Environmnet</a> >> <a href="@routes.Application.viewAreas(idenv)">View Areas</a> >> <a href="@routes.Application.viewArea(id, idenv)"> View Area </a>>> Features
+
+</div>
+
 </div>
 
 <div class="row">
-<div class="col-md-12">
+<div class="col-md-offset-3 col-md-9">
 <div class="tree">
 <ul>
 <li>
@@ -82,7 +82,7 @@
 
 } else {
 	<li>
-		<a data-toggle="modal" data-target="#envdesc">@d</a><br>
+		<a data-toggle="modal" data-target="#areadesc">@d</a><br>
 	</li>
 }
 
@@ -90,7 +90,7 @@
 
 } else {
 	<li>
-		  <a data-toggle="modal" data-target="#boodesc">@bd</a><br>
+		  <a data-toggle="modal" data-target="#areaboodesc">@bd</a><br>
 	</li>
 }
 
@@ -98,7 +98,7 @@
 
 } else {
 	<li>
-		 <a data-toggle="modal" data-target="#program-env">@p</a><br>
+		 <a data-toggle="modal" data-target="#program-area">@p</a><br>
 	</li>
 }
 
@@ -106,7 +106,7 @@
 
 } else {
 	<li>
-		  <a data-toggle="modal" data-target="#order">@o</a><br>
+		  <a data-toggle="modal" data-target="#order-area">@o</a><br>
 	</li>
 }
 
@@ -114,7 +114,7 @@
 
 } else {
 	<li>
-		 <a data-toggle="modal" data-target="#social">@s</a>
+		 <a data-toggle="modal" data-target="#social-area">@s</a>
 	</li>
 }
 </ul>
@@ -124,52 +124,64 @@
 </div><!--tree-->
 </div>
 </div>
-
 <style type="text/css">
 
-	a:hover{
-		text-decoration: none;
-		cursor: pointer;
-	}
+body{
+  overflow-x: hidden;
+}
+
+  a:hover{
+    text-decoration: none;
+    cursor: pointer;
+  }
 
 * {margin: 0; padding: 0;}
 
+.tree {
+  position: relative;
+  /*left: 340px;*/
+  top: 50px;
+  /*font-size: 40px;*/
+}
+
 .tree ul {
-	padding-top: 20px; position: relative;
-	
-	transition: all 0.5s;
-	-webkit-transition: all 0.5s;
-	-moz-transition: all 0.5s;
+  padding-top: 20px; position: relative;
+  
+  transition: all 0.5s;
+  -webkit-transition: all 0.5s;
+  -moz-transition: all 0.5s;
 }
 
 .tree li {
-	float: left; text-align: center;
-	list-style-type: none;
-	position: relative;
-	padding: 20px 5px 0 5px;
-	
-	transition: all 0.5s;
-	-webkit-transition: all 0.5s;
-	-moz-transition: all 0.5s;
+  float: left; text-align: center;
+  list-style-type: none;
+  position: relative;
+  padding: 20px 5px 0 5px;
+  
+
+  transition: all 0.5s;
+  -webkit-transition: all 0.5s;
+  -moz-transition: all 0.5s;
 }
 
 /*We will use ::before and ::after to draw the connectors*/
 
 .tree li::before, .tree li::after{
-	content: '';
-	position: absolute; top: 0; right: 50%;
-	border-top: 1px solid #ccc;
-	width: 50%; height: 20px;
+  content: '';
+  position: absolute; top: 0; right: 50%;
+  border-top: 1px solid #ccc;
+  width: 70%;
+  height: 20px;
 }
 .tree li::after{
-	right: auto; left: 50%;
-	border-left: 1px solid #ccc;
+  right: auto; left: 50%;
+  border-left: 1px solid #ccc;
 }
 
 /*We need to remove left-right connectors from elements without 
 any siblings*/
 .tree li:only-child::after, .tree li:only-child::before {
-	display: none;
+  display: none;
 }
 
 /*Remove space from the top of single children*/
@@ -178,65 +190,73 @@ any siblings*/
 /*Remove left connector from first child and 
 right connector from last child*/
 .tree li:first-child::before, .tree li:last-child::after{
-	border: 0 none;
+  border: 0 none;
 }
 /*Adding back the vertical connector to the last nodes*/
 .tree li:last-child::before{
-	border-right: 1px solid #ccc;
-	border-radius: 0 5px 0 0;
-	-webkit-border-radius: 0 5px 0 0;
-	-moz-border-radius: 0 5px 0 0;
+  border-right: 1px solid #ccc;
+  border-radius: 0 5px 0 0;
+  -webkit-border-radius: 0 5px 0 0;
+  -moz-border-radius: 0 5px 0 0;
 }
 .tree li:first-child::after{
-	border-radius: 5px 0 0 0;
-	-webkit-border-radius: 5px 0 0 0;
-	-moz-border-radius: 5px 0 0 0;
+  border-radius: 5px 0 0 0;
+  -webkit-border-radius: 5px 0 0 0;
+  -moz-border-radius: 5px 0 0 0;
 }
 
 /*Time to add downward connectors from parents*/
 .tree ul ul::before{
-	content: '';
-	position: absolute; top: 0; left: 50%;
-	border-left: 1px solid #ccc;
-	width: 0; height: 20px;
+  content: '';
+  position: absolute; top: 0; left: 50%;
+  border-left: 1px solid #ccc;
+  width: 0; height: 20px;
 }
 
 .tree li a{
-	border: 1px solid #ccc;
-	padding: 5px 10px;
-	text-decoration: none;
-	/*color: #666;*/
-	color: #FFF;
-	font-family: arial, verdana, tahoma;
-	font-size: 11px;
-	display: inline-block;
-	
-	border-radius: 5px;
-	-webkit-border-radius: 5px;
-	-moz-border-radius: 5px;
-	
-	transition: all 0.5s;
-	-webkit-transition: all 0.5s;
-	-moz-transition: all 0.5s;
+  border: 1px solid #ccc;
+  padding: 5px 10px;
+  text-decoration: none;
+  /*color: #666;*/
+  /*color: #FFF;*/
+    color: #C1C3C0;
+    text-shadow: 2px 2px 4px #000000;
+
+  font-family: pursia, arial, verdana, tahoma;
+  font-size: 20px;
+  display: inline-block;
+  
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  
+  transition: all 0.5s;
+  -webkit-transition: all 0.5s;
+  -moz-transition: all 0.5s;
 }
 
 /*Time for some hover effects*/
 /*We will apply the hover effect the the lineage of the element also*/
 .tree li a:hover, .tree li a:hover+ul li a {
-	background: #c8e4f8; color: #000; border: 1px solid #94a0b4;
+  background: #B8B800; 
+  /*color: #000; */
+  color:#FFF;
+  text-shadow: 0 0 3px #000, 0 0 5px #DDDEDB;
+  border: 1px solid #B8B800;
 }
 /*Connector styles on hover*/
 .tree li a:hover+ul li::after, 
 .tree li a:hover+ul li::before, 
 .tree li a:hover+ul::before, 
 .tree li a:hover+ul ul::before{
-	border-color:  #94a0b4;
+  border-color:  #B8B800;
 }
 
 </style>
 
-<!-- Modal Description-->
-<div class="modal fade" id="envdesc" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+
+<!-- Modal description area-->
+<div class="modal fade" id="areadesc" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -244,10 +264,11 @@ right connector from last child*/
         <h4 class="modal-title" id="myModalLabel">Description</h4>
       </div>
       <div class="modal-body">
-      <div class="modal-body-envdesc"></div>
+        <div class="areadescription"></div>
       <script type="text/javascript">
-        $(function(){   
-            $(".modal-body-envdesc").load("@routes.Application.envDescription(id)");
+      $(function(){   
+        // alert("aaa");
+            $(".areadescription").load("@routes.Application.areaDescription(id,idenv)");
         });
       </script>
       </div>
@@ -259,7 +280,7 @@ right connector from last child*/
 </div>
 
 <!-- Modal booth description-->
-<div class="modal fade" id="boodesc" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade" id="areaboodesc" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -267,10 +288,11 @@ right connector from last child*/
         <h4 class="modal-title" id="myModalLabel">Booth Description</h4>
       </div>
       <div class="modal-body">
-        <div class="modal-body-boodesc-env"></div>
+       <div class="booareadesc"></div>
       <script type="text/javascript">
-        $(function(){   
-            $(".modal-body-boodesc-env").load("@routes.Application.envBothDescription(id)");
+      $(function(){   
+        // alert("aaa");
+            $(".booareadesc").load("@routes.Application.areaBothDescription(id,idenv)");
         });
       </script>
       </div>
@@ -281,8 +303,8 @@ right connector from last child*/
   </div>
 </div>
 
-<!-- Modal program-->
-<div class="modal fade" id="program-env" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<!-- Modal Program-->
+<div class="modal fade" id="program-area" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -290,15 +312,13 @@ right connector from last child*/
         <h4 class="modal-title" id="myModalLabel">Program</h4>
       </div>
       <div class="modal-body">
-        
-
-      <div class="modal-body-program-env"></div>
+       <div class="areaprogram"></div>
       <script type="text/javascript">
-        $(function(){   
-            $(".modal-body-program-env").load("@routes.Application.envProgram(id)");
+      $(function(){   
+        // alert("aaa");
+            $(".areaprogram").load("@routes.Application.areaProgram(id,idenv)");
         });
       </script>
-
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -308,7 +328,7 @@ right connector from last child*/
 </div>
 
 <!-- Modal order-->
-<div class="modal fade" id="order" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade" id="order-area" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -316,10 +336,11 @@ right connector from last child*/
         <h4 class="modal-title" id="myModalLabel">Order</h4>
       </div>
       <div class="modal-body">
-      <div class="modal-body-order-env"></div>
+       <div class="areaorder"></div>
       <script type="text/javascript">
-        $(function(){   
-            $(".modal-body-order-env").load("@routes.Application.orderEnv(id)");
+      $(function(){   
+        // alert("aaa");
+            $(".areaorder").load("@routes.Application.orderArea(id,idenv)");
         });
       </script>
       </div>
@@ -331,18 +352,19 @@ right connector from last child*/
 </div>
 
 <!-- Modal social media-->
-<div class="modal fade" id="social" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade" id="social-area" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">social media</h4>
+        <h4 class="modal-title" id="myModalLabel">Social media</h4>
       </div>
       <div class="modal-body">
-      <div class="modal-body-social-env"></div>
+       <div class="socialaraea"></div>
       <script type="text/javascript">
-        $(function(){   
-            $(".modal-body-social-env").load("@routes.Application.socialMediaEnv(id)");
+      $(function(){   
+        // alert("aaa");
+            $(".socialaraea").load("@routes.Application.socialMediaArea(id,idenv)");
         });
       </script>
       </div>

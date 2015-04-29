@@ -3,21 +3,21 @@
 
 
   <!-- <div class="col-md-offset-1 col-md-5"> -->
-        <form action="@routes.Application.editBoothEnv(id)" method="POST">
+<form action="@routes.Application.editBoothEnv(id)" method="POST">
 <div class="col-md-offset-1 col-md-10">
         <!-- <div class="row"> -->
        <br><br>
        <div class="inputs">
-	        Contact Email : <br>
+	       <label> Contact Email : </label><br>
 			<input name="contact_email" class="form-control" value="@contact_email" data-toggle="tooltip" data-placement="left" title="click to edit"><br>
-			Contact Website : <br>
+			<label>Contact Website : <br></label>
 			<input name="contact_website" class="form-control" value="@contact_website" data-toggle="tooltip" data-placement="left" title="click to edit"><br>
-			Image Url:
+			<label>Image Url:</label>
 		    <input name="image_url" class="form-control" value="@image_url" data-toggle="tooltip" data-placement="left" title="click to edit"><br>
 	    </div>
 
 	    <div class="textarea">
-	    Product Description : <br>
+	   <label> Product Description : <br></label>
 	
    		<textarea class="form-control" name="description" cols="50" rows="5" data-toggle="tooltip" data-placement="left" title="click to edit">@description</textarea>
    		<br><br>
@@ -38,6 +38,9 @@
 </div>	 
         </form>
         <style type="text/css">
+        label{
+        font-family: 'Open Sans Condensed', sans-serif;
+          }
         .inputs input, .textarea textarea{
         	background-color: transparent;
         	border: none;

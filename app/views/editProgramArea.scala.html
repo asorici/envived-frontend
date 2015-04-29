@@ -2,17 +2,18 @@
 @Main("Program area") {
 <form action="@routes.Application.updateDeleteAreaProgram(id,idenv)" method="POST">
 
-Edit Program 
-
+<!-- Edit< Program  -->
+<div class="program">
 <textarea class="form-control" name="description" rows="5" cols="40">@description</textarea>
+</div>
 <br>
    		<div class="row">
    		
-   		<div class="col-md-4">
+   		<div class="col-md-2">
 		<input type="submit" name="update-po" value="save" class="btn-edit">
 		<br>
 		</div>
-		<div class="col-md-4">
+		<div class="col-md-3">
 		<input type="submit" name="update-po" value="delete" class="btn-edit">
 		<br>
 		</div>
@@ -20,5 +21,12 @@ Edit Program
 		</div>
 
 </form>
+<style type="text/css">
+	.program textarea{
+		background:transparent;
+		border: none;
+		color: #FFF;
+	}
+</style>
 
 }

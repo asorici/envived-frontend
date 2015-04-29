@@ -5,7 +5,7 @@
  <div class="col-md-offset-1 col-md-11">
         <form action="@routes.Application.saveDeleteDescEnv(k)" method="POST">
       
-             <h2>Environment Description</h2>
+             <!-- <h2>Environment Description</h2> -->
                <style type="text/css">
              	 h2{
             	font-size: 17px;
@@ -40,7 +40,11 @@
 	cursor: pointer;
 }
 .edit-input-container textarea{
-	    /*color: #FFF;*/
+	position: relative;
+	top: 30px;
+	bottom: 10px;
+
+	    color: #FFF;
 		border: none;
 		background-color: transparent;
 		box-shadow: none;
@@ -50,6 +54,10 @@
 		border: 1px solid #000;
 		background-color: #FFF;
 		border-radius: 7px;
+	}
+	.edit-btns-save-delete{
+		position: relative;
+		top: 20px;
 	}
 </style>
 	</div>

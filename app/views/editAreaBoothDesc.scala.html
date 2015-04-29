@@ -5,28 +5,28 @@
   <!-- <div class="col-md-offset-1 col-md-5"> -->
         <form action="@routes.Application.editBoothArea(id,idenv)" method="POST">
 <div class="col-md-offset-1 col-md-10">
-        <!-- <div class="row"> -->
+        <div class="inputs">
         <br>
-        Contact Email : <br>
+        <label> Contact Email : <br></label>
 		<input name="contact_email" class="form-control" value="@contact_email"><br>
-		Contact Website : <br>
+		 <label> Contact Website : <br></label>
 		<input name="contact_website" class="form-control" value="@contact_website"><br>
-		Image Url:
+		 <label>Image Url:</label>
 	    <input name="image_url" class="form-control" value="@image_url"><br>
 
-	    	Product Description : <br>
+	    	 <label>Product Description : <br></label>
 	
-   			<textarea class="form-control" name="description" cols="50" rows="10">@description</textarea>
+   			<textarea class="form-control" name="description" cols="50" rows="5">@description</textarea>
    			<br><br>
-   		<!-- </div> -->
+   		</div>
 
    		<div class="row">
    		
-   		<div class="col-md-4">
+   		<div class="col-md-2">
 		<input type="submit" name="update-bo" value="save" class="btn-edit">
 		<br>
 		</div>
-		<div class="col-md-4">
+		<div class="col-md-3">
 		<input type="submit" name="update-bo" value="delete" class="btn-edit">
 		<br>
 		</div>
@@ -34,6 +34,37 @@
 		</div>
 </div>	 
         </form>
- 
+ <style type="text/css">
+        label{
+        font-family: 'Open Sans Condensed', sans-serif;
+        color: #C1C3C0;
+    	text-shadow: 2px 2px 4px #000;
+          }
+
+ .inputs{
+/*	color: #878886;
+    text-shadow: 1px 1px 2px #000;*/
+         color: #C1C3C0;
+    	text-shadow: 2px 2px 4px #000000;
+ }
+
+.inputs input{
+	background: transparent;
+	border: none;
+	color: #FFF;
+}
+
+.inputs textarea{
+	background: transparent;
+	border: none;
+	color: #FFF;
+}
+
+.inputs input:hover{
+	cursor: pointer;
+}
+ </style>
+
+
 
 }

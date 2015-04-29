@@ -604,7 +604,7 @@ textarea{
         -webkit-opacity: .6;
         -moz-opacity: .6;
         filter: alpha(opacity=60);
-        color: #000;
+        /*color: #000;*/
         -webkit-transition: all 0.5s;
         transition: all 0.5s; 
 	}
@@ -748,6 +748,7 @@ textarea{
   background:     -ms-linear-gradient(45deg, rgba(20, 21, 23, 0.6) 10%, #6A9113 70%); 
   background:      -o-linear-gradient(45deg, rgba(20, 21, 23, 0.6) 10%, #6A9113 70%); 
   background:         linear-gradient(45deg, rgba(20, 21, 23, 0.6) 10%, #6A9113 70%);
+  opacity: 1;
   }
   .modal-header{
   border-bottom: 1px solid  rgba(43, 44, 44, 0.3);
@@ -778,7 +779,7 @@ textarea{
   color: #C1C3C0;
   text-shadow: 2px 2px 4px #000000; 
 }
-   .modal-footer button:hover{
+  .modal-footer button:hover{
   border: 1px solid  rgba(43, 44, 44, 0.8);;
   background:transparent;
   opacity:0.9;

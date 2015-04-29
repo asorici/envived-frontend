@@ -2,17 +2,18 @@
 @Main("order ") {
 <form action="@routes.Application.updateDeleteAreaOrder(id,idenv)" method="POST">
 
- Order 
-
+ <!-- Order  -->
+<div class="order">
 <textarea class="form-control" name="description" rows="5" cols="40">@description</textarea>
+</div>
 <br>
    		<div class="row">
    		
-   		<div class="col-md-4">
+   		<div class="col-md-2">
 		<input type="submit" name="update-po" value="save" class="btn-edit">
 		<br>
 		</div>
-		<div class="col-md-4">
+		<div class="col-md-3">
 		<input type="submit" name="update-po" value="delete" class="btn-edit">
 		<br>
 		</div>
@@ -20,5 +21,12 @@
 		</div>
 
 </form>
+<style type="text/css">
+	.order textarea{
+		background: transparent;
+		border: none;
+		color: #FFF;
+	}
+</style>
 
 }

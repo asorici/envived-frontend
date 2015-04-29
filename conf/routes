@@ -11,10 +11,13 @@ POST	/register				    controllers.Application.AddUser()
 GET     /login                      controllers.Application.LoginPage()
 POST    /login                      controllers.Application.PostLogin()
 
+GET     /forgotPassword   			controllers.Application.ForgotPass()
+POST    /forgotPassword   			controllers.Application.PostForgotPass()
+
 GET     /welcome					controllers.Application.welcome()
 GET     /error   					controllers.Application.error()
 GET     /checkfeatenv               controllers.Application.checkfeatenv(id:String)
-GET     /checkfeatarea               controllers.Application.checkfeatarea(id:String, idenv:String)
+GET     /checkfeatarea              controllers.Application.checkfeatarea(id:String, idenv:String)
 
 GET     /EditProfile                controllers.Application.EditProfile()
 POST    /EditProfile                controllers.Application.AddEditedProfile()
@@ -69,7 +72,7 @@ POST     /updateDeleteEnvProgram     controllers.Application.updateDeleteEnvProg
 
 GET       /orderArea                  controllers.Application.orderArea(id:String, idenv:String)
 POST      /postOrderArea 			  controllers.Application.postOrderArea(id:String, idenv:String)
-POST      /updateDeleteAreaOrder       controllers.Application.updateDeleteAreaOrder(id:String, idenv:String)
+POST      /updateDeleteAreaOrder      controllers.Application.updateDeleteAreaOrder(id:String, idenv:String)
 
 
 GET       /orderEnv                   controllers.Application.orderEnv(id:String)
@@ -84,9 +87,16 @@ GET		 /socialMediaEnv              controllers.Application.socialMediaEnv(id:Str
 POST	 /postSocialEnv  			  controllers.Application.postSocialEnv(id:String)
 POST     /editSocialEnv               controllers.Application.editSocialEnv(id:String)
 
+GET      /areathing					  controllers.Application.AreaThing(id:String, idenv:String)
 GET      /areatemp					  controllers.Application.areatemp(id:String, idenv:String)
 GET      /areahum					  controllers.Application.areahum(id:String, idenv:String)
 GET      /arealum					  controllers.Application.arealum(id:String, idenv:String)
+
+GET      /ManualThingEnv              controllers.Application.ManualThingEnv(id:String)
+POST     /PostManualEnv				  controllers.Application.PostManualEnv(id:String)
+GET      /viewThingsManualEnv		  controllers.Application.viewThingsManualEnv(id:String)
+POST     /addingValManualEnv		  controllers.Application.addingValManualEnv(type:String, id_thing:String, id:String)
+GET 	 /graphicThingEnv			  controllers.Application.graphicThingEnv(id:String, id_thing:String, type:String)
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)

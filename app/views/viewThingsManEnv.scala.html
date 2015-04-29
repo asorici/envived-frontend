@@ -1,0 +1,104 @@
+@(map: Map[String, String],id:String)
+
+@Main("Manual command") {
+
+<nav id="css" class="navbar navbar-default">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="@routes.Application.viewEnv(id)">Environment</a> 
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <!-- <li><a href="#" data-toggle="modal" data-target="#editEnvironmet">Edit Environment <span class="sr-only">(current)</span></a></li> -->
+
+       <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Areas <span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu">
+            <li role="presentation">
+              <a href="@routes.Application.viewAreas(id)" data-toggle="modal">
+                 View Areas
+              </a>
+            </li>
+            <!-- <li><a href="@routes.Application.AddArea(id)">Add Area</a></li>  -->
+          </ul>
+        </li>
+
+      </ul>
+
+      <ul class="nav navbar-nav navbar-right">
+
+        <li><a href="@routes.Application.welcome()"><i class="fa fa-home"></i>Profile</a></li> 
+        <li><a href="@routes.Application.index()">Log out</a></li>
+             
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+
+<div class="col-md-offset-1 col-md-11">
+  <div class="path">
+  Path : <a href="@routes.Application.welcome()">Profile </a> >> <a href="@routes.Application.viewEnv(id)">View Environmnet</a> >> <a href="@routes.Application.ManualThingEnv(id)">Things (manual) </a> >> add values
+  </div>
+</div> 
+
+
+<div class="row">
+<br><br><br>
+<div class="col-md-offset-2 col-md-8">
+
+
+		@for((c,w)<- map){
+<div class="row">
+
+<div class="col-md-3">
+		thing type = c: @c  <br>
+
+		id thing = w: @w <br>
+		
+</div>
+<form action="@routes.Application.addingValManualEnv(c,w,id)" method="POST">
+
+
+		<div class="col-md-2">
+			<input type="text" class="form-control" placeholder="value" name="value"/>
+		</div>
+
+		<div class="col-md-2">
+			<select class="form-control" name="measurement_unit">
+				  <option name="measurement_unit">-----</option>
+				  <option name="measurement_unit">Celsius</option>
+				  <option name="measurement_unit">Fahrenheit</option>
+				  <option name="measurement_unit">Percent</option>
+			</select>
+		</div>
+
+		<div class="col-md-2">
+			<input type="submit" value="add" class="add-btn btn"/>
+		</div>
+	<div class="col-md-2">
+		<button class="add-btn btn form-control"><a href="@routes.Application.graphicThingEnv(id,w,c)">get graphic</a></button>
+	</div>
+</form>
+
+
+</div>	
+<br><br>
+		}
+
+	<!--  -->
+
+
+<br>	
+</div>
+</div>
+
+}

@@ -1,0 +1,23 @@
+@(id:String, idenv:String)
+@Main("temperature area"){
+
+<p>insert the pins you want to connect</p>
+
+	<button id="temperature" class="led">temperature</button> <!-- button for temp-->
+	<button id="humidity" class="led">humidity</button> <!-- button for hum -->
+	<button id="luminosity" class="led">luminosity</button> <!-- button for lum -->
+		
+	<script src="jquery.min.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$(".led").click(function(){
+				var p = $(this).attr('id'); // get id value (i.e. pin13, pin12, or pin11)
+				// send HTTP GET request to the IP address with the parameter "pin" and value "p", then execute the function
+				// $.get("http://192.168.4.1:80/", {pin:p}); 
+				// execute get request
+				$.get("http://localhost:8080/envived/client/v2/resources/things/1/properties/?clientrequest=true&virtual=true&format=json&type=",{pin:p});
+			});
+		});
+	</script>
+
+}
