@@ -25,7 +25,7 @@ void loop()
     Serial.print(humi);
     Serial.println();
     Serial.print(" Luminozitate:");
-    Serial.println(analogRead(lightPin));
+/
     Serial.println();
   }
   else

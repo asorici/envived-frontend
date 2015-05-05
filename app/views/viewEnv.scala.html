@@ -46,11 +46,14 @@
 
 <div class="col-md-offset-1 col-md-11">
   <div class="path">
-  Path : <a href="@routes.Application.welcome()">Profile </a> >> <a>View Environmnet</a>
+  Path : <a href="@routes.Application.welcome()">Profile </a> >> <a href="#">View Environmnet</a>
   </div>
 </div>
-
- &nbsp;&nbsp;  <a href="@routes.Application.checkfeatenv(id)">test: see your features</a>
+<div class="row">
+<div class="col-md-offset-1 col-md-11">
+  <div> <a href="@routes.Application.checkfeatenv(id)"> See your features</a></div>
+</div>
+</div>
 
 
 <div class="container">
@@ -93,7 +96,7 @@
             </div>
             <ul id="demo_ul_2">
                 <li class="demo_li"><a href="@routes.Application.ManualThingEnv(id)"><div><br><i class="fa fa-paw"></i></div><div>Manual</div></a></li>
-                <li class="demo_li"><div><br><i class="fa fa-skyatlas"></i></div><div>Arduino</div></li>
+                <li class="demo_li"><a href="@routes.Application.envArduino(id)"><div><br><i class="fa fa-skyatlas"></i></div><div>Arduino</div></a></li>
                 <!-- <li class="demo_li"><div><br><i class="fa fa-recycle"></i></div><div>Humidity</div></li>
                  -->
                  <!-- icon = fa-skyatlas  fa-lightbulb-o-->

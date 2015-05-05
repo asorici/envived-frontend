@@ -45,6 +45,7 @@ import scala.collection.immutable.Stream.Cons;
 import views.html.*;
 import views.html.helper.form;
 
+
 public class Application extends Controller {
 	
 	final static Form<Environment> EnvNew = Form.form(Environment.class);
@@ -2465,16 +2466,40 @@ public class Application extends Controller {
       	 JsonNode content = ListResponse.asJson();
    	     List<String> value = content.findValuesAsText("value");
      	 List<String> timestamp = content.findValuesAsText("timestamp");
-     	 		 
+     	 
      	 HashMap<String, String>hash=new HashMap<String, String>();
 	   	 
+     	ArrayList<String> timeList = new ArrayList<String>();
+     	ArrayList<String> dateList = new ArrayList<String>();
+     	
 	   	 for(int i=0;i<value.size();i++){
-			   		hash.put(value.get(i),timestamp.get(i));		
-	   	 }
+	   		 
+	   		 		String string = timestamp.get(i);	
+	   		 		String[] parts = string.split("T");
+	   		 		
+	   			   	String date = parts[0]; 
+	   			   	String time = parts[1]; 
+
+	   			  	if (string.contains("T")) {
+	   			   	    // Split it.
+	   			   	} else {
+	   			   	    throw new IllegalArgumentException("String " + string + " does not contain -");
+	   			   	}
+	   			  	
+	   			    timeList.add(time);
+	   			    dateList.add(date);
+	   			  
+			   		hash.put(value.get(i),null);
+	 }
 	   	 
-	   	System.out.println("val::: "+value+"\n");	   
 	   
-	   return ok(graphicEnvThing.render(hash,id));
+	   	System.out.println("val::: "+value+"\n");	 
+	   		   
+	   return ok(graphicEnvThing.render(hash,id,timeList,dateList));
+   }
+   
+   public static Result envArduino(String id){
+	   return ok(envarduinopage.render(id));
    }
 }
 

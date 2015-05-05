@@ -95,16 +95,16 @@ Path : <a href="@routes.Application.welcome()">Profile </a> >> <a  href="@routes
    <div id="demo_box_2">
             <div class="pop_ctrl"><i class="fa "></i>
               <p>
-              <!-- <input type="button" class="display" id="refreshNotes" value="Things"/> -->
-              <input type="button" class="display" id="refreshNotes" value="Things" onclick="location.href='@routes.Application.AreaThing(id,idenv)'"/>
+              <!-- <input type="button" class="display" id="refreshNotes" value="Things"/> onclick="location.href='@routes.Application.AreaThing(id,idenv)'"-->
+              <input type="button" class="display" id="refreshNotes" value="Things" />
               
               <!-- <a href="@routes.Application.AreaThing(id,idenv)">Things</a></p> -->
             </div>
-<!--             <ul id="demo_ul_2">
-                <li class="demo_li"><a href="@routes.Application.areatemp(id,idenv)"><div><br><i class="fa fa-fire"></i></div><div>Temperature</div></a></li>
-                <li class="demo_li"><div><br><i class="fa fa-lightbulb-o"></i></div><div><a href="@routes.Application.arealum(id,idenv)">Luminosity</a></div></li>
-                <li class="demo_li"><div><br><i class="fa fa-recycle"></i></div><div><a href="@routes.Application.areahum(id,idenv)">Humidity</a></div></li>
-            </ul> -->
+            <ul id="demo_ul_2">
+                <li class="demo_li"><a href="@routes.Application.areatemp(id,idenv)"><div><br><i class="fa fa-fire"></i></div><div>Manual</div></a></li>
+                <li class="demo_li"><div><br><i class="fa fa-lightbulb-o"></i></div><div><a href="@routes.Application.AreaThing(id,idenv)">Arduino</a></div></li>
+               <!--  <li class="demo_li"><div><br><i class="fa fa-recycle"></i></div><div><a href="@routes.Application.areahum(id,idenv)">Humidity</a></div></li> -->
+            </ul>
         </div>
   </td>
 </tr>
