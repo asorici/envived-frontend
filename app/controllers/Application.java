@@ -50,25 +50,36 @@ public class Application extends Controller {
 	
 	final static Form<Environment> EnvNew = Form.form(Environment.class);
 	
+	/**
+	 * Returning the 'index' page :
+	 * */
+	
     public static Result index() {
     	
         return ok(Index.render("Welcome to Envived"));
     }
     
+    /**
+     * Returning the 'profile' page ::: welcome = 'home'
+     * */
+    
 	public static Result welcome()
 	{	
-	    return ok(Profile.render(session(Constant.first_name)));
-		
+	    return ok(Profile.render(session(Constant.first_name)));	
 	}
        
     /**
-     * Register:
+     * Return the registration page :
      * */
     
     public static Result Register(){
     	
     	return ok(Register.render("Register"));
     }
+    
+   /**
+    * Adding a new user : 
+    * */
     
     public static Result AddUser(){
     	
@@ -112,55 +123,53 @@ public class Application extends Controller {
   if(successYes == false){
 		  return ok(Register.render("wrong credentials...."));
 	  }  
-    	  if(allData.has(resources)){
-    		  
+    	  if(allData.has(resources)){		  
     	  String userId = allData.getString(resources).split("/")[6];
     	  session("userid",userId);
-    	  System.out.println("id user: " + userId);
-    	  
+    	  System.out.println("id user: " + userId); 	  
     	  }
     	   	  
     	  if(allData.has("first_name")){		  
      		  String user_name;
     		  user_name = allData.getString("first_name");
-    		  session("first_name", user_name);
-    		  
+    		  session("first_name", user_name);		  
     		  System.out.println("\nUser Name : " + session("userid"));	  
-    	  }
-    	  
-    	  session(response.getCookie("sessionid").getName(), response.getCookie("sessionid").getValue());	  
-	  
+    	  }  	  
+    	  session(response.getCookie("sessionid").getName(), response.getCookie("sessionid").getValue());	  	  
 	 } catch (JSONException e) {
 			System.out.println("^^^^^ JSONException: something is missing....^^^^^");
-	 }
-	 		
- 	return ok(Index.render("Now you can log in ..."));
-      	  
-}        
+	 } 		
+ 	return ok(Index.render("Now you can log in ..."));      	  
+    }    
+    
     /**
-     * Forgot Password
+     * Returning the 'Forgot password' page
      * */
     
     public static Result ForgotPass(){
-    	
     	return ok(forgotpassword.render(""));
     }
     
-    public static Result PostForgotPass(){
-    	
-    	String url = Url.host + ":" + Url.port + Url.logout;
-    	
-    	return TODO;
+    /**
+     * Log out :
+     * */
+    
+    public static Result logout(){
+    	String url = Url.host + ":" + Url.port + Url.logout;  	
+    	return redirect(routes.Application.index());
     }
     
     /**
-     * Login
+     * Returning the 'log in' page:
      * */
     
-    public static Result LoginPage(){
-    	
+    public static Result LoginPage(){   	
     	return ok (Login.render(""));
     }
+    
+    /**
+     * The log in:
+     * */
     
     public static Result PostLogin(){
     	
@@ -200,32 +209,27 @@ public class Application extends Controller {
     }
     
     /**
-     * Profile
+     * Returning the 'Profile' page
      * */
        
-    public static Result EditProfile(){
-    	
+    public static Result EditProfile(){  	
     	return ok(EditProfile.render(new Form<UserProfile>(UserProfile.class)));
     }
-    
-    public static Result AddEditedProfile(){
-    	return TODO;
-    }
-    
+     
     /**
-     * Add Environment
+     * Return the page to 'add a new environment':
      * */
     
-    //add a new environment
-    public static Result AddEnvironment(){
-    	
+    public static Result AddEnvironment(){	
     	String val = session("userid");
-    	System.out.println("Add Environment : "+ val);
-    	
+    	System.out.println("Add Environment : "+ val);  	
     	return ok(NewEnvironment.render());
     }
     
-    //post the new environment
+    /**
+     * Saving the new environment ...
+     * */
+    
     public static Result PostNewEnvironment(){
     	  	
         Form<Environment> formData = Form.form(Environment.class);
@@ -258,7 +262,10 @@ public class Application extends Controller {
  		   
     }
     
-    //view all environments
+   /**
+    * View all environments
+    * */
+    
     public static Result viewEnvironments(){
     	String getEnvUrl = Url.host + ":" + Url.port + Url.parent + Url.crTvTfjO+ session("userid");
      
@@ -287,7 +294,10 @@ public class Application extends Controller {
   		
     }
    
-    //edit environment
+   /**
+    * Edit an environment page 
+    * */
+    
     public static Result editEnv(String id){	
     	
        String getEnvUrl = Url.host+":"+Url.port+Url.parent+id+"/?virtual=true";
@@ -319,7 +329,10 @@ public class Application extends Controller {
     	 
     }
     
-    //save edited environment : 
+    /**
+     * Save edited environment
+     * */
+    
     public static Result saveEnv(String id){
     	
     	DynamicForm mySaveForm;
@@ -364,7 +377,10 @@ public class Application extends Controller {
     	return redirect(routes.Application.viewEnv(id));  	
     }
     
-    //view an environment :
+    /**
+     * View an environment
+     * */
+    
     public static Result viewEnv(String id) {
     	
     	System.out.println("... i am checking your env features ...");
@@ -569,15 +585,19 @@ public class Application extends Controller {
 		return redirect(routes.Application.error());
      }
     
+    /**
+     * An error page 
+     * */
+    
     public static Result error(){
     	 return ok(error.render("...something it's missing, go fishing...."));
     }
     
     /**
      * Environment Description
+     * -if i have description return edit page if not return add description page
      * */
 
-	//if i have description return edit page if not return add description page
 	public static Result envDescription(String id){
 			
 		 String descrUrl =Url.host+":"+Url.port+Url.description+Url.vFcrTfj+"&environment="+id;
@@ -609,7 +629,10 @@ public class Application extends Controller {
 		
 	}
 	
-	//Post the new environment description
+	/**
+	 * Post the new description
+	 * */
+	
 	public static Result PostEnvDescription(String id){
 		
 		DynamicForm envData = Form.form().bindFromRequest();
@@ -633,7 +656,11 @@ public class Application extends Controller {
 			return redirect(routes.Application.viewEnv(id));
 	}
 
-	//Edit Description Environment : save or delete the environment description
+	/**
+	 * Edit Description Environment 
+	 * -save or delete the environment description
+	 * */
+	
 	public static Result saveDeleteDescEnv(String id){
 		DynamicForm mySaveForm;
 		mySaveForm = Form.form().bindFromRequest();
@@ -679,8 +706,7 @@ public class Application extends Controller {
 			 System.out.println("*delete (description environment) result: "+rezultatDelete2.getBody()+"status: "+rezultatDelete2.getStatus());
 			 
 			break;
-			default: break;	
-		
+			default: break;			
 		}
 		return redirect(routes.Application.viewEnv(id));	
 	}
@@ -725,7 +751,10 @@ public class Application extends Controller {
 	 	return ok(envBoothDesc.render(id));  	
 	}
 	
-	//post the new booth description
+	/**
+	 * Post the new booth description
+	 * */
+	
 	public static Result PostBoothEnvDesc(String id){
 		
 		DynamicForm envData = Form.form().bindFromRequest();
@@ -772,7 +801,11 @@ public class Application extends Controller {
 	
 	}
 	
-	//save(edited)-delete booth description:  	
+	/**
+	 * Save(edited)-(delete) Booth Description
+	 * -environmnet
+	 * */
+	
 	public static Result editBoothEnv(String id){
 		DynamicForm mySaveForm;
 		mySaveForm = Form.form().bindFromRequest();
@@ -859,6 +892,10 @@ public class Application extends Controller {
 	    	return ok(programEnv.render(id));
    }
    
+   /**
+    * Saving Environment Program
+    * */
+   
    public static Result postEnvProgram(String id){
 	 DynamicForm areaData = Form.form().bindFromRequest();
    	
@@ -878,8 +915,12 @@ public class Application extends Controller {
  	 System.out.println("userid:" + session("userid") + "\nsessionid:" + session("sessionid") + " \nJson result: " + jsonParams);	
  		
  	return redirect(routes.Application.viewEnv(id));
-  
    }
+   
+   /**
+    * Edit or Delete the progarm
+    * -environment
+    * */
    
    public static Result updateDeleteEnvProgram(String id){
 	   
@@ -928,8 +969,7 @@ public class Application extends Controller {
    		default: break;	    	
    	}
    	
-   	return redirect(routes.Application.viewEnv(id));
-   	
+   	return redirect(routes.Application.viewEnv(id)); 	
    }
    
    /***
@@ -966,6 +1006,10 @@ public class Application extends Controller {
 	    	return ok(orderenv.render(id));
    }
    
+   /**
+    * Saving the new Order
+    * */
+   
    public static Result postOrderEnv(String id){
 		 DynamicForm areaData = Form.form().bindFromRequest();
 		   	
@@ -986,6 +1030,11 @@ public class Application extends Controller {
 	 		
 	 	return redirect(routes.Application.viewEnv(id));	  
    }
+   
+   /**
+    * Edit the order
+    * -environment
+    * */
    
    public static Result updateDeleteEnvOrder(String id){
 	   
@@ -1039,6 +1088,7 @@ public class Application extends Controller {
    
    /**
     * Social media 
+    * -environment
     * */
    
    public static Result socialMediaEnv(String id){
@@ -1075,6 +1125,10 @@ public class Application extends Controller {
 	   return  ok(envsocialmedia.render(id));
    }
    
+   /**
+    * Saving Social Media
+    * */
+   
    public static Result postSocialEnv(String id){
 	   
 		 DynamicForm areaData = Form.form().bindFromRequest();
@@ -1099,6 +1153,11 @@ public class Application extends Controller {
 	 		
 	 	return redirect(routes.Application.viewEnv(id));
    }
+   
+   /**
+    * Edit or delete social media
+    * -environment
+    * */
    
    public static Result editSocialEnv(String id){
 	   	DynamicForm mySaveForm;
@@ -1154,16 +1213,18 @@ public class Application extends Controller {
    
    
    /**
-     * Add Area
+     * Add a new Area
      * */
-      
-    //add a new area
+
     public static Result AddArea(String id){
     	   
  		return ok(newarea.render(id));
     }
     
-    //post the new area
+    /**
+     * Save the new area
+     * */
+    
     public static Result PostNewArea(String id){
     	//env id = String id
     	 DynamicForm areaData = Form.form().bindFromRequest(); 
@@ -2546,7 +2607,7 @@ public class Application extends Controller {
      	 
      	 WSRequestHolder holder2=WS.url(url);
          WSResponse ListResponse = holder2.get().get(200000);
-         System.out.println("Edit environment status response : "+ListResponse.getStatus());
+         System.out.println("post manual values env status response : "+ListResponse.getStatus());
 
      	 WSRequestHolder holder=WS.url(url);
 	 	 holder.setContentType(Url.appjson);
@@ -2663,12 +2724,12 @@ public class Application extends Controller {
 	   			  
 		hash.put(value.get(i),null);
 	 }
-	   	 
-	   
 	   	System.out.println("val::: "+value+"\n");	 
 	   		   
 	   return ok(graphicEnvThing.render(hash,id,timeList,dateList));
    }
+   
+   
    public static Result RemoveTingEnv(String type, String id_thing,String id){
 	   String url = "http://localhost:8080/envived/client/v2/resources/things/"+id_thing+"/?clientrequest=true&virtual=true&format=json";
 //	   String url = "http://localhost:8080/envived/client/v2/resources/things/?clientrequest=true&virtual=true&format=json&environment="+id;
@@ -2681,8 +2742,228 @@ public class Application extends Controller {
  		 
 	   return redirect(routes.Application.ManualThingEnv(id));
    }
+   
+   
    public static Result envArduino(String id){
 	   return ok(envarduinopage.render(id));
+   }
+   
+   /**
+    * Areat things 
+    * */
+   
+   public static Result ManualThingArea (String idenv, String id){
+	   
+	   String url = "http://localhost:8080/envived/client/v2/resources/things/?clientrequest=true&virtual=true&format=json&area="+id; 
+	   
+	   String thng_id;
+	   String temp= "temperature";
+	   String lum = "humidity";
+	   String hum = "luminosity";
+	   
+	   WSRequestHolder holder = WS.url(url);
+      	 
+      	 holder.setHeader("Cookie","sessionid="+session("sessionid"));
+      	 holder.setContentType(Url.appjson);
+      	
+      	 WSResponse ListResponse = holder.get().get(200000);
+      	 
+      	 System.out.println("session id : "+session("sessionid"));
+      	 System.out.println("area id : "+id);
+      	 System.out.println("Status response: "+ListResponse.getStatus());
+      	 
+      	 JsonNode content = ListResponse.asJson();
+   	     List<String> type = content.findValuesAsText("thing_type");
+     	 List<String> area = content.findValuesAsText("area");
+     	 
+     	 List<String> idthing = content.findValuesAsText("resource_uri");
+    	     	  
+    	 session("userid",id);
+  	   	 		 
+     	 HashMap<String, String>hash=new HashMap<String, String>();
+	   	 	  
+	   	 for(int i=0;i<type.size();i++){
+	   		
+	   		 if(type.get(i) == temp){
+				temp = null;
+				System.out.println("\nif temp : "+temp);
+			}
+			if(type.get(i) == lum){
+				lum = null;
+				System.out.println("\nif lum : "+lum);
+			}
+			if(type.get(i) == hum){
+				hum = null;	
+				System.out.println("\nif hum : "+hum);
+			}
+			 System.out.println("\ntype: " + type.get(i));
+		     hash.put(type.get(i),idthing.get(i).split("/")[6]);		
+	   	 }
+	   	 
+	    System.out.println("\nfinal values (vall = null -> I have it): \ntemp = "+temp + "\nlum = "+lum + "\nhum = " +hum);  
+	   	System.out.println("thing-uri: "+type+"\n");
+	   	System.out.println("area: " + area); 
+	   	
+	   return ok(thingareamanual.render(hash,idenv,id,temp,lum,hum));
+   }
+   
+   /**
+    * Post value area 
+    * */
+   
+   public static Result PostManualArea(String idenv, String id){
+	 DynamicForm Data = Form.form().bindFromRequest();
+	   	
+	 String url = Url.host + ":" + Url.port + Url.thing + Url.vFcrTfj; 	
+	
+	 ObjectNode jsonParams = Json.newObject();
+	 jsonParams.put("area", Url.area +id+"/");
+   	 jsonParams.put("thing_type", Data.get("type"));
+   	 
+   	 WSRequestHolder holder2=WS.url(url);
+     WSResponse ListResponse = holder2.get().get(200000);
+     System.out.println("post manual area status response : "+ListResponse.getStatus());
+
+   	 WSRequestHolder holder=WS.url(url);
+	 holder.setContentType(Url.appjson);
+	 holder.setHeader("Cookie","sessionid="+session("sessionid"));
+	 WSResponse postResult = holder.post(jsonParams).get(20000);
+	 		 
+	 System.out.println("add thing status result:" + postResult.getStatus());
+	 System.out.println("userid:" + session("userid") + "\nsessionid:" + session("sessionid") + " \nJson result: " + jsonParams);	
+	  	  
+	 return redirect(routes.Application.ManualThingArea(idenv, id));
+ }
+   
+   /**
+    * view manual things for area
+    * */
+   
+   public static Result viewThingsManualArea(String idenv, String id){
+		 
+	     String url = "http://localhost:8080/envived/client/v2/resources/things/?clientrequest=true&virtual=true&format=json&area="+id; 
+	     WSRequestHolder holder = WS.url(url);
+    	 
+    	 holder.setHeader("Cookie","sessionid="+session("sessionid"));
+    	 holder.setContentType(Url.appjson);
+    	
+    	 WSResponse ListResponse = holder.get().get(200000);
+    	 
+    	 System.out.println("session id : "+session("sessionid"));
+    	 System.out.println("area id : "+id);
+    	 System.out.println("Status response: "+ListResponse.getStatus());
+    	 
+    	 JsonNode content = ListResponse.asJson();
+ 	     List<String> type = content.findValuesAsText("thing_type");
+   	     List<String> area = content.findValuesAsText("area");
+   	 
+   	     List<String> idthing = content.findValuesAsText("resource_uri");
+  	     	  
+  	     session("userid",id);
+	   	 		 
+   	     HashMap<String, String>hash=new HashMap<String, String>();
+	   	 
+   	     String thng_id;
+	   	    for(int i=0;i<type.size();i++){
+			   		hash.put(type.get(i),idthing.get(i).split("/")[6]);		
+	   	  }
+	   	 
+	   	System.out.println("thing-uri: "+type+"\n");
+	   	System.out.println("area: " + area);   	   	   	
+    	 
+ 	   return ok(viewThingsManArea.render(hash, idenv, id));    
+ }
+   
+   /**
+    * Remove thing area
+    * */
+   
+   public static Result RemoveTingArea(String type, String id_thing,String idenv, String id){
+	   String url = "http://localhost:8080/envived/client/v2/resources/things/"+id_thing+"/?clientrequest=true&virtual=true&format=json";
+     
+	   System.out.println("idelete-thing :  ! *** " + type);
+ 	   WSRequestHolder delHolder2=WS.url(url);
+ 	   delHolder2.setContentType(Url.appjson);
+ 	   delHolder2.setHeader("Cookie","sessionid="+session("sessionid"));
+ 	   WSResponse rezultatDelete2 = delHolder2.delete().get(20000);
+ 	   System.out.println("*delete thing area: "+type+" : "+rezultatDelete2.getBody()+"status: "+rezultatDelete2.getStatus());
+ 		 
+	   return redirect(routes.Application.ManualThingArea(idenv,id));
+   }
+   
+   public static Result addingValManualArea (String type, String id_thing, String idenv, String id){
+
+	   DynamicForm Data = Form.form().bindFromRequest();
+ 	   String url = Url.host + ":" + Url.port + "/envived/client/v2/resources/thing_properties/" + Url.vFcrTfj;
+   	   ObjectNode jsonParams = Json.newObject();
+   	   
+   	   jsonParams.put("measurement_unit", Data.get("measurement_unit"));
+	   jsonParams.put("thing", Url.thing +id_thing+"/");
+   	   jsonParams.put("type", type);
+   	   jsonParams.put("value", Data.get("value"));
+   
+   	   WSRequestHolder holder=WS.url(url);
+       holder.setContentType(Url.appjson);
+	   holder.setHeader("Cookie","sessionid="+session("sessionid"));
+	   WSResponse postResult = holder.post(jsonParams).get(20000);
+	  
+	   System.out.println("---___^^^ type: "+type + "- - -thind id: "+id_thing);
+	   System.out.println("userid:" + session("userid") + "\nsessionid:" + session("sessionid") + " \nJson result: " + jsonParams);	
+	   System.out.println("add properties thing area result ******:" + postResult.getStatus());
+	   
+	   return redirect(routes.Application.graphicThingArea(idenv,id,id_thing,type));
+   }
+ 
+   
+   /**
+    * Area chart
+    * */
+   
+   public static Result graphicThingArea(String idenv,String id,String id_thing, String type){
+	   
+	   String url = "http://localhost:8080/envived/client/v2/resources/things/"+id_thing+"/properties/?clientrequest=true&virtual=true&format=json&type="+type;
+	   WSRequestHolder holder = WS.url(url);
+      	 
+       holder.setHeader("Cookie","sessionid="+session("sessionid"));
+       holder.setContentType(Url.appjson);
+      	
+       WSResponse ListResponse = holder.get().get(200000);
+      	 
+       System.out.println("session id : "+session("sessionid"));
+       System.out.println("area id : "+id);
+       System.out.println("Status response: "+ListResponse.getStatus());
+      	 
+       JsonNode content = ListResponse.asJson();
+   	   List<String> value = content.findValuesAsText("value");
+       List<String> timestamp = content.findValuesAsText("timestamp");
+     	 
+       HashMap<String, String>hash=new HashMap<String, String>();
+	   	 
+       ArrayList<String> timeList = new ArrayList<String>();
+       ArrayList<String> dateList = new ArrayList<String>();
+     	
+	   for(int i=0;i<value.size();i++){
+	   		 
+	 		 	String string = timestamp.get(i);	
+	   		 	String[] parts = string.split("T");
+	   		 		
+	   			String date = parts[0]; 
+	   			String time = parts[1]; 
+
+	   			if (string.contains("T")) {
+	   			   	    // Split it.
+	   			} else {
+	   				throw new IllegalArgumentException("String " + string + " does not contain T");
+	   			  }
+	   			  	
+	    timeList.add(time);
+	    dateList.add(date);
+	   			  
+		hash.put(value.get(i),null);
+	 }
+	   	System.out.println("val::: "+value+"\n");	 
+	   		   
+	   return ok(graphicAreaThing.render(hash,idenv,id,timeList,dateList));
    }
 }
 

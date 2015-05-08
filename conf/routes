@@ -12,7 +12,7 @@ GET     /login                      controllers.Application.LoginPage()
 POST    /login                      controllers.Application.PostLogin()
 
 GET     /forgotPassword   			controllers.Application.ForgotPass()
-POST    /forgotPassword   			controllers.Application.PostForgotPass()
+#POST    /forgotPassword   			controllers.Application.PostForgotPass()
 
 GET     /welcome					controllers.Application.welcome()
 GET     /error   					controllers.Application.error()
@@ -20,7 +20,7 @@ GET     /error   					controllers.Application.error()
 GET     /checkfeatarea              controllers.Application.checkfeatarea(id:String, idenv:String)
 
 GET     /EditProfile                controllers.Application.EditProfile()
-POST    /EditProfile                controllers.Application.AddEditedProfile()
+#POST    /EditProfile                controllers.Application.AddEditedProfile()
 
 GET    /addEnvironment				 controllers.Application.AddEnvironment()
 POST   /postNewEnvironment           controllers.Application.PostNewEnvironment() 
@@ -100,6 +100,15 @@ GET 	 /graphicThingEnv			  controllers.Application.graphicThingEnv(id:String, id
 
 GET		 /envArduino				  controllers.Application.envArduino(id:String)
 GET      /RemoveTingEnv				  controllers.Application.RemoveTingEnv(type:String, id_thing:String, id:String)
+
+GET      /ManualThingArea             controllers.Application.ManualThingArea(idenv:String, id:String)
+POST     /PostManualArea			  controllers.Application.PostManualArea(idenv:String, id:String)
+GET      /viewThingsManualArea		  controllers.Application.viewThingsManualArea(idenv:String, id:String)
+POST     /addingValManualArea		  controllers.Application.addingValManualArea(type:String, id_thing:String, idenv:String, id:String)
+GET 	 /graphicThingArea			  controllers.Application.graphicThingArea(idenv:String, id:String, id_thing:String, type:String)
+
+GET      /RemoveTingArea			  controllers.Application.RemoveTingArea(type:String, id_thing:String, idenv:String, id:String)
+
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)

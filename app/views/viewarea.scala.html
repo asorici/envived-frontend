@@ -84,7 +84,7 @@ Path : <a href="@routes.Application.welcome()">Profile </a> >> <a  href="@routes
   <td>
    <div id="demo_box_2">
             <div class="pop_ctrl"><i class="fa "></i>
-              <p><input type="button" class="display trei" id="refreshNotes" value="Things"/></p>
+              <p><a href="@routes.Application.ManualThingArea(idenv,id)"><input type="button" class="display trei" id="refreshNotes" value="Things"/></a></p>
             </div><!-- pop_ctrl-->
            <!--  <ul id="demo_ul_2">
                 <li class="demo_li"><a href="@routes.Application.ManualThingEnv(id)"><div><br><i class="fa fa-paw"></i></div><div>Manual</div></a></li>
@@ -204,7 +204,6 @@ Path : <a href="@routes.Application.welcome()">Profile </a> >> <a  href="@routes
 
 <!-- scripts -->
 <script type="text/javascript">
-
   $(function(){
       // $('#demo_box').popmenu({'background':'rgb(124, 166, 0)','focusColor':'rgb(204, 204, 0)'});
       $('#demo_box').popmenu({'background':'rgb(204, 204, 0)','focusColor':'rgb(138, 184, 0)'});

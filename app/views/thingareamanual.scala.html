@@ -1,0 +1,203 @@
+@(map: Map[String, String], idenv:String, id:String, temp:String, lum:String, hum:String)
+@Main("Manual command") {
+<nav id="css" class="navbar navbar-default">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="@routes.Application.viewArea(id, idenv)">Area</a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li><a href="#"><button  id="editarea" data-toggle="modal" data-target="#edit-area">Edit Area </button><span class="sr-only">(current)</span></a></li>
+      </ul>
+
+      <ul class="nav navbar-nav navbar-right">
+
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Areas <span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu">
+            <li role="presentation">
+              <a href="@routes.Application.viewAreas(idenv)" data-toggle="modal">
+                 View Areas
+              </a>
+            </li>
+            <li><a href="@routes.Application.AddArea(idenv)">Add Area</a></li> 
+          </ul>
+        </li>
+
+        <li><a href="@routes.Application.viewEnv(idenv)">Environment <span class="sr-only">(current)</span></a></li>
+        <li><a href="@routes.Application.welcome()"><i class="fa fa-home"></i>Profile</a></li> 
+        <li><a href="@routes.Application.index()">Log out</a></li>
+             
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+
+
+
+
+<div class="col-md-offset-1 col-md-11">
+<div class="path">
+Path : <a href="@routes.Application.welcome()">Profile </a> >> <a  href="@routes.Application.viewEnv(idenv)">View Environmnet</a> >> <a href="@routes.Application.viewAreas(idenv)">View Areas</a> >> <a href="@routes.Application.viewArea(id, idenv)"> View Area </a> >> Things
+
+</div><!--path-->
+</div><!--offset-->
+
+
+  <div class="row">
+    <div class="col-md-offset-2 col-md-8">
+    <div class="arduino">
+      Arduino
+    </div>
+  </div>
+</div>
+
+<div class="row">
+<div class="col-md-offset-1 col-md-8">
+<!-- you have:<br><br>
+@for((c,w)<- map){ 	
+	@c<br>
+	} -->
+<br><br>
+<form ACTION="@routes.Application.PostManualArea(idenv,id)" method="POST">
+<div class="row">
+
+  <div class="col-md-offset-5 col-md-4">
+  	<select class="form-control" name="type">
+  	 <option name="type">---</option>	
+@if(temp==null){
+  
+}else{   
+  	 <option name="type">temperature</option>
+     }
+@if(lum==null){
+  
+}else{
+  	 <option name="type">luminosity</option>
+     }
+@if(hum==null){
+  
+}else{
+  	 <option name="type">humidity</option>	
+      }
+  	 </select>
+  </div><!--col-md-4-->
+
+  <div class="col-md-3">
+  	<input type="submit" value="add" class="add-btn addyn"/>
+  </div><!--col-md 3-->
+</div><!--row-->
+</form>
+
+<br><br><br>
+<br><br><br>
+
+</div><!--offset-->
+</div><!--row-->
+
+
+
+
+<div class="load-values">
+
+     <script type="text/javascript">
+        $(function(){
+          $(".load-values").load("@routes.Application.viewThingsManualArea(idenv,id)");
+         });             
+      </script>
+
+</div><!--row-->
+
+<script type="text/javascript">
+   $('[data-toggle="tooltip"]').tooltip({ container: 'body' })
+</script>
+
+
+<style type="text/css">
+.arduino{
+  text-align: center;
+  border: none;
+  border-radius: 10px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  position: relative;
+  top: 10px;
+  bottom: 20px;
+  font-family: 'Open Sans Condensed', sans-serif;
+  font-size: 18px;
+  color: #C1C3C0;
+  text-shadow: 2px 2px 4px #000000;
+  background: -webkit-linear-gradient(90deg, #809A34 10%, #445611 90%); 
+  background:    -moz-linear-gradient(90deg, #809A34 10%, #445611 90%); 
+  background:     -ms-linear-gradient(90deg, #809A34 10%, #445611 90%); 
+  background:      -o-linear-gradient(90deg, #809A34 10%, #445611 90%); 
+  background:         linear-gradient(90deg, #809A34 10%, #445611 90%); 
+
+  -moz-border-radius: 1em 4em 1em 4em;
+  border-radius: 1em 4em 1em 4em;
+
+  -moz-box-shadow:    inset 0 0 10px #000;
+   -webkit-box-shadow: inset 0 0 10px #000;
+   box-shadow:         inset 0 0 10px #000;
+
+  transition: all 0.8s;
+  -webkit-transition: all 0.8s;
+  -moz-transition: all 0.8s;
+}
+.arduino:hover{
+  cursor: pointer;
+  color:#FFF;
+  text-shadow: 0 0 3px #000, 0 0 5px #DDDEDB;
+  background: -webkit-linear-gradient(90deg, #7AA300 10%, #2E3D00 90%); 
+  background:    -moz-linear-gradient(90deg, #7AA300 10%, #2E3D00 90%); 
+  background:     -ms-linear-gradient(90deg, #7AA300 10%, #2E3D00 90%); 
+  background:      -o-linear-gradient(90deg, #7AA300 10%, #2E3D00 90%); 
+  background:         linear-gradient(90deg, #7AA300 10%, #2E3D00 90%); 
+
+-moz-border-radius: 4em 1em 4em 1em;
+border-radius: 4em 1em 4em 1em;
+
+  -webkit-box-shadow: 0 10px 6px -6px #FFFFB2;
+     -moz-box-shadow: 0 10px 6px -6px #FFFFB2;
+          box-shadow: 0 10px 6px -6px #FFFFB2;
+}
+.add-btn{
+	width: 50px;
+	height: 45px;
+	border-radius: 7px;
+}
+.load-values{
+/*  position: relative;
+  top: 40px;
+  bottom: 10px;*/
+}
+.addyn{
+  border-radius: 50%;
+  border: none;
+  background-color: #527A00;
+  color: #C1C3C0;
+  text-shadow: 2px 2px 4px #000000;
+
+  -webkit-transition: all 0.8s;
+  -moz-transition: all 0.8s;
+}
+.addyn:hover{
+  color:#FFF;
+  text-shadow: 0 0 3px #000, 0 0 5px #DDDEDB;
+  background-color: #5A6C24;
+  -moz-box-shadow:    inset 0 0 10px #FFFFB2;
+  -webkit-box-shadow: inset 0 0 10px #FFFFB2;
+  box-shadow:         inset 0 0 10px #FFFFB2;
+}
+</style>
+
+}

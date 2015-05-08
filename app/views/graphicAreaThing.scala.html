@@ -1,0 +1,318 @@
+@(map: Map[String, String],idenv:String,id:String, timeList: List[String],dateList: List[String])
+@Main("Graphic Area") {
+<nav id="css" class="navbar navbar-default">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="@routes.Application.viewArea(id, idenv)">Area</a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+      <!--   <li><a href="#"><button  id="editarea" data-toggle="modal" data-target="#edit-area">Edit Area </button><span class="sr-only">(current)</span></a></li>
+       -->
+
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Areas <span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu">
+            <li role="presentation">
+              <a href="@routes.Application.viewAreas(idenv)" data-toggle="modal">
+                 View Areas
+              </a>
+            </li>
+            <li><a href="@routes.Application.AddArea(idenv)">Add Area</a></li> 
+          </ul>
+        </li>
+
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Things <span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu">
+            <li role="presentation">
+              <a href="@routes.Application.ManualThingArea(idenv,id)" data-toggle="modal">
+                 Add More
+              </a>
+            </li>
+            <li><a href="#">Arduino</a></li> 
+          </ul>
+        </li>
+        </ul>
+      <ul class="nav navbar-nav navbar-right">
+
+        <li><a href="@routes.Application.viewEnv(idenv)">Environment <span class="sr-only">(current)</span></a></li>
+        <li><a href="@routes.Application.welcome()"><i class="fa fa-home"></i>Profile</a></li> 
+        <li><a href="@routes.Application.index()">Log out</a></li>
+             
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+
+<div class="col-md-offset-1 col-md-11">
+<div class="path">
+Path : <a href="@routes.Application.welcome()">Profile </a> >> <a  href="@routes.Application.viewEnv(idenv)">View Environmnet</a> >> <a href="@routes.Application.viewAreas(idenv)">View Areas</a> >> <a href="@routes.Application.viewArea(id, idenv)"> View Area </a> >> <a href="@routes.Application.ManualThingArea(idenv,id)">Things</a > >> Chart
+
+</div><!--path-->
+</div><!--offset-->
+
+<div class="row">
+<div class="col-md-offset-1 col-md-10">
+
+<!-- real time -->
+<br>
+<script>
+var data = [];
+var dataset;
+var totalPoints = 100;
+var updateInterval = 1000;
+var now = new Date().getTime();
+
+
+function GetData() {
+    data.shift();
+
+    while (data.length < totalPoints) {     
+        var y = Math.random() * 100;
+        var temp = [now += updateInterval, y];
+
+        data.push(temp);
+    }
+}
+
+var options = {
+    series: {
+        lines: {
+            show: true,
+            lineWidth: 1.2,
+            fill: true
+        }
+    },
+    xaxis: {
+        mode: "time",
+        tickSize: [2, "second"],
+        tickFormatter: function (v, axis) {
+            var date = new Date(v);
+
+            if (date.getSeconds() % 20 == 0) {
+                var hours = date.getHours() < 10 ? "0" + date.getHours() : date.getHours();
+                var minutes = date.getMinutes() < 10 ? "0" + date.getMinutes() : date.getMinutes();
+                var seconds = date.getSeconds() < 10 ? "0" + date.getSeconds() : date.getSeconds();
+
+                return hours + ":" + minutes + ":" + seconds;
+            } else {
+                return "";
+            }
+        },
+        axisLabel: "Time",
+        axisLabelUseCanvas: true,
+        axisLabelFontSizePixels: 12,
+        axisLabelFontFamily: 'Verdana, Arial',
+        axisLabelPadding: 10
+    },
+    yaxis: {
+        min: 0,
+        max: 100,        
+        tickSize: 5,
+        tickFormatter: function (v, axis) {
+            if (v % 10 == 0) {
+                return v + "%";
+            } else {
+                return "";
+            }
+        },
+        axisLabel: "loading",
+        axisLabelUseCanvas: true,
+        axisLabelFontSizePixels: 12,
+        axisLabelFontFamily: 'Verdana, Arial',
+        axisLabelPadding: 6
+    },
+    legend: {        
+        labelBoxBorderColor: "#fff"
+    },
+    grid: {                
+        backgroundColor: "#000000",
+        tickColor: "#008040",
+        color:"#fff"
+    }
+};
+
+$(document).ready(function () {
+    GetData();
+
+    dataset = [
+        { label: "CPU", data: data, color: "#00FF00" }
+    ];
+
+    $.plot($("#flot-placeholder1"), dataset, options);
+
+    function update() {
+        GetData();
+
+        $.plot($("#flot-placeholder1"), dataset, options)
+        setTimeout(update, updateInterval);
+    }
+
+    update();
+});
+
+
+
+</script>
+<!-- HTML -->
+<div id="flot-placeholder1" style="width:550px;height:300px;margin:0 auto"></div>
+
+
+<!-- real tim -->
+
+<br><br><br>
+<div class="tabel-val">
+<table id= "myTable" style="width:100%">
+<tr  class="val">
+    <th>&nbsp;&nbsp;value</th>
+    @for((c,w)<- map){
+    <td>@c</td>
+     }
+</tr>
+<tr class="timp">
+    <th>&nbsp;&nbsp;time</th>
+    @for(k <- timeList){
+        <td> @k</td> 
+     }
+</tr>
+<tr class="data">
+    <th>&nbsp;&nbsp;date</th> 
+    @for(q <- dateList){ 
+    <td>@q </td>
+    }
+ </tr>
+  
+</table>
+</div>
+
+<div id="chartdiv"></div> 
+<style type="text/css">
+.tabel-val{
+  width: 1160px;
+  height: 130px;
+  overflow: scroll;
+  overflow-y:hidden;
+}
+.tabel-val::-webkit-scrollbar-thumb {
+visibility: hidden;
+}
+body {
+  font-family: Lato;
+  overflow-y:scroll;
+}
+
+table {
+  border: 2px solid #ccc;
+  border-collapse: collapse;
+}
+
+table td {
+  border: 1px solid #eee;
+  padding: 5px;
+}
+
+#chartdiv {
+    width       : 100%;
+    height      : 300px;
+    font-size   : 11px;
+}           
+</style>
+
+<script type="text/javascript">
+ var chart;
+
+var chartData = [];
+
+AmCharts.ready(function() {
+  // first we generate some random data
+  generateChartData();
+
+  // SERIAL CHART
+  chart = new AmCharts.AmSerialChart();
+  chart.pathToImages = "http://www.amcharts.com/lib/3/images/";
+  chart.dataProvider = chartData;
+  chart.categoryField = "date";
+  
+  // we're going to need this to correctly parse date/time from strings
+  chart.dataDateFormat = "YYYY-MM-DD HH:NN:SS";
+
+  // AXES
+  // Category
+  var categoryAxis = chart.categoryAxis;
+  categoryAxis.parseDates = true; // in order char to understand dates, we should set parseDates to true
+  categoryAxis.minPeriod = "mm"; // as we have data with minute interval, we have to set "mm" here.            
+  categoryAxis.gridAlpha = 0.07;
+  categoryAxis.axisColor = "#DADADA";
+
+  // Value
+  var valueAxis = new AmCharts.ValueAxis();
+  valueAxis.gridAlpha = 0.07;
+  valueAxis.title = "Things Chart";
+  chart.addValueAxis(valueAxis);
+
+  // GRAPH
+  var graph = new AmCharts.AmGraph();
+  graph.type = "line"; // try to change it to "column"
+  graph.title = "red line";
+  graph.valueField = "visits";
+  graph.lineAlpha = 1;
+  graph.lineColor = "#d1cf2a";
+  graph.fillAlphas = 0.3; // setting fillAlphas to > 0 value makes it area graph
+  chart.addGraph(graph);
+
+  // CURSOR
+  var chartCursor = new AmCharts.ChartCursor();
+  chartCursor.cursorPosition = "mouse";
+  chartCursor.categoryBalloonDateFormat = "JJ:NN:SS, YYYY-MM-DD";
+  chart.addChartCursor(chartCursor);
+
+  // SCROLLBAR
+  var chartScrollbar = new AmCharts.ChartScrollbar();
+
+  chart.addChartScrollbar(chartScrollbar);
+
+  // WRITE
+  chart.write("chartdiv");
+});
+
+// generate some random data, quite different range 
+function generateChartData() {
+  
+  // initialize empty array
+  chartData = [];
+  
+  // get the table
+  var table = document.getElementById( 'myTable' );
+  
+  // get table rows
+  var rows = table.getElementsByTagName( 'tr' );
+  
+  // iterate through the <td> elements of the first row
+  // and construct chart data out of other rows as well
+  var values = rows[ 0 ].getElementsByTagName( 'td' );
+  var times = rows[ 1 ].getElementsByTagName( 'td' );
+  var dates = rows[ 2 ].getElementsByTagName( 'td' );
+  for ( var x = 0; x < values.length; x++ ) {
+    chartData.push( {
+      "visits": values[ x ].innerHTML,
+      "date": dates[ x ].innerHTML + " " + times[ x ].innerHTML
+    } );
+  }
+}
+</script>
+</div><!--row-->
+
+<!-- dhdhdhddd -->
+
+
+}
