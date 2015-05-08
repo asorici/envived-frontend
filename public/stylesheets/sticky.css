@@ -1,4 +1,7 @@
 /*body{background:#EFEFEF;color:#888;padding:0;margin:0;font: 72.5% 'Helvetica Neue', Helvetica, Arial, sans-serif; }*/
+body{
+	overflow:hidden;
+}
 .clear { clear:both; }
 
 /*Headers*/
@@ -15,7 +18,7 @@ h6{font-size:13px; letter-spacing:0px;}*/
 /*Links*/
 a{
 	/*color:#4C7895;*/
-	text-decoration:non;
+	text-decoration:none;
 	/*font-weight:bold;*/
 	}
 	
@@ -30,11 +33,11 @@ a:hover{ text-decoration:underline; }
 /*Container*/
 .container{
 	position:relative;
-	left:30px;
+	/*left:10px;*/
 	width:85%;
-	margin:30px auto;
+	margin:20px auto;
 	/*background:#FFF; */
-	padding:25px;
+	/*padding:25px;*/
 	/*border:1px solid #a1a1a1;*/
 	min-height:400px;
 	height:auto;	
@@ -43,13 +46,13 @@ a:hover{ text-decoration:underline; }
 ul.sticky_notes{ 
 	list-style:none;
 	position:relative;
-	left:45px;	
+	/*left:35px;*/	
 	 }
 ul.sticky_notes li{
 	width:250px;
-	height:200px;
-	padding:20px;
-	margin:20px;
+	height:190px;
+	padding:17px;
+	margin:15px;
 	float:left;
 	 /* Firefox */  
   /*-moz-box-shadow:5px 5px 7px rgba(33,33,33,1);  */
@@ -60,10 +63,11 @@ ul.sticky_notes li{
   -webkit-transform:rotate(-6deg);  
   -o-transform:rotate(-6deg);  
   -moz-transform:rotate(-6deg);  
-  font-family: 'Short Stack', cursive;
+ /* font-family: 'Short Stack', cursive;*/
+  font-family: 'Open Sans Condensed', sans-serif;
 }
 ul.sticky_notes p{
-	font-size:16px;
+	font-size:15x;
 }
 
 ul.sticky_notes li:nth-child(odd){  
@@ -118,5 +122,5 @@ ul.sticky_notes li:hover{
   	-webkit-border-radius: 3px;  
   	/*border-radius:3px;*/
 }
-.newTasks input[type=text] { width:300px; padding:3px };
-.deleteButton { cursor:pointer; }
+/*.newTasks input[type=text] { width:300px; padding:3px };
+.deleteButton { cursor:pointer; }*/

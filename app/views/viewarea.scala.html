@@ -1,4 +1,4 @@
-@(name:String, img_thumbnail_url:String, areaType:String, tags:String, id:String, idenv:String)
+@(name:String, img_thumbnail_url:String, areaType:String, tags:String, id:String, idenv:String, d:String, bd:String, p:String, o:String, s:String)
 @Main("Area") {
 
 <nav id="css" class="navbar navbar-default">
@@ -51,122 +51,186 @@ Path : <a href="@routes.Application.welcome()">Profile </a> >> <a  href="@routes
 </div><!--path-->
 </div><!--offset-->
 
-  &nbsp;&nbsp; <a href="@routes.Application.checkfeatarea(id, idenv)">test: see your features</a>
-
-<div class="container">
-<div class="row">
-
-<!-- <div class="checkareafeat">
-  
-
-</div> -->
-
+  <div class="col-md-offset-1 col-md-9"> <!--box+sticky-->
+<div class="row"> <!-- row for boxes and sticky-->
 <tr>
-<div class="col-md-4">
+<div class="col-md-3">
   <td>
   <br>
-    <p><input type="button" class="display" id="refreshNotes" value="Display Area details" data-toggle="tooltip" data-placement="top" title="click again to change the notes colors"/></p>
+    <p><input type="button" class="display unu" id="refreshNotes" value="Display Area details" data-toggle="tooltip" data-placement="top" title="click again to change the notes colors"/></p>
   </td>
-</div>
-<div class="col-md-4">
+</div> <!--col-md -3 for BOX : Display Environment details-->
 
+<div class="col-md-3">
   <td>
-  <div id="demo_box"> 
-            <div class="pop_ctrl"><i class="fa"></i>
-                <p><input type="button" class="display" id="refreshNotes" value="Features"/></p> 
-            </div>
+  <div id="demo_box">
+       
+            <div class="pop_ctrl"><i class="fa "></i>
+                <p><input type="button" class="display doi" id="refreshNotes" value="Features"/></p> 
+            </div><!-- pop_ctrl -->
             <ul id="demo_ul">
-                <li class="demo_li"><div data-toggle="modal" data-target="#areadesc"><a href="#"><div><br><i class="fa fa-bell-o"></i></div>Description</a></div></li>
-                <li class="demo_li"><div data-toggle="modal" data-target="#areaboodesc"><a href="#"><div><br><i class="fa fa-archive"></i></div>Booth Description</a></div></li>
-                <li class="demo_li"><div data-toggle="modal" data-target="#program-area"><div><br><i class="fa fa-calendar"></i></div>Program</div></li>
-                <li class="demo_li"><div data-toggle="modal" data-target="#order-area"><div><br><i class="fa fa-coffee"></i></div>Order</div></li>
-                <li class="demo_li"><div data-toggle="modal" data-target="#social-area"><div><br><i class="fa fa-users"></i></div>Social Media</div></li>
-                <li class="demo_li"><div id="chck-ft"><div><br> <i class="fa fa-eye"></i> </div>your features</div></li>
+                <li class="demo_li"><div data-toggle="modal" data-target="#envdesc"><a href="#"><div><br><i class="fa fa-bell-o"></i></div>Description</a></div></li>
+                <li class="demo_li"><div data-toggle="modal" data-target="#boodesc"><a href="#"><div><br><i class="fa fa-archive"></i></div>Booth Description</a></div></li>
+                <li class="demo_li"><div data-toggle="modal" data-target="#program-env"><div><br><i class="fa fa-calendar"></i></div>Program</div></li>
+                <li class="demo_li"><div data-toggle="modal" data-target="#order"><div><br><i class="fa fa-coffee"></i></div>Order</div></li>
+                <li class="demo_li"><div data-toggle="modal" data-target="#social"><div><br><i class="fa fa-users"></i></div>Social Media</div></li>
+                
             </ul>
-        </div>
+        </div><!--demo_box-->
   </td>
-</div>
+</div><!-- col-md-3 : BOX : FEATURES-->
 
-
-
-
-<div class="col-md-4">
+<div class="col-md-3">
   <td>
    <div id="demo_box_2">
             <div class="pop_ctrl"><i class="fa "></i>
-              <p>
-              <!-- <input type="button" class="display" id="refreshNotes" value="Things"/> onclick="location.href='@routes.Application.AreaThing(id,idenv)'"-->
-              <input type="button" class="display" id="refreshNotes" value="Things" />
-              
-              <!-- <a href="@routes.Application.AreaThing(id,idenv)">Things</a></p> -->
-            </div>
-            <ul id="demo_ul_2">
-                <li class="demo_li"><a href="@routes.Application.areatemp(id,idenv)"><div><br><i class="fa fa-fire"></i></div><div>Manual</div></a></li>
-                <li class="demo_li"><div><br><i class="fa fa-lightbulb-o"></i></div><div><a href="@routes.Application.AreaThing(id,idenv)">Arduino</a></div></li>
-               <!--  <li class="demo_li"><div><br><i class="fa fa-recycle"></i></div><div><a href="@routes.Application.areahum(id,idenv)">Humidity</a></div></li> -->
-            </ul>
-        </div>
+              <p><input type="button" class="display trei" id="refreshNotes" value="Things"/></p>
+            </div><!-- pop_ctrl-->
+           <!--  <ul id="demo_ul_2">
+                <li class="demo_li"><a href="@routes.Application.ManualThingEnv(id)"><div><br><i class="fa fa-paw"></i></div><div>Manual</div></a></li>
+                <li class="demo_li"><a href="@routes.Application.envArduino(id)"><div><br><i class="fa fa-skyatlas"></i></div><div>Arduino</div></a></li>
+            </ul> -->
+        </div><!-- demo_box_2-->
   </td>
-</tr>
-</div>
-</div>
-    <script>
-        $(function(){
-            // $('#demo_box').popmenu({'background':'#002E3D','focusColor':'#00aadc'});
-            // $('#demo_box_2').popmenu({'background':'#b88be5','focusColor':'#FF9FE7'});
-            $('#demo_box').popmenu({'background':'rgba(48, 26, 23, 0.99)','focusColor':'rgba(108, 70, 61, 0.79)'});
-            $('#demo_box_2').popmenu({'background':'rgba(108, 70, 61, 0.98)','focusColor':'rgba(48, 26, 23, 0.79)'});
-        })
-    </script>
+</div> <!-- col-md-3 : BOX : ThinGS-->
+
 
 <table class="newTasks" id="newTasks">
-<tr><th></th><th></th><th></th></tr>
-<tr>
-  <td>
-   <input type="text" id="title-1" value="Area" />
-  </td>
+  <tr><th></th><th></th><th></th></tr>
+  <tr>
     <td>
-      <input type="text" id="description-1" value="name: @name </br>area type: @areaType" />
+     <input type="text" id="title-1" value="Area" />
     </td>
-  </td>
-</tr>
-<tr>
-  <td><input type="text" id="title-2" value="Tags" /></td>
-  <td><input type="text" id="description-2" value="@tags" /></td>
-  <!-- <td><a class="deleteButton" id="delete-2" title="Delete Task">X</a> -->
-  </td>
-</tr>
-<tr>
-  <td><input type="text" id="title-3" value="Img thumbail url" /></td>
-  <td><input type="text" id="description-3" value="@img_thumbnail_url" /></td>
-  <!-- <td><a class="deleteButton" id="delete-3" title="Delete Task">X</a></td> -->
-</tr>
+    <td>
+     <input type="text" id="description-1" value="name: @name </br>area type: @areaType" />
+    </td>  
+  </tr>
+
+  <tr>
+   <td><input type="text" id="title-2" value="Tags" /></td>
+   <td><input type="text" id="description-2" value="@tags" /></td>
+  </tr>
+  <tr>
+    <td><input type="text" id="title-3" value="Image" /></td>
+    <td><input type="text" id="description-3" value="@img_thumbnail_url" /></td>
+  </tr>
 </table>
+
 <div class="clear"></div>
-<ul class="sticky_notes"></ul>
+<div class="row">
+  <div class="col-md-10">
+  <ul class="sticky_notes"></ul>
+  </div> <!--col-md-10 : sticky_notes-->
+</div><!--row sticky-->
 <div class="clear"></div>
-</div>
+
+</div><!-- row for boxes and sticky-->
+</div> <!--col-md-9 box+sticky-->
+
+
+<div class="col-md-1">
+<div class="bubble">
+<style type="text/css">
+  .bubble .tree .description{
+    position: relative;
+    top: 40px;
+  }
+</style>
+<div class="tree">
+<ul>
+<li>
+<!-- <a>Features</a> -->
+
+<ul>
+@if(d == null) {
+
+} else {
+  <li>
+    <a data-toggle="modal" data-target="#envdesc">
+   <div class="description"> @d </div>
+    </a><br>
+  </li>
+}
+
+@if(bd == null) {
+
+} else {
+  <li>
+      <a data-toggle="modal" data-target="#boodesc">
+     <div class="description"> @bd </div>
+      </a><br>
+  </li>
+}
+
+@if(p == null) {
+
+} else {
+  <li>
+     <a data-toggle="modal" data-target="#program-env">
+    <div class="description"> @p </div>
+     </a><br>
+  </li>
+}
+
+@if(o == null) {
+
+} else {
+  <li>
+      <a data-toggle="modal" data-target="#order">
+      <div class="description"> @o </div>
+      </a><br>
+  </li>
+}
+
+@if(s == null) {
+
+} else {
+  <li>
+     <a data-toggle="modal" data-target="#social">
+    <div class="description"> @s </div>
+     </a>
+  </li>
+}
+</ul>
+
+</li>
+</ul>
+</div><!--tree-->
+
+
+</div><!--bubble-->
+</div><!--col-md : bubble-->
+
 
 <!-- scripts -->
 <script type="text/javascript">
-  $(function () {
-  $('[data-toggle="tooltip"]').tooltip()
-})
-  $('[data-toggle="tooltip"]').tooltip({ container: 'body' })
+
+  $(function(){
+      // $('#demo_box').popmenu({'background':'rgb(124, 166, 0)','focusColor':'rgb(204, 204, 0)'});
+      $('#demo_box').popmenu({'background':'rgb(204, 204, 0)','focusColor':'rgb(138, 184, 0)'});
+  })
+</script>
+
+<script type="text/javascript">
+   $('[data-toggle="tooltip"]').tooltip({ container: 'body' })
 </script>
 
 <!-- styles -->
 <style type="text/css">
+
+table{
+  visibility: hidden;
+}
+
 .demo_li a:hover{
   text-decoration: none;
 }
+
 #demo_ul_2 li{
 border-radius: 7px;  
 }
+
 #demo_ul{
-/*  z-index: -10;
-  position: relative;
-  top: 20px;*/
 top: 20px;
 right: 10px
 }
@@ -174,54 +238,208 @@ right: 10px
 .fa-bars{
   display: none;
 }
-  .container table{
-    visibility: hidden;
-  }
-  .container .display{
+
+.display{
     position: relative;
-    top: 90px;
+    top: 10px;
     bottom: 30px;
-    left: 30px;
     background: transparent;
-    background:rgba(45, 90, 0, 0.5);
-    border: 1px solid rgba(0, 61, 0, 0.5);
+    border: none;
     border-radius: 7px;
-    width: 200px;
-    height: 75px;
+    width: 220px;
+    height: 150px;
 
     color: #C1C3C0;
     text-shadow: 2px 2px 4px #000000
    -webkit-transition: all 0.5s;
     transition: all 0.5s;
   }
-  .container .display:hover{
-  /*opacity: 1;*/
+
+  .unu{
+    background-color: #003300;
+    -webkit-transition: all 0.5s;
+    transition: all 0.5s;
+  }
+
+   .doi{
+    background-color: #194719;
+     -webkit-transition: all 0.5s;
+    transition: all 0.5s;
+  }
+
+   .trei{
+    background-color: #335C33;
+     -webkit-transition: all 0.5s;
+    transition: all 0.5s;
+  }
+
+ .display:hover{
   color:#FFF;
-  border:1px solid rgba(76, 102, 0, 0.6);
-  background-color: rgba(0, 76, 0, 0.6);
+  border: none;
+  background-color:#334C4C;
   text-shadow: 0 0 3px #000, 0 0 5px #DDDEDB;
   }
-  .container .display:focus{
+
+ .unu:hover{
+  background-color: #335C85;
+  }
+
+ .doi:hover{
+  background-color: #194775;
+  }
+
+ .trei:hover{
+  background-color: #003366;
+  }
+
+  .display:focus{
     outline: none;
   }
+
+  .sticky_notes{
+    position: relative;
+    right: 20px;
+  }
+
+a:hover{
+    text-decoration: none;
+    cursor: pointer;
+}
+
+* {margin: 0; padding: 0;}
+
+.tree ul {
+  position: relative;
+  
+  transition: all 0.5s;
+  -webkit-transition: all 0.5s;
+  -moz-transition: all 0.5s;
+}
+
+.tree li {
+  float: bottom; 
+  text-align: center;
+  list-style-type: none;
+  position: relative;
+  transition: all 0.5s;
+  -webkit-transition: all 0.5s;
+  -moz-transition: all 0.5s;
+}
+
+/*We will use ::before and ::after to draw the connectors*/
+
+.tree li::before, .tree li::after{
+  content: '';
+  position: absolute; 
+  top: 0; 
+  width: 50%; 
+  height: 20px;
+}
+
+.tree li::after{
+}
+
+/*We need to remove left-right connectors from elements without 
+any siblings*/
+.tree li:only-child::after, .tree li:only-child::before {
+  display: none;
+}
+
+/*Remove space from the top of single children*/
+.tree li:only-child{ padding-top: 0;}
+
+/*Remove left connector from first child and 
+right connector from last child*/
+.tree li:first-child::before, .tree li:last-child::after{
+  border: 0 none;
+}
+
+/*Time to add downward connectors from parents*/
+.tree ul ul::before{
+  content: '';
+  position: absolute; top: 0; 
+  width: 0; 
+  height: 20px;
+}
+
+.tree li a{
+  position: relative;
+  text-decoration: none;
+  color: #FFF;
+  font-family: 'Open Sans Condensed', sans-serif;
+  height: 100px;
+  width: 100px;
+  border-radius: 50%;
+  text-align: center;
+  vertical-align: middle;
+  position: relative;
+  box-shadow: inset -10px -10px 100px #000, 10px 10px 20px black, inset 0px 0px 10px black;
+  display: inline-block;
+  margin: 5%;
+
+  transition: all 0.5s;
+  -webkit-transition: all 0.5s;
+  -moz-transition: all 0.5s;
+}
+
+.tree li a:after{
+  background-color: rgba(255, 255, 255, 0.3);
+  content: '';
+  height: 45%;
+  width: 12%;
+  position: absolute;
+  top: 4%;
+  left: 15%;
+  border-radius: 50%;
+  transform: rotate(40deg);
+}
+
+.tree ul li a .text{
+  position: relative;
+  top:50px;  
+  color: red;
+}
+
+/*Time for some hover effects*/
+/*We will apply the hover effect the the lineage of the element also*/
+.tree li a:hover, .tree li a:hover+ul li a {
+  background: #c8e4f8; 
+  color: #000; 
+}
+
+/*Connector styles on hover*/
+.tree li a:hover+ul li::after, 
+.tree li a:hover+ul li::before, 
+.tree li a:hover+ul::before, 
+.tree li a:hover+ul ul::before{
+  border-color:  #94a0b4;
+}
+
+.bubble{
+  position: relative;
+  right: 80px;
+  top: 35px;
+}
+
 </style>
 
-<!-- MODALS:  -->
+<!-- modals -->
+
+<!-- edit arrea -->
 <!-- Modal edit area -->
 <div class="modal fade" id="edit-area" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">Edit area</h4>
+        <h4 class="modal-title" id="myModalLabel">Edit environment</h4>
       </div>
       <div class="modal-body">
-      <div class="editareamodal"></div>
+      <div class="edit-env"></div>
       <script type="text/javascript">
-      $(function(){   
-        // alert("aaa");
-            $(".editareamodal").load("@routes.Application.editArea(id,idenv)");
-        });
+        $(function(){
+          $(".edit-env").load("@routes.Application.editArea(id,idenv)");
+         });             
       </script>
       </div>
       <div class="modal-footer">
@@ -230,9 +448,10 @@ right: 10px
     </div>
   </div>
 </div>
+<!-- end edit area -->
 
-<!-- Modal description area-->
-<div class="modal fade" id="areadesc" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<!-- Modal Description-->
+<div class="modal fade" id="envdesc" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -240,11 +459,10 @@ right: 10px
         <h4 class="modal-title" id="myModalLabel">Description</h4>
       </div>
       <div class="modal-body">
-        <div class="areadescription"></div>
+      <div class="modal-body-envdesc"></div>
       <script type="text/javascript">
-      $(function(){   
-        // alert("aaa");
-            $(".areadescription").load("@routes.Application.areaDescription(id,idenv)");
+        $(function(){   
+            $(".modal-body-envdesc").load("@routes.Application.areaDescription(id,idenv)");
         });
       </script>
       </div>
@@ -256,7 +474,7 @@ right: 10px
 </div>
 
 <!-- Modal booth description-->
-<div class="modal fade" id="areaboodesc" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade" id="boodesc" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -264,11 +482,10 @@ right: 10px
         <h4 class="modal-title" id="myModalLabel">Booth Description</h4>
       </div>
       <div class="modal-body">
-       <div class="booareadesc"></div>
+        <div class="modal-body-boodesc-env"></div>
       <script type="text/javascript">
-      $(function(){   
-        // alert("aaa");
-            $(".booareadesc").load("@routes.Application.areaBothDescription(id,idenv)");
+        $(function(){   
+            $(".modal-body-boodesc-env").load("@routes.Application.areaBothDescription(id,idenv)");
         });
       </script>
       </div>
@@ -279,8 +496,8 @@ right: 10px
   </div>
 </div>
 
-<!-- Modal Program-->
-<div class="modal fade" id="program-area" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<!-- Modal program-->
+<div class="modal fade" id="program-env" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -288,13 +505,15 @@ right: 10px
         <h4 class="modal-title" id="myModalLabel">Program</h4>
       </div>
       <div class="modal-body">
-       <div class="areaprogram"></div>
+        
+
+      <div class="modal-body-program-env"></div>
       <script type="text/javascript">
-      $(function(){   
-        // alert("aaa");
-            $(".areaprogram").load("@routes.Application.areaProgram(id,idenv)");
+        $(function(){   
+            $(".modal-body-program-env").load("@routes.Application.areaProgram(id,idenv)");
         });
       </script>
+
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -304,7 +523,7 @@ right: 10px
 </div>
 
 <!-- Modal order-->
-<div class="modal fade" id="order-area" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade" id="order" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -312,11 +531,10 @@ right: 10px
         <h4 class="modal-title" id="myModalLabel">Order</h4>
       </div>
       <div class="modal-body">
-       <div class="areaorder"></div>
+      <div class="modal-body-order-env"></div>
       <script type="text/javascript">
-      $(function(){   
-        // alert("aaa");
-            $(".areaorder").load("@routes.Application.orderArea(id,idenv)");
+        $(function(){   
+            $(".modal-body-order-env").load("@routes.Application.orderArea(id,idenv)");
         });
       </script>
       </div>
@@ -328,19 +546,18 @@ right: 10px
 </div>
 
 <!-- Modal social media-->
-<div class="modal fade" id="social-area" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade" id="social" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">Social media</h4>
+        <h4 class="modal-title" id="myModalLabel">social media</h4>
       </div>
       <div class="modal-body">
-       <div class="socialaraea"></div>
+      <div class="modal-body-social-env"></div>
       <script type="text/javascript">
-      $(function(){   
-        // alert("aaa");
-            $(".socialaraea").load("@routes.Application.socialMediaArea(id,idenv)");
+        $(function(){   
+            $(".modal-body-social-env").load("@routes.Application.socialMediaArea(id,idenv)");
         });
       </script>
       </div>
@@ -351,11 +568,6 @@ right: 10px
   </div>
 </div>
 
-   <script type="text/javascript">
-       // $( "#chck-ft" ).click(function() {
-       //    alert( "Handler for .click() called." );
-       //     $(".checkareafeat").load("@routes.Application.checkfeatarea(id,idenv)");
-       //  });
-     </script>
 
+ 
 }

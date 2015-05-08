@@ -2,103 +2,99 @@
 
 @Main("Manual command") {
 
-<nav id="css" class="navbar navbar-default">
-  <div class="container-fluid">
-    <!-- Brand and toggle get grouped for better mobile display -->
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="@routes.Application.viewEnv(id)">Environment</a> 
+<div class="contente">
+@for((c,w)<- map){
+<div class="loop">
+  <div class="col-md-offset-1 col-md-2">
+  		<!-- thing type = c: -->
+     <a href="@routes.Application.RemoveTingEnv(c,w,id)" data-toggle="tooltip" data-placement="top" title="remove"><i class="fa fa-times"></i></a> &nbsp;&nbsp;&nbsp;<label>@c</label>
+  		<!-- id thing = w: @w<br>	 -->
+  </div>
+
+  <form action="@routes.Application.addingValManualEnv(c,w,id)" method="POST">
+  		<div class="col-md-2">
+  			<input type="text" class="form-control" placeholder="value" name="value"/>
+  		</div>
+
+  		<div class="col-md-2">
+  			<select class="form-control" name="measurement_unit">
+  				  <option name="measurement_unit">-----</option>
+  				  <option name="measurement_unit">Celsius</option>
+  				  <!-- <option name="measurement_unit">Fahrenheit</option> -->
+  				  <option name="measurement_unit">Percent</option>
+  			</select>
+  		</div>
+
+  		<div class="col-md-1">
+  			<input type="submit" value="add" class="form-control adbt"/>
+  		</div>
+
+  </form>
+
+    <div class="col-md-2">
+      <a href="@routes.Application.graphicThingEnv(id,w,c)"><button id ="bty" class="form-control">chart</button></a>
     </div>
 
-    <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav">
-        <!-- <li><a href="#" data-toggle="modal" data-target="#editEnvironmet">Edit Environment <span class="sr-only">(current)</span></a></li> -->
-
-       <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Areas <span class="caret"></span></a>
-          <ul class="dropdown-menu" role="menu">
-            <li role="presentation">
-              <a href="@routes.Application.viewAreas(id)" data-toggle="modal">
-                 View Areas
-              </a>
-            </li>
-            <!-- <li><a href="@routes.Application.AddArea(id)">Add Area</a></li>  -->
-          </ul>
-        </li>
-
-      </ul>
-
-      <ul class="nav navbar-nav navbar-right">
-
-        <li><a href="@routes.Application.welcome()"><i class="fa fa-home"></i>Profile</a></li> 
-        <li><a href="@routes.Application.index()">Log out</a></li>
-             
-      </ul>
-    </div><!-- /.navbar-collapse -->
-  </div><!-- /.container-fluid -->
-</nav>
-
-<div class="col-md-offset-1 col-md-11">
-  <div class="path">
-  Path : <a href="@routes.Application.welcome()">Profile </a> >> <a href="@routes.Application.viewEnv(id)">View Environmnet</a> >> <a href="@routes.Application.ManualThingEnv(id)">Things (manual) </a> >> add values
   </div>
-</div> 
-
-
-<div class="row">
+  </div><!--content-->
 <br><br><br>
-<div class="col-md-offset-2 col-md-8">
+  }
 
+<style type="text/css">
+a:hover{
+  text-decoration: none;
+}
+.fa-times{
+  color: #007A7A;
+    transition: all 0.8s;
+  -webkit-transition: all 0.8s;
+  -moz-transition: all 0.8s;
+}
+.fa-times:hover{
+  color: #004C4C;
+  text-shadow: 2px 2px 4px #000000;
+}
 
-		@for((c,w)<- map){
-<div class="row">
-
-<div class="col-md-3">
-		thing type = c: @c  <br>
-
-		id thing = w: @w <br>
-		
-</div>
-<form action="@routes.Application.addingValManualEnv(c,w,id)" method="POST">
-
-
-		<div class="col-md-2">
-			<input type="text" class="form-control" placeholder="value" name="value"/>
-		</div>
-
-		<div class="col-md-2">
-			<select class="form-control" name="measurement_unit">
-				  <option name="measurement_unit">-----</option>
-				  <option name="measurement_unit">Celsius</option>
-				  <option name="measurement_unit">Fahrenheit</option>
-				  <option name="measurement_unit">Percent</option>
-			</select>
-		</div>
-
-		<div class="col-md-2">
-			<input type="submit" value="add" class="add-btn btn"/>
-		</div>
-	<div class="col-md-2">
-		<button class="add-btn btn form-control"><a href="@routes.Application.graphicThingEnv(id,w,c)">get graphic</a></button>
-	</div>
-</form>
-
-
-</div>	
-<br><br>
-		}
-
-	<!--  -->
-
-
-<br>	
-</div>
-</div>
+  .loop{
+  padding-bottom: 5px;
+  position: relative;
+  }
+  label{
+  font-family: 'Open Sans Condensed', sans-serif;
+  font-size: 18px;
+  color: #C1C3C0;
+  text-shadow: 2px 2px 4px #000000;
+  }
+/*  .contente{
+    position: relative;
+    bottom: 20px;
+  }*/
+.adbt{
+    background-color: #004C4C;
+    border: none;
+   color: #C1C3C0;
+  transition: all 0.8s;
+  -webkit-transition: all 0.8s;
+  -moz-transition: all 0.8s;
+}
+.adbt:hover{
+   background-color: #007A7A;
+   color: #FFF;
+    text-shadow: 1px 1px 2px #FFFFC2;
+   }
+.loop #bty{
+  color: #C1C3C0;
+  background-color: #007A7A;
+  border: none;
+  transition: all 0.8s;
+  -webkit-transition: all 0.8s;
+  -moz-transition: all 0.8s;
+}
+.loop #bty:hover{
+  background-color: #004C4C;
+  color: #FFF;
+   text-shadow: 1px 1px 2px #FFFFC2;
+}
+</style>
 
 }

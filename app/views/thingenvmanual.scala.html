@@ -1,4 +1,4 @@
-@(map: Map[String, String],id:String)
+@(map: Map[String, String],id:String,temp:String, lum:String, hum:String)
 @Main("Manual command") {
 <nav id="css" class="navbar navbar-default">
   <div class="container-fluid">
@@ -12,12 +12,10 @@
       </button>
       <a class="navbar-brand" href="@routes.Application.viewEnv(id)">Environment</a> 
     </div>
-
-    <!-- Collect the nav links, forms, and other content for toggling -->
+  <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
         <!-- <li><a href="#" data-toggle="modal" data-target="#editEnvironmet">Edit Environment <span class="sr-only">(current)</span></a></li> -->
-
        <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Areas <span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
@@ -26,24 +24,17 @@
                  View Areas
               </a>
             </li>
-            <!-- <li><a href="@routes.Application.AddArea(id)">Add Area</a></li>  -->
           </ul>
         </li>
-
       </ul>
-
       <ul class="nav navbar-nav navbar-right">
-
         <li><a href="@routes.Application.welcome()"><i class="fa fa-home"></i>Profile</a></li> 
-        <li><a href="@routes.Application.index()">Log out</a></li>
-             
+        <li><a href="@routes.Application.index()">Log out</a></li>         
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
 
-
-<div class="container-fluid">
 
 
 <div class="col-md-offset-1 col-md-11">
@@ -53,76 +44,149 @@
 </div>
 
 
+  <div class="row">
+    <div class="col-md-offset-2 col-md-8">
+    <div class="arduino">
+      Arduino
+    </div>
+  </div>
+</div>
+
 <div class="row">
 <div class="col-md-offset-1 col-md-8">
-
-you have:<br><br>
-
-@for((c,w)<- map){
- 	
+<!-- you have:<br><br>
+@for((c,w)<- map){ 	
 	@c<br>
-	}
-
-	<br><br>
+	} -->
+<br><br>
 <form ACTION="@routes.Application.PostManualEnv(id)" method="POST">
-
 <div class="row">
-<div class="col-md-4">
-	<select class="form-control" name="type">
-	 <option name="type">-----</option>
-	
-	 <option name="type">temperature</option>
 
-	 <option name="type">luminosity</option>
+  <div class="col-md-offset-5 col-md-4">
+  	<select class="form-control" name="type">
+  	 <option name="type">---</option>	
+@if(temp==null){
+  
+}else{   
+  	 <option name="type">temperature</option>
+     }
+@if(lum==null){
+  
+}else{
+  	 <option name="type">luminosity</option>
+     }
+@if(hum==null){
+  
+}else{
+  	 <option name="type">humidity</option>	
+      }
+  	</select>
+  </div><!--col-md-4-->
 
-	 <option name="type">humidity</option>
-	
-	
-	</select>
-</div>
-
-<!-- <div class="col-md-2">
-	<input type="text" class="form-control" placeholder="value" name="value"/>
-</div>
-
-<div class="col-md-3">
-	<select class="form-control" name="measurement_unit">
-	  <option name="measurement_unit">-</option>
-	  <option name="measurement_unit">Celsius</option>
-	  <option name="measurement_unit">Fahrenheit</option>
-	  <option name="measurement_unit">Percent</option>
-	</select>
-</div> -->
-
-<div class="col-md-3">
-	<input type="submit" value="add" class="add-btn"/>
-</div>
-
-</div>
-
-
+  <div class="col-md-3">
+  	<input type="submit" value="add" class="add-btn addyn"/>
+  </div><!--col-md 3-->
+</div><!--row-->
 </form>
+
+<br><br><br>
+<br><br><br>
 
 </div><!--offset-->
 </div><!--row-->
 
-      <div class="seething">
-      	<a href="@routes.Application.viewThingsManualEnv(id)">click me</a>
-      </div>
-      <script type="text/javascript">
-        // $(function(){   
-        //     $(".seething").load("@routes.Application.viewThingsManualEnv(id)");
-        // });
+
+
+
+<div class="load-values">
+
+     <script type="text/javascript">
+        $(function(){
+          $(".load-values").load("@routes.Application.viewThingsManualEnv(id)");
+         });             
       </script>
 
+</div><!--row-->
 
-</div><!--container fluid-->
+<script type="text/javascript">
+   $('[data-toggle="tooltip"]').tooltip({ container: 'body' })
+</script>
+
 <style type="text/css">
-.add-btn{
+.arduino{
+  text-align: center;
+  border: none;
+  border-radius: 10px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  position: relative;
+  top: 10px;
+  bottom: 20px;
+  font-family: 'Open Sans Condensed', sans-serif;
+  font-size: 18px;
+  color: #C1C3C0;
+  text-shadow: 2px 2px 4px #000000;
+  background: -webkit-linear-gradient(90deg, #809A34 10%, #445611 90%); 
+  background:    -moz-linear-gradient(90deg, #809A34 10%, #445611 90%); 
+  background:     -ms-linear-gradient(90deg, #809A34 10%, #445611 90%); 
+  background:      -o-linear-gradient(90deg, #809A34 10%, #445611 90%); 
+  background:         linear-gradient(90deg, #809A34 10%, #445611 90%); 
 
+  -moz-border-radius: 1em 4em 1em 4em;
+  border-radius: 1em 4em 1em 4em;
+
+  -moz-box-shadow:    inset 0 0 10px #000;
+   -webkit-box-shadow: inset 0 0 10px #000;
+   box-shadow:         inset 0 0 10px #000;
+
+  transition: all 0.8s;
+  -webkit-transition: all 0.8s;
+  -moz-transition: all 0.8s;
+}
+.arduino:hover{
+  cursor: pointer;
+  color:#FFF;
+  text-shadow: 0 0 3px #000, 0 0 5px #DDDEDB;
+  background: -webkit-linear-gradient(90deg, #7AA300 10%, #2E3D00 90%); 
+  background:    -moz-linear-gradient(90deg, #7AA300 10%, #2E3D00 90%); 
+  background:     -ms-linear-gradient(90deg, #7AA300 10%, #2E3D00 90%); 
+  background:      -o-linear-gradient(90deg, #7AA300 10%, #2E3D00 90%); 
+  background:         linear-gradient(90deg, #7AA300 10%, #2E3D00 90%); 
+
+-moz-border-radius: 4em 1em 4em 1em;
+border-radius: 4em 1em 4em 1em;
+
+  -webkit-box-shadow: 0 10px 6px -6px #FFFFB2;
+     -moz-box-shadow: 0 10px 6px -6px #FFFFB2;
+          box-shadow: 0 10px 6px -6px #FFFFB2;
+}
+.add-btn{
 	width: 50px;
 	height: 45px;
 	border-radius: 7px;
+}
+.load-values{
+/*  position: relative;
+  top: 40px;
+  bottom: 10px;*/
+}
+.addyn{
+  border-radius: 50%;
+  border: none;
+  background-color: #527A00;
+  color: #C1C3C0;
+  text-shadow: 2px 2px 4px #000000;
+
+  -webkit-transition: all 0.8s;
+  -moz-transition: all 0.8s;
+}
+.addyn:hover{
+  color:#FFF;
+  text-shadow: 0 0 3px #000, 0 0 5px #DDDEDB;
+  background-color: #5A6C24;
+  -moz-box-shadow:    inset 0 0 10px #FFFFB2;
+  -webkit-box-shadow: inset 0 0 10px #FFFFB2;
+  box-shadow:         inset 0 0 10px #FFFFB2;
 }
 </style>
 

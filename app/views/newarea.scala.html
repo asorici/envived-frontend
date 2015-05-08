@@ -39,25 +39,31 @@
   </div><!-- /.container-fluid -->
 </nav>
 
-<div class="col-md-offset-1 col-md-7">
 
 <div class="path">
-  Path : <a href="@routes.Application.welcome()">Profile </a> >> <a  href="@routes.Application.viewEnv(k)">View Environmnet</a> >> <a href="@routes.Application.viewAreas(k)">View Areas</a> >> Add new Area
+  <div class="row">
+    <div class="col-md-offset-1">
+      Path : <a href="@routes.Application.welcome()">Profile </a> >> <a  href="@routes.Application.viewEnv(k)">View Environmnet</a> >> <a href="@routes.Application.viewAreas(k)">View Areas</a> >> Add new Area
+    </div>
+  </div>
 </div>
-    <h3>Add New Area</h3>
+
+<div class="col-md-offset-3 col-md-5">
+<br><br>
+    <!-- <h3>Add New Area</h3> -->
   <!-- <div class="border-input-edit"></div> -->
 
 
   <form action="@routes.Application.PostNewArea(k)" method="POST">
     <div class="row">
-      <div class="col-md-8">
+      <div class="col-md-12">
 
        Area name <br>
        <input name="name" class="form-control"><br>
 
         Area type<br>
         <div class="row">
-          <div class="col-md-6">   
+          <div class="col-md-8">   
             <select name= "areaType" class="typo form-control"> 
               <option  name= "areaType" value="null" class="typo form-control">----</option>
               <option  name= "areaType" value="interest" class="typo form-control">interest</option>
@@ -66,16 +72,16 @@
           </div>
         </div>
 
-          Img thumbnail url<br>
-          <input name="img_thumbnail_url" class="form-control">
-
-        <!--   Shape<br>
-          <textarea name="shape" class="form-control" rows="5" cols="40"></textarea> <br> -->
 
           Tags <br>
           <input name="tags" class="form-control"><br>
 
 
+          Img thumbnail url<br>
+          <input name="img_thumbnail_url" class="form-control"><br>
+
+        <!--   Shape<br>
+          <textarea name="shape" class="form-control" rows="5" cols="40"></textarea> <br> -->
     </div>
     </div>
 

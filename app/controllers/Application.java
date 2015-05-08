@@ -367,15 +367,179 @@ public class Application extends Controller {
     //view an environment :
     public static Result viewEnv(String id) {
     	
+    	System.out.println("... i am checking your env features ...");
+  	   
+  	   String firstUrl = Url.host + ":" + Url.port;
+  	   String lastUrl = Url.vFcrTfj + "&environment=" + id;
+  	   
+  	   String descriptionUrl = firstUrl + Url.description + lastUrl;
+  	   String boothUrl = firstUrl + Url.boo_description + lastUrl;
+  	   String programUrl = firstUrl + Url.program + lastUrl;
+  	   String orderUrl = firstUrl + Url.order + lastUrl;
+  	   String socialUrl = firstUrl + Url.socialmedia + lastUrl;
+  	
+  	   // = 1 : i do not have za feature
+  	   int descriptionChck = 1; 
+  	   int boodesc = 1; 
+  	   int program = 1;
+  	   int order = 1;
+  	   int social = 1 ;
+  	   
+  	 //description
+  	 WSRequestHolder holder=WS.url(descriptionUrl);
+       holder.setHeader("Cookie","sessionid="+session("sessionid"));
+  	 holder.setContentType(Url.appjson);
+  	 
+       WSResponse response = holder.get().get(20000);	
+  	 JsonNode content = response.asJson();
+  	 List<String> description = content.findValuesAsText("description");
+  		 
+  	try{	   
+  		 if(description.get(0) != null){ 		 
+  			 descriptionChck = 0 ;
+  		 	}
+  		}catch(InputMismatchException ex){
+  		   }catch (IndexOutOfBoundsException ex )
+  		    {  
+  		     } 
+  	
+  	//booth description 	
+  	 holder=WS.url(boothUrl);
+  	 holder.setHeader("Cookie","sessionid="+session("sessionid"));
+  	 holder.setContentType(Url.appjson);
+  	 
+  	 response = holder.get().get(20000);
+  	 content = response.asJson();
+  	 List<String> BOOdescription = content.findValuesAsText("description");
+  	 List<String> BOOcontact_email = content.findValuesAsText("contact_email");
+  	 List<String> BOOcontact_website = content.findValuesAsText("contact_website");
+  	 List<String> BOOimage_url = content.findValuesAsText("image_url");
+  	 
+  	try{	   
+  		 if(BOOdescription.get(0) != null || BOOcontact_email != null || BOOcontact_website.get(0) != null || BOOimage_url.get(0) != null){ 		 
+  			boodesc = 0;
+  		 	}
+  		}catch(InputMismatchException ex){
+  			   }catch (IndexOutOfBoundsException ex )
+  			   {  
+  		        } 
+   	
+  	   //program
+  	   holder=WS.url(programUrl);
+  	   holder.setHeader("Cookie","sessionid="+session("sessionid"));
+  	   holder.setContentType(Url.appjson);
+  	   	 
+  	   response = holder.get().get(20000);	   	
+  	   content = response.asJson();
+  	   List<String> PROGRAMdescription = content.findValuesAsText("description");
+
+  	   try{   
+  	   	 if(PROGRAMdescription.get(0) != null){ 		 
+  	   		 program = 0;
+  	   	 	}
+  	   	}catch(InputMismatchException ex){
+  			   }catch (IndexOutOfBoundsException ex )
+  		    {
+  		     } 
+  	    	
+  	     //order  
+  	   	 holder=WS.url(orderUrl);
+  	   	 holder.setHeader("Cookie","sessionid="+session("sessionid"));
+  	   	 holder.setContentType(Url.appjson);
+  	   	 
+  	   	 response = holder.get().get(20000);
+  	   	 content = response.asJson();
+  	   	 List<String> ORDERdescription = content.findValuesAsText("description");
+
+  	   try{
+  		   
+  	   	 if(ORDERdescription.get(0) != null){ 		 
+  	   		 order = 0;
+  	   	 	}
+  	   	}catch(InputMismatchException ex){
+  			   }catch (IndexOutOfBoundsException ex )
+  		    { 
+  		     } 
+  	    
+  	     //social
+  	   	 holder=WS.url(socialUrl);
+  	   	 holder.setHeader("Cookie","sessionid="+session("sessionid"));
+  	   	 holder.setContentType(Url.appjson);
+  	   	 
+  	     response = holder.get().get(20000);
+  	     content = response.asJson();
+  	   	 List<String> facebook_url = content.findValuesAsText("facebook_url");
+  	   	 List<String> twitter_url = content.findValuesAsText("twitter_url");
+  	   	 List<String> google_plus_url = content.findValuesAsText("google_plus_url");
+  	   	 List<String> internal_forum_url = content.findValuesAsText("internal_forum_url");
+   	
+  	   try{  
+  	   	 if(facebook_url.get(0) != null || twitter_url.get(0)!= null || google_plus_url.get(0)!=null || internal_forum_url.get(0)!=null){ 		 
+  	   		 social = 0 ;
+  	   	   }
+  	   	}catch(InputMismatchException ex){
+  	   		}catch (IndexOutOfBoundsException ex )
+  		    { 
+  		     } 
+  	   
+  	  System.out.println("Legend : \n\n     1 = i don't have the feature :( \n     0 = i have it ^_^ \n\n"
+  			+ "(description) = " + descriptionChck 
+  			+ "\n(booth description) = " + boodesc
+  			+ "\n(program) = " + program
+  			+ "\n(order) = " + order
+  			+ "\n(social) = " + social);
+  	
+  	  String d = "";
+  	  String bd = "";
+  	  String p = "";
+  	  String o = "";
+  	  String s = "";
+  	  
+  	//description
+  	if (descriptionChck == 1){
+  		d = null;
+  	}
+  		else if (descriptionChck == 0){
+  	     d = "Description";
+  		}	
+  	//boo desc
+  	if (boodesc == 1){
+  		bd = null;
+  	}
+  		else if (boodesc == 0){
+  			bd = "Booth Description";
+  		}
+  	//program
+  	if (program == 1){
+  		p = null;
+  	}
+  		else if (program == 0){
+  			p = "Program";
+  		}
+  	//order
+  	if (order == 1){
+  		o = null;
+  	}
+  		else if (order == 0){
+  			o = "Order";
+  		}
+  	//social
+  	if (social == 1){
+  		s = null;
+  	}
+  		else if (social == 0){
+  			s = "Social Media";
+  		}
+    	
         String getEnvUrl = Url.host+":"+Url.port+Url.parent+id+"/?virtual=true";
-        WSRequestHolder holder=WS.url(getEnvUrl);
+        holder=WS.url(getEnvUrl);
     	 
         holder.setHeader("Cookie","sessionid="+session("sessionid"));
         holder.setContentType(Url.appjson);
     	 
         WSResponse envListResponse = holder.get().get(200000);
         System.out.println("Edit environment status response : "+envListResponse.getStatus());
-        JsonNode content = envListResponse.asJson();
+        content = envListResponse.asJson();
 	 
 	    List<String> nume = content.findValuesAsText("name");
 	    List<String> width = content.findValuesAsText("width");
@@ -394,7 +558,7 @@ public class Application extends Controller {
 		try{   
 			 if(nume.get(0) != null && width.get(0) != null && height != null && img_thumbnail_url != null && tags != null){ 		 
 				 System.out.println("view environment ok !!!! ...");
-				 return ok(viewEnv.render(nume.get(0),width.get(0),height.get(0),img_thumbnail_url.get(0),tags,id));   
+				 return ok(viewEnv.render(nume.get(0),width.get(0),height.get(0),img_thumbnail_url.get(0),tags,id,d,bd,p,o,s));   
 			 	} 
 			}catch(InputMismatchException ex){
 				System.out.println("!!!InputMismatchException!!!!");
@@ -408,7 +572,7 @@ public class Application extends Controller {
     public static Result error(){
     	 return ok(error.render("...something it's missing, go fishing...."));
     }
-          
+    
     /**
      * Environment Description
      * */
@@ -466,7 +630,7 @@ public class Application extends Controller {
 			 System.out.println("add environment description status result:" + postResult.getStatus());
 			 System.out.println("userid:" + session("userid") + "\nsessionid:" + session("sessionid") + " \nJson result: " + jsonParams);
 					
-			return redirect(routes.Application.checkfeatenv(id));
+			return redirect(routes.Application.viewEnv(id));
 	}
 
 	//Edit Description Environment : save or delete the environment description
@@ -518,7 +682,7 @@ public class Application extends Controller {
 			default: break;	
 		
 		}
-		return redirect(routes.Application.checkfeatenv(id));	
+		return redirect(routes.Application.viewEnv(id));	
 	}
 	
 	/**
@@ -604,7 +768,7 @@ public class Application extends Controller {
 		 System.out.println("Add area booth description status result:" + postResult.getStatus());
 		 System.out.println("userid:" + session("userid") + "\nsessionid:" + session("sessionid") + " \nJson result: " + jsonParams);
 				
-		return redirect(routes.Application.checkfeatenv(id));
+		return redirect(routes.Application.viewEnv(id));
 	
 	}
 	
@@ -658,7 +822,7 @@ public class Application extends Controller {
 			break;
 			default: break;	    	
 		}	
-		return redirect(routes.Application.checkfeatenv(id));	
+		return redirect(routes.Application.viewEnv(id));	
 	}
 
     /**
@@ -713,7 +877,7 @@ public class Application extends Controller {
  	 System.out.println("add area program status result:" + postResult.getStatus());
  	 System.out.println("userid:" + session("userid") + "\nsessionid:" + session("sessionid") + " \nJson result: " + jsonParams);	
  		
- 	return redirect(routes.Application.checkfeatenv(id));
+ 	return redirect(routes.Application.viewEnv(id));
   
    }
    
@@ -820,7 +984,7 @@ public class Application extends Controller {
 	 	 System.out.println("add env order status result:" + postResult.getStatus());
 	 	 System.out.println("userid:" + session("userid") + "\nsessionid:" + session("sessionid") + " \nJson result: " + jsonParams);	
 	 		
-	 	return redirect(routes.Application.checkfeatenv(id));	  
+	 	return redirect(routes.Application.viewEnv(id));	  
    }
    
    public static Result updateDeleteEnvOrder(String id){
@@ -870,7 +1034,7 @@ public class Application extends Controller {
 	   		default: break;	    	
 	   	}
 	   	
-	   	return redirect(routes.Application.checkfeatenv(id));	   	
+	   	return redirect(routes.Application.viewEnv(id));	   	
 	   }
    
    /**
@@ -933,7 +1097,7 @@ public class Application extends Controller {
 	 	 System.out.println("add env social media status result:" + postResult.getStatus());
 	 	 System.out.println("userid:" + session("userid") + "\nsessionid:" + session("sessionid") + " \nJson result: " + jsonParams);	
 	 		
-	 	return redirect(routes.Application.checkfeatenv(id));
+	 	return redirect(routes.Application.viewEnv(id));
    }
    
    public static Result editSocialEnv(String id){
@@ -985,181 +1149,9 @@ public class Application extends Controller {
 	   		default: break;	    	
 	   	}
 	   	
-	   	return redirect(routes.Application.checkfeatenv(id));
+	   	return redirect(routes.Application.viewEnv(id));
    }
-   /**
-    *  :: Check environment features ::
-    *  			for the forest :)
-    * */
    
-   public static Result checkfeatenv(String id){
-	   
-	   System.out.println("... i am checking your env features ...");
-	   
-	   String firstUrl = Url.host + ":" + Url.port;
-	   String lastUrl = Url.vFcrTfj + "&environment=" + id;
-	   
-	   String descriptionUrl = firstUrl + Url.description + lastUrl;
-	   String boothUrl = firstUrl + Url.boo_description + lastUrl;
-	   String programUrl = firstUrl + Url.program + lastUrl;
-	   String orderUrl = firstUrl + Url.order + lastUrl;
-	   String socialUrl = firstUrl + Url.socialmedia + lastUrl;
-	
-	   // = 1 : i do not have za feature
-	   int descriptionChck = 1; 
-	   int boodesc = 1; 
-	   int program = 1;
-	   int order = 1;
-	   int social = 1 ;
-	   
-	 //description
-	 WSRequestHolder holder=WS.url(descriptionUrl);
-     holder.setHeader("Cookie","sessionid="+session("sessionid"));
-	 holder.setContentType(Url.appjson);
-	 
-     WSResponse response = holder.get().get(20000);	
-	 JsonNode content = response.asJson();
-	 List<String> description = content.findValuesAsText("description");
-		 
-	try{	   
-		 if(description.get(0) != null){ 		 
-			 descriptionChck = 0 ;
-		 	}
-		}catch(InputMismatchException ex){
-		   }catch (IndexOutOfBoundsException ex )
-		    {  
-		     } 
-	
-	//booth description 	
-	 holder=WS.url(boothUrl);
-	 holder.setHeader("Cookie","sessionid="+session("sessionid"));
-	 holder.setContentType(Url.appjson);
-	 
-	 response = holder.get().get(20000);
-	 content = response.asJson();
-	 List<String> BOOdescription = content.findValuesAsText("description");
-	 List<String> BOOcontact_email = content.findValuesAsText("contact_email");
-	 List<String> BOOcontact_website = content.findValuesAsText("contact_website");
-	 List<String> BOOimage_url = content.findValuesAsText("image_url");
-	 
-	try{	   
-		 if(BOOdescription.get(0) != null || BOOcontact_email != null || BOOcontact_website.get(0) != null || BOOimage_url.get(0) != null){ 		 
-			boodesc = 0;
-		 	}
-		}catch(InputMismatchException ex){
-			   }catch (IndexOutOfBoundsException ex )
-			   {  
-		        } 
- 	
-	   //program
-	   holder=WS.url(programUrl);
-	   holder.setHeader("Cookie","sessionid="+session("sessionid"));
-	   holder.setContentType(Url.appjson);
-	   	 
-	   response = holder.get().get(20000);	   	
-	   content = response.asJson();
-	   List<String> PROGRAMdescription = content.findValuesAsText("description");
-
-	   try{   
-	   	 if(PROGRAMdescription.get(0) != null){ 		 
-	   		 program = 0;
-	   	 	}
-	   	}catch(InputMismatchException ex){
-			   }catch (IndexOutOfBoundsException ex )
-		    {
-		     } 
-	    	
-	     //order  
-	   	 holder=WS.url(orderUrl);
-	   	 holder.setHeader("Cookie","sessionid="+session("sessionid"));
-	   	 holder.setContentType(Url.appjson);
-	   	 
-	   	 response = holder.get().get(20000);
-	   	 content = response.asJson();
-	   	 List<String> ORDERdescription = content.findValuesAsText("description");
-
-	   try{
-		   
-	   	 if(ORDERdescription.get(0) != null){ 		 
-	   		 order = 0;
-	   	 	}
-	   	}catch(InputMismatchException ex){
-			   }catch (IndexOutOfBoundsException ex )
-		    { 
-		     } 
-	    
-	     //social
-	   	 holder=WS.url(socialUrl);
-	   	 holder.setHeader("Cookie","sessionid="+session("sessionid"));
-	   	 holder.setContentType(Url.appjson);
-	   	 
-	     response = holder.get().get(20000);
-	     content = response.asJson();
-	   	 List<String> facebook_url = content.findValuesAsText("facebook_url");
-	   	 List<String> twitter_url = content.findValuesAsText("twitter_url");
-	   	 List<String> google_plus_url = content.findValuesAsText("google_plus_url");
-	   	 List<String> internal_forum_url = content.findValuesAsText("internal_forum_url");
- 	
-	   try{  
-	   	 if(facebook_url.get(0) != null || twitter_url.get(0)!= null || google_plus_url.get(0)!=null || internal_forum_url.get(0)!=null){ 		 
-	   		 social = 0 ;
-	   	   }
-	   	}catch(InputMismatchException ex){
-	   		}catch (IndexOutOfBoundsException ex )
-		    { 
-		     } 
-	   
-	  System.out.println("Legend : \n\n     1 = i don't have the feature :( \n     0 = i have it ^_^ \n\n"
-			+ "(description) = " + descriptionChck 
-			+ "\n(booth description) = " + boodesc
-			+ "\n(program) = " + program
-			+ "\n(order) = " + order
-			+ "\n(social) = " + social);
-	
-	  String d = "";
-	  String bd = "";
-	  String p = "";
-	  String o = "";
-	  String s = "";
-	  
-	//description
-	if (descriptionChck == 1){
-		d = null;
-	}
-		else if (descriptionChck == 0){
-	     d = "Description";
-		}	
-	//boo desc
-	if (boodesc == 1){
-		bd = null;
-	}
-		else if (boodesc == 0){
-			bd = "Booth Description";
-		}
-	//program
-	if (program == 1){
-		p = null;
-	}
-		else if (program == 0){
-			p = "Program";
-		}
-	//order
-	if (order == 1){
-		o = null;
-	}
-		else if (order == 0){
-			o = "Order";
-		}
-	//social
-	if (social == 1){
-		s = null;
-	}
-		else if (social == 0){
-			s = "Social Media";
-		}
-	
-	  return ok(envfeat.render(d,bd,p,o,s,id));
-   }
    
    /**
      * Add Area
@@ -1204,11 +1196,343 @@ public class Application extends Controller {
   		return redirect(routes.Application.viewAreas(id));
     }
     
+    public static Result checkfeatarea(String id, String idenv){
+ 	   
+ 	   System.out.println("... i am checking your area features ...");
+ 	   
+ 	   String firstUrl = Url.host + ":" + Url.port;
+ 	   String lastUrl = Url.vFcrTfj + "&area=" + id;
+ 	   
+ 	   String descriptionUrl = firstUrl + Url.description + lastUrl;
+ 	   String boothUrl = firstUrl + Url.boo_description + lastUrl;
+ 	   String programUrl = firstUrl + Url.program + lastUrl;
+ 	   String orderUrl = firstUrl + Url.order + lastUrl;
+ 	   String socialUrl = firstUrl + Url.socialmedia + lastUrl;
+ 	
+ 	   // = 1 : i do not have za feature
+ 	   int descriptionChck = 1; 
+ 	   int boodesc = 1; 
+ 	   int program = 1;
+ 	   int order = 1;
+ 	   int social = 1 ;
+ 	   
+ 	 //description
+ 	 WSRequestHolder holder=WS.url(descriptionUrl);
+      holder.setHeader("Cookie","sessionid="+session("sessionid"));
+ 	 holder.setContentType(Url.appjson);
+ 	 
+      WSResponse response = holder.get().get(20000);	
+ 	 JsonNode content = response.asJson();
+ 	 List<String> description = content.findValuesAsText("description");
+ 		 
+ 	try{	   
+ 		 if(description.get(0) != null){ 		 
+ 			 descriptionChck = 0 ;
+ 		 	}
+ 		}catch(InputMismatchException ex){
+ 		   }catch (IndexOutOfBoundsException ex )
+ 		    {  
+ 		     } 
+ 	
+ 	//booth description 	
+ 	 holder=WS.url(boothUrl);
+ 	 holder.setHeader("Cookie","sessionid="+session("sessionid"));
+ 	 holder.setContentType(Url.appjson);
+ 	 
+ 	 response = holder.get().get(20000);
+ 	 content = response.asJson();
+ 	 List<String> BOOdescription = content.findValuesAsText("description");
+ 	 List<String> BOOcontact_email = content.findValuesAsText("contact_email");
+ 	 List<String> BOOcontact_website = content.findValuesAsText("contact_website");
+ 	 List<String> BOOimage_url = content.findValuesAsText("image_url");
+ 	 
+ 	try{	   
+ 		 if(BOOdescription.get(0) != null || BOOcontact_email != null || BOOcontact_website.get(0) != null || BOOimage_url.get(0) != null){ 		 
+ 			boodesc = 0;
+ 		 	}
+ 		}catch(InputMismatchException ex){
+ 			   }catch (IndexOutOfBoundsException ex )
+ 			   {  
+ 		        } 
+  	
+ 	   //program
+ 	   holder=WS.url(programUrl);
+ 	   holder.setHeader("Cookie","sessionid="+session("sessionid"));
+ 	   holder.setContentType(Url.appjson);
+ 	   	 
+ 	   response = holder.get().get(20000);	   	
+ 	   content = response.asJson();
+ 	   List<String> PROGRAMdescription = content.findValuesAsText("description");
+
+ 	   try{   
+ 	   	 if(PROGRAMdescription.get(0) != null){ 		 
+ 	   		 program = 0;
+ 	   	 	}
+ 	   	}catch(InputMismatchException ex){
+ 			   }catch (IndexOutOfBoundsException ex )
+ 		    {
+ 		     } 
+ 	    	
+ 	     //order  
+ 	   	 holder=WS.url(orderUrl);
+ 	   	 holder.setHeader("Cookie","sessionid="+session("sessionid"));
+ 	   	 holder.setContentType(Url.appjson);
+ 	   	 
+ 	   	 response = holder.get().get(20000);
+ 	   	 content = response.asJson();
+ 	   	 List<String> ORDERdescription = content.findValuesAsText("description");
+
+ 	   try{
+ 		   
+ 	   	 if(ORDERdescription.get(0) != null){ 		 
+ 	   		 order = 0;
+ 	   	 	}
+ 	   	}catch(InputMismatchException ex){
+ 			   }catch (IndexOutOfBoundsException ex )
+ 		    { 
+ 		     } 
+ 	    
+ 	     //social
+ 	   	 holder=WS.url(socialUrl);
+ 	   	 holder.setHeader("Cookie","sessionid="+session("sessionid"));
+ 	   	 holder.setContentType(Url.appjson);
+ 	   	 
+ 	     response = holder.get().get(20000);
+ 	     content = response.asJson();
+ 	   	 List<String> facebook_url = content.findValuesAsText("facebook_url");
+ 	   	 List<String> twitter_url = content.findValuesAsText("twitter_url");
+ 	   	 List<String> google_plus_url = content.findValuesAsText("google_plus_url");
+ 	   	 List<String> internal_forum_url = content.findValuesAsText("internal_forum_url");
+  	
+ 	   try{  
+ 	   	 if(facebook_url.get(0) != null || twitter_url.get(0)!= null || google_plus_url.get(0)!=null || internal_forum_url.get(0)!=null){ 		 
+ 	   		 social = 0 ;
+ 	   	   }
+ 	   	}catch(InputMismatchException ex){
+ 	   		}catch (IndexOutOfBoundsException ex )
+ 		    { 
+ 		     } 
+ 	   
+ 	  System.out.println("Legend : \n\n     1 = i don't have the feature :( \n     0 = i have it ^_^ \n\n"
+ 			+ "(description) = " + descriptionChck 
+ 			+ "\n(booth description) = " + boodesc
+ 			+ "\n(program) = " + program
+ 			+ "\n(order) = " + order
+ 			+ "\n(social) = " + social);
+ 	
+ 	  String d = "";
+ 	  String bd = "";
+ 	  String p = "";
+ 	  String o = "";
+ 	  String s = "";
+ 	  
+ 	//description
+ 	if (descriptionChck == 1){
+ 		d = null;
+ 	}
+ 		else if (descriptionChck == 0){
+ 	     d = "Description";
+ 		}	
+ 	//boo desc
+ 	if (boodesc == 1){
+ 		bd = null;
+ 	}
+ 		else if (boodesc == 0){
+ 			bd = "Booth Description";
+ 		}
+ 	//program
+ 	if (program == 1){
+ 		p = null;
+ 	}
+ 		else if (program == 0){
+ 			p = "Program";
+ 		}
+ 	//order
+ 	if (order == 1){
+ 		o = null;
+ 	}
+ 		else if (order == 0){
+ 			o = "Order";
+ 		}
+ 	//social
+ 	if (social == 1){
+ 		s = null;
+ 	}
+ 		else if (social == 0){
+ 			s = "Social Media";
+ 		}
+ 	
+ 	  return ok(areafeat.render(d,bd,p,o,s,id,idenv));
+    }
     //view one area
     public static Result viewArea(String id, String idenv){
-     //String id = id area ; 
+     //String id = id area ;
+    	
+       System.out.println("... i am checking your area features ...");
+   	   
+   	   String firstUrl = Url.host + ":" + Url.port;
+   	   String lastUrl = Url.vFcrTfj + "&area=" + id;
+   	   
+   	   String descriptionUrl = firstUrl + Url.description + lastUrl;
+   	   String boothUrl = firstUrl + Url.boo_description + lastUrl;
+   	   String programUrl = firstUrl + Url.program + lastUrl;
+   	   String orderUrl = firstUrl + Url.order + lastUrl;
+   	   String socialUrl = firstUrl + Url.socialmedia + lastUrl;
+   	
+   	   // = 1 : i do not have za feature
+   	   int descriptionChck = 1; 
+   	   int boodesc = 1; 
+   	   int program = 1;
+   	   int order = 1;
+   	   int social = 1 ;
+   	   
+   	 //description
+   	 WSRequestHolder holder=WS.url(descriptionUrl);
+        holder.setHeader("Cookie","sessionid="+session("sessionid"));
+   	 holder.setContentType(Url.appjson);
+   	 
+        WSResponse response = holder.get().get(20000);	
+   	 JsonNode content = response.asJson();
+   	 List<String> description = content.findValuesAsText("description");
+   		 
+   	try{	   
+   		 if(description.get(0) != null){ 		 
+   			 descriptionChck = 0 ;
+   		 	}
+   		}catch(InputMismatchException ex){
+   		   }catch (IndexOutOfBoundsException ex )
+   		    {  
+   		     } 
+   	
+   	//booth description 	
+   	 holder=WS.url(boothUrl);
+   	 holder.setHeader("Cookie","sessionid="+session("sessionid"));
+   	 holder.setContentType(Url.appjson);
+   	 
+   	 response = holder.get().get(20000);
+   	 content = response.asJson();
+   	 List<String> BOOdescription = content.findValuesAsText("description");
+   	 List<String> BOOcontact_email = content.findValuesAsText("contact_email");
+   	 List<String> BOOcontact_website = content.findValuesAsText("contact_website");
+   	 List<String> BOOimage_url = content.findValuesAsText("image_url");
+   	 
+   	try{	   
+   		 if(BOOdescription.get(0) != null || BOOcontact_email != null || BOOcontact_website.get(0) != null || BOOimage_url.get(0) != null){ 		 
+   			boodesc = 0;
+   		 	}
+   		}catch(InputMismatchException ex){
+   			   }catch (IndexOutOfBoundsException ex )
+   			   {  
+   		        } 
+    	
+   	   //program
+   	   holder=WS.url(programUrl);
+   	   holder.setHeader("Cookie","sessionid="+session("sessionid"));
+   	   holder.setContentType(Url.appjson);
+   	   	 
+   	   response = holder.get().get(20000);	   	
+   	   content = response.asJson();
+   	   List<String> PROGRAMdescription = content.findValuesAsText("description");
+
+   	   try{   
+   	   	 if(PROGRAMdescription.get(0) != null){ 		 
+   	   		 program = 0;
+   	   	 	}
+   	   	}catch(InputMismatchException ex){
+   			   }catch (IndexOutOfBoundsException ex )
+   		    {
+   		     } 
+   	    	
+   	     //order  
+   	   	 holder=WS.url(orderUrl);
+   	   	 holder.setHeader("Cookie","sessionid="+session("sessionid"));
+   	   	 holder.setContentType(Url.appjson);
+   	   	 
+   	   	 response = holder.get().get(20000);
+   	   	 content = response.asJson();
+   	   	 List<String> ORDERdescription = content.findValuesAsText("description");
+
+   	   try{
+   		   
+   	   	 if(ORDERdescription.get(0) != null){ 		 
+   	   		 order = 0;
+   	   	 	}
+   	   	}catch(InputMismatchException ex){
+   			   }catch (IndexOutOfBoundsException ex )
+   		    { 
+   		     } 
+   	    
+   	     //social
+   	   	 holder=WS.url(socialUrl);
+   	   	 holder.setHeader("Cookie","sessionid="+session("sessionid"));
+   	   	 holder.setContentType(Url.appjson);
+   	   	 
+   	     response = holder.get().get(20000);
+   	     content = response.asJson();
+   	   	 List<String> facebook_url = content.findValuesAsText("facebook_url");
+   	   	 List<String> twitter_url = content.findValuesAsText("twitter_url");
+   	   	 List<String> google_plus_url = content.findValuesAsText("google_plus_url");
+   	   	 List<String> internal_forum_url = content.findValuesAsText("internal_forum_url");
+    	
+   	   try{  
+   	   	 if(facebook_url.get(0) != null || twitter_url.get(0)!= null || google_plus_url.get(0)!=null || internal_forum_url.get(0)!=null){ 		 
+   	   		 social = 0 ;
+   	   	   }
+   	   	}catch(InputMismatchException ex){
+   	   		}catch (IndexOutOfBoundsException ex )
+   		    { 
+   		     } 
+   	   
+   	  System.out.println("Legend : \n\n     1 = i don't have the feature :( \n     0 = i have it ^_^ \n\n"
+   			+ "(description) = " + descriptionChck 
+   			+ "\n(booth description) = " + boodesc
+   			+ "\n(program) = " + program
+   			+ "\n(order) = " + order
+   			+ "\n(social) = " + social);
+   	
+   	  String d = "";
+   	  String bd = "";
+   	  String p = "";
+   	  String o = "";
+   	  String s = "";
+   	  
+   	//description
+   	if (descriptionChck == 1){
+   		d = null;
+   	}
+   		else if (descriptionChck == 0){
+   	     d = "Description";
+   		}	
+   	//boo desc
+   	if (boodesc == 1){
+   		bd = null;
+   	}
+   		else if (boodesc == 0){
+   			bd = "Booth Description";
+   		}
+   	//program
+   	if (program == 1){
+   		p = null;
+   	}
+   		else if (program == 0){
+   			p = "Program";
+   		}
+   	//order
+   	if (order == 1){
+   		o = null;
+   	}
+   		else if (order == 0){
+   			o = "Order";
+   		}
+   	//social
+   	if (social == 1){
+   		s = null;
+   	}
+   		else if (social == 0){
+   			s = "Social Media";
+   		}
    	 String getUrl = Url.host+":"+Url.port+Url.area+id+"/"+Url.vTcrTfJ;
-   	 WSRequestHolder holder=WS.url(getUrl);
+   	 holder=WS.url(getUrl);
    	 
    	 holder.setHeader("Cookie","sessionid="+session("sessionid"));
    	 holder.setContentType(Url.appjson);
@@ -1216,7 +1540,7 @@ public class Application extends Controller {
    	 WSResponse ListResponse = holder.get().get(200000);
    	 System.out.println("view area response status: "+ListResponse.getStatus());
    	 
-   	 JsonNode content = ListResponse.asJson();
+   	 content = ListResponse.asJson();
    	 List<String> nume = content.findValuesAsText("name");
    	 List<String> img_thumbnail_url = content.findValuesAsText("img_thumbnail_url");
    	 List<String> areaType = content.findValuesAsText("areaType");
@@ -1231,7 +1555,7 @@ public class Application extends Controller {
 		 }
 	 System.out.println("area id : "+id);
 	 
-	 return ok(viewarea.render(nume.get(0),img_thumbnail_url.get(0),areaType.get(0),tags,id,idenv));
+	 return ok(viewarea.render(nume.get(0),img_thumbnail_url.get(0),areaType.get(0),tags,id,idenv,d,bd,p,o,s));
     	  	
     }
     
@@ -1654,10 +1978,8 @@ public class Application extends Controller {
     		 
     		break;
     		default: break;	    	
-    	}
-    	
+    	}	
     	return redirect(routes.Application.checkfeatarea(id,idenv));
-    	
     }
           
     /**
@@ -1692,8 +2014,7 @@ public class Application extends Controller {
   		System.out.println("add area conference-role status result:" + postResult.getStatus());
   		System.out.println("userid:" + session("userid") + "\nsessionid:" + session("sessionid") + " \nJson result: " + jsonParams);	
   		
-  		return redirect(routes.Application.checkfeatarea(id,idenv));
-   
+  		return redirect(routes.Application.checkfeatarea(id,idenv)); 
     }  
     
     /**
@@ -1965,8 +2286,7 @@ public class Application extends Controller {
 		    {  
 			    System.out.println("==IndexOutOfBoundsException===");
 		     } 
-	  
-	   
+	  	   
 	   return  ok(areasocialmedia.render(id, idenv));
    }
    
@@ -2047,176 +2367,8 @@ public class Application extends Controller {
 	   	return redirect(routes.Application.checkfeatarea(id,idenv));
    }
    
-   public static Result checkfeatarea(String id, String idenv){
-	   
-	   System.out.println("... i am checking your area features ...");
-	   
-	   String firstUrl = Url.host + ":" + Url.port;
-	   String lastUrl = Url.vFcrTfj + "&area=" + id;
-	   
-	   String descriptionUrl = firstUrl + Url.description + lastUrl;
-	   String boothUrl = firstUrl + Url.boo_description + lastUrl;
-	   String programUrl = firstUrl + Url.program + lastUrl;
-	   String orderUrl = firstUrl + Url.order + lastUrl;
-	   String socialUrl = firstUrl + Url.socialmedia + lastUrl;
-	
-	   // = 1 : i do not have za feature
-	   int descriptionChck = 1; 
-	   int boodesc = 1; 
-	   int program = 1;
-	   int order = 1;
-	   int social = 1 ;
-	   
-	 //description
-	 WSRequestHolder holder=WS.url(descriptionUrl);
-     holder.setHeader("Cookie","sessionid="+session("sessionid"));
-	 holder.setContentType(Url.appjson);
-	 
-     WSResponse response = holder.get().get(20000);	
-	 JsonNode content = response.asJson();
-	 List<String> description = content.findValuesAsText("description");
-		 
-	try{	   
-		 if(description.get(0) != null){ 		 
-			 descriptionChck = 0 ;
-		 	}
-		}catch(InputMismatchException ex){
-		   }catch (IndexOutOfBoundsException ex )
-		    {  
-		     } 
-	
-	//booth description 	
-	 holder=WS.url(boothUrl);
-	 holder.setHeader("Cookie","sessionid="+session("sessionid"));
-	 holder.setContentType(Url.appjson);
-	 
-	 response = holder.get().get(20000);
-	 content = response.asJson();
-	 List<String> BOOdescription = content.findValuesAsText("description");
-	 List<String> BOOcontact_email = content.findValuesAsText("contact_email");
-	 List<String> BOOcontact_website = content.findValuesAsText("contact_website");
-	 List<String> BOOimage_url = content.findValuesAsText("image_url");
-	 
-	try{	   
-		 if(BOOdescription.get(0) != null || BOOcontact_email != null || BOOcontact_website.get(0) != null || BOOimage_url.get(0) != null){ 		 
-			boodesc = 0;
-		 	}
-		}catch(InputMismatchException ex){
-			   }catch (IndexOutOfBoundsException ex )
-			   {  
-		        } 
- 	
-	   //program
-	   holder=WS.url(programUrl);
-	   holder.setHeader("Cookie","sessionid="+session("sessionid"));
-	   holder.setContentType(Url.appjson);
-	   	 
-	   response = holder.get().get(20000);	   	
-	   content = response.asJson();
-	   List<String> PROGRAMdescription = content.findValuesAsText("description");
-
-	   try{   
-	   	 if(PROGRAMdescription.get(0) != null){ 		 
-	   		 program = 0;
-	   	 	}
-	   	}catch(InputMismatchException ex){
-			   }catch (IndexOutOfBoundsException ex )
-		    {
-		     } 
-	    	
-	     //order  
-	   	 holder=WS.url(orderUrl);
-	   	 holder.setHeader("Cookie","sessionid="+session("sessionid"));
-	   	 holder.setContentType(Url.appjson);
-	   	 
-	   	 response = holder.get().get(20000);
-	   	 content = response.asJson();
-	   	 List<String> ORDERdescription = content.findValuesAsText("description");
-
-	   try{
-		   
-	   	 if(ORDERdescription.get(0) != null){ 		 
-	   		 order = 0;
-	   	 	}
-	   	}catch(InputMismatchException ex){
-			   }catch (IndexOutOfBoundsException ex )
-		    { 
-		     } 
-	    
-	     //social
-	   	 holder=WS.url(socialUrl);
-	   	 holder.setHeader("Cookie","sessionid="+session("sessionid"));
-	   	 holder.setContentType(Url.appjson);
-	   	 
-	     response = holder.get().get(20000);
-	     content = response.asJson();
-	   	 List<String> facebook_url = content.findValuesAsText("facebook_url");
-	   	 List<String> twitter_url = content.findValuesAsText("twitter_url");
-	   	 List<String> google_plus_url = content.findValuesAsText("google_plus_url");
-	   	 List<String> internal_forum_url = content.findValuesAsText("internal_forum_url");
- 	
-	   try{  
-	   	 if(facebook_url.get(0) != null || twitter_url.get(0)!= null || google_plus_url.get(0)!=null || internal_forum_url.get(0)!=null){ 		 
-	   		 social = 0 ;
-	   	   }
-	   	}catch(InputMismatchException ex){
-	   		}catch (IndexOutOfBoundsException ex )
-		    { 
-		     } 
-	   
-	  System.out.println("Legend : \n\n     1 = i don't have the feature :( \n     0 = i have it ^_^ \n\n"
-			+ "(description) = " + descriptionChck 
-			+ "\n(booth description) = " + boodesc
-			+ "\n(program) = " + program
-			+ "\n(order) = " + order
-			+ "\n(social) = " + social);
-	
-	  String d = "";
-	  String bd = "";
-	  String p = "";
-	  String o = "";
-	  String s = "";
-	  
-	//description
-	if (descriptionChck == 1){
-		d = null;
-	}
-		else if (descriptionChck == 0){
-	     d = "Description";
-		}	
-	//boo desc
-	if (boodesc == 1){
-		bd = null;
-	}
-		else if (boodesc == 0){
-			bd = "Booth Description";
-		}
-	//program
-	if (program == 1){
-		p = null;
-	}
-		else if (program == 0){
-			p = "Program";
-		}
-	//order
-	if (order == 1){
-		o = null;
-	}
-		else if (order == 0){
-			o = "Order";
-		}
-	//social
-	if (social == 1){
-		s = null;
-	}
-		else if (social == 0){
-			s = "Social Media";
-		}
-	
-	  return ok(areafeat.render(d,bd,p,o,s,id,idenv));
-   }
    /**
-    * Things
+    * Things AREA
     * */
    //area things page
    public static Result AreaThing (String id,String idenv){
@@ -2330,7 +2482,13 @@ public class Application extends Controller {
    public static Result ManualThingEnv (String id){
 	   
 	   String url = "http://localhost:8080/envived/client/v2/resources/things/?clientrequest=true&virtual=true&format=json&environment="+id; 
-	     WSRequestHolder holder = WS.url(url);
+	   
+	   String thng_id;
+	   String temp= "temperature";
+	   String lum = "humidity";
+	   String hum = "luminosity";
+	   
+	   WSRequestHolder holder = WS.url(url);
       	 
       	 holder.setHeader("Cookie","sessionid="+session("sessionid"));
       	 holder.setContentType(Url.appjson);
@@ -2350,17 +2508,30 @@ public class Application extends Controller {
     	 session("userid",id);
   	   	 		 
      	 HashMap<String, String>hash=new HashMap<String, String>();
-	   	 
-     	 String thng_id;
+	   	 	  
 	   	 for(int i=0;i<type.size();i++){
-	   		 		
-			   		hash.put(type.get(i),idthing.get(i).split("/")[6]);		
+	   		
+	   		 if(type.get(i) == temp){
+				temp = null;
+				System.out.println("\nif temp : "+temp);
+			}
+			if(type.get(i) == lum){
+				lum = null;
+				System.out.println("\nif lum : "+lum);
+			}
+			if(type.get(i) == hum){
+				hum = null;	
+				System.out.println("\nif hum : "+hum);
+			}
+			 System.out.println("\ntype: " + type.get(i));
+		     hash.put(type.get(i),idthing.get(i).split("/")[6]);		
 	   	 }
 	   	 
+	    System.out.println("\nfinal values (vall = null -> I have it): \ntemp = "+temp + "\nlum = "+lum + "\nhum = " +hum);  
 	   	System.out.println("thing-uri: "+type+"\n");
 	   	System.out.println("env: " + parent); 
 	   	
-	   return ok(thingenvmanual.render(hash,id));
+	   return ok(thingenvmanual.render(hash,id,temp,lum,hum));
    }
    
    //post a type for a thing 
@@ -2373,9 +2544,9 @@ public class Application extends Controller {
 	     jsonParams.put("environment", Url.parent +id+"/");
      	 jsonParams.put("thing_type", Data.get("type"));
      	 
-     	WSRequestHolder holder2=WS.url(url);
-        WSResponse ListResponse = holder2.get().get(200000);
-        System.out.println("Edit environment status response : "+ListResponse.getStatus());
+     	 WSRequestHolder holder2=WS.url(url);
+         WSResponse ListResponse = holder2.get().get(200000);
+         System.out.println("Edit environment status response : "+ListResponse.getStatus());
 
      	 WSRequestHolder holder=WS.url(url);
 	 	 holder.setContentType(Url.appjson);
@@ -2385,8 +2556,9 @@ public class Application extends Controller {
 	 	 System.out.println("add thing status result:" + postResult.getStatus());
 	 	 System.out.println("userid:" + session("userid") + "\nsessionid:" + session("sessionid") + " \nJson result: " + jsonParams);	
 	  	  
-//	 	return ok(thingenvmanual.render(id));
-	 	 return redirect(routes.Application.viewThingsManualEnv(id));
+//	 	 return ok(thingenvmanual.render(id));
+//	 	 return redirect(routes.Application.viewThingsManualEnv(id));
+	 	return redirect(routes.Application.ManualThingEnv(id));
    }
    
  //view the thing types i have and try to add some properties
@@ -2446,50 +2618,50 @@ public class Application extends Controller {
 	   System.out.println("userid:" + session("userid") + "\nsessionid:" + session("sessionid") + " \nJson result: " + jsonParams);	
 	   System.out.println("add properties thing environment result ******:" + postResult.getStatus());
 	   
-	  return redirect(routes.Application.viewThingsManualEnv(id));
+	   return redirect(routes.Application.graphicThingEnv(id,id_thing,type));
    }
    
    public static Result graphicThingEnv(String id,String id_thing, String type){
 	   
 	   String url = "http://localhost:8080/envived/client/v2/resources/things/"+id_thing+"/properties/?clientrequest=true&virtual=true&format=json&type="+type;
-	     WSRequestHolder holder = WS.url(url);
+	   WSRequestHolder holder = WS.url(url);
       	 
-      	 holder.setHeader("Cookie","sessionid="+session("sessionid"));
-      	 holder.setContentType(Url.appjson);
+       holder.setHeader("Cookie","sessionid="+session("sessionid"));
+       holder.setContentType(Url.appjson);
       	
-      	 WSResponse ListResponse = holder.get().get(200000);
+       WSResponse ListResponse = holder.get().get(200000);
       	 
-      	 System.out.println("session id : "+session("sessionid"));
-      	 System.out.println("Environment (parent) id : "+id);
-      	 System.out.println("Status response: "+ListResponse.getStatus());
+       System.out.println("session id : "+session("sessionid"));
+       System.out.println("Environment (parent) id : "+id);
+       System.out.println("Status response: "+ListResponse.getStatus());
       	 
-      	 JsonNode content = ListResponse.asJson();
-   	     List<String> value = content.findValuesAsText("value");
-     	 List<String> timestamp = content.findValuesAsText("timestamp");
+       JsonNode content = ListResponse.asJson();
+   	   List<String> value = content.findValuesAsText("value");
+       List<String> timestamp = content.findValuesAsText("timestamp");
      	 
-     	 HashMap<String, String>hash=new HashMap<String, String>();
+       HashMap<String, String>hash=new HashMap<String, String>();
 	   	 
-     	ArrayList<String> timeList = new ArrayList<String>();
-     	ArrayList<String> dateList = new ArrayList<String>();
+       ArrayList<String> timeList = new ArrayList<String>();
+       ArrayList<String> dateList = new ArrayList<String>();
      	
-	   	 for(int i=0;i<value.size();i++){
+	   for(int i=0;i<value.size();i++){
 	   		 
-	   		 		String string = timestamp.get(i);	
-	   		 		String[] parts = string.split("T");
+	 		 	String string = timestamp.get(i);	
+	   		 	String[] parts = string.split("T");
 	   		 		
-	   			   	String date = parts[0]; 
-	   			   	String time = parts[1]; 
+	   			String date = parts[0]; 
+	   			String time = parts[1]; 
 
-	   			  	if (string.contains("T")) {
+	   			if (string.contains("T")) {
 	   			   	    // Split it.
-	   			   	} else {
-	   			   	    throw new IllegalArgumentException("String " + string + " does not contain -");
-	   			   	}
+	   			} else {
+	   				throw new IllegalArgumentException("String " + string + " does not contain T");
+	   			  }
 	   			  	
-	   			    timeList.add(time);
-	   			    dateList.add(date);
+	    timeList.add(time);
+	    dateList.add(date);
 	   			  
-			   		hash.put(value.get(i),null);
+		hash.put(value.get(i),null);
 	 }
 	   	 
 	   
@@ -2497,7 +2669,18 @@ public class Application extends Controller {
 	   		   
 	   return ok(graphicEnvThing.render(hash,id,timeList,dateList));
    }
-   
+   public static Result RemoveTingEnv(String type, String id_thing,String id){
+	   String url = "http://localhost:8080/envived/client/v2/resources/things/"+id_thing+"/?clientrequest=true&virtual=true&format=json";
+//	   String url = "http://localhost:8080/envived/client/v2/resources/things/?clientrequest=true&virtual=true&format=json&environment="+id;
+	   System.out.println("idelete-thing :  ! *** " + type);
+ 	   WSRequestHolder delHolder2=WS.url(url);
+ 	   delHolder2.setContentType(Url.appjson);
+ 	   delHolder2.setHeader("Cookie","sessionid="+session("sessionid"));
+ 	   WSResponse rezultatDelete2 = delHolder2.delete().get(20000);
+ 	   System.out.println("*delete thing: "+type+" : "+rezultatDelete2.getBody()+"status: "+rezultatDelete2.getStatus());
+ 		 
+	   return redirect(routes.Application.ManualThingEnv(id));
+   }
    public static Result envArduino(String id){
 	   return ok(envarduinopage.render(id));
    }

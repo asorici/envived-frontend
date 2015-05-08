@@ -33,6 +33,8 @@ body{
   background:      -o-linear-gradient(90deg, #6A9113 10%, #1A2304 90%); 
   background:         linear-gradient(90deg, #6A9113 10%, #1A2304 90%); 
   
+ 
+ 
 /*Nice Green*/
 /*
   background: -webkit-linear-gradient(90deg, #52c234 10%, #061700 90%); 
@@ -860,3 +862,4 @@ textarea{
 .add-tag-btn{
 	height: 45px;
 }
+/*env chart*/

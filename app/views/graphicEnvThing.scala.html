@@ -33,10 +33,22 @@
             </li>
             <!-- <li><a href="@routes.Application.AddArea(id)">Add Area</a></li>  -->
           </ul>
+
+      </li>
+       <li class="dropdown">
+           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Things<span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu">
+            <li role="presentation">
+              <a href="@routes.Application.ManualThingEnv(id)" data-toggle="modal">
+                Add More
+              </a>
+            </li>
+            <li><a href="#">Arduino</a></li> 
+          </ul>
+
         </li>
 
       </ul>
-
       <ul class="nav navbar-nav navbar-right">
 
         <li><a href="@routes.Application.welcome()"><i class="fa fa-home"></i>Profile</a></li> 
@@ -47,39 +59,160 @@
   </div><!-- /.container-fluid -->
 </nav>
 
+<div class="col-md-offset-1 col-md-11">
+  <div class="path">
+  Path : <a href="@routes.Application.welcome()">Profile </a> >> <a href="@routes.Application.viewEnv(id)">View Environmnet</a> >> <a href="@routes.Application.ManualThingEnv(id)">Things</a> >> Chart
+  </div>
+</div>
+
 <div class="row">
 <div class="col-md-offset-1 col-md-10">
 
+<!-- real time -->
+<br>
+<script>
+var data = [];
+var dataset;
+var totalPoints = 100;
+var updateInterval = 1000;
+var now = new Date().getTime();
 
 
+function GetData() {
+    data.shift();
+
+    while (data.length < totalPoints) {     
+        var y = Math.random() * 100;
+        var temp = [now += updateInterval, y];
+
+        data.push(temp);
+    }
+}
+
+var options = {
+    series: {
+        lines: {
+            show: true,
+            lineWidth: 1.2,
+            fill: true
+        }
+    },
+    xaxis: {
+        mode: "time",
+        tickSize: [2, "second"],
+        tickFormatter: function (v, axis) {
+            var date = new Date(v);
+
+            if (date.getSeconds() % 20 == 0) {
+                var hours = date.getHours() < 10 ? "0" + date.getHours() : date.getHours();
+                var minutes = date.getMinutes() < 10 ? "0" + date.getMinutes() : date.getMinutes();
+                var seconds = date.getSeconds() < 10 ? "0" + date.getSeconds() : date.getSeconds();
+
+                return hours + ":" + minutes + ":" + seconds;
+            } else {
+                return "";
+            }
+        },
+        axisLabel: "Time",
+        axisLabelUseCanvas: true,
+        axisLabelFontSizePixels: 12,
+        axisLabelFontFamily: 'Verdana, Arial',
+        axisLabelPadding: 10
+    },
+    yaxis: {
+        min: 0,
+        max: 100,        
+        tickSize: 5,
+        tickFormatter: function (v, axis) {
+            if (v % 10 == 0) {
+                return v + "%";
+            } else {
+                return "";
+            }
+        },
+        axisLabel: "loading",
+        axisLabelUseCanvas: true,
+        axisLabelFontSizePixels: 12,
+        axisLabelFontFamily: 'Verdana, Arial',
+        axisLabelPadding: 6
+    },
+    legend: {        
+        labelBoxBorderColor: "#fff"
+    },
+    grid: {                
+        backgroundColor: "#000000",
+        tickColor: "#008040",
+        color:"#fff"
+    }
+};
+
+$(document).ready(function () {
+    GetData();
+
+    dataset = [
+        { label: "CPU", data: data, color: "#00FF00" }
+    ];
+
+    $.plot($("#flot-placeholder1"), dataset, options);
+
+    function update() {
+        GetData();
+
+        $.plot($("#flot-placeholder1"), dataset, options)
+        setTimeout(update, updateInterval);
+    }
+
+    update();
+});
+
+
+
+</script>
+<!-- HTML -->
+<div id="flot-placeholder1" style="width:550px;height:300px;margin:0 auto"></div>
+
+
+<!-- real tim -->
+
+<br><br><br>
+<div class="tabel-val">
 <table id= "myTable" style="width:100%">
 <tr  class="val">
-    <th>value</th>
+    <th>&nbsp;&nbsp;value</th>
     @for((c,w)<- map){
     <td>@c</td>
      }
 </tr>
 <tr class="timp">
-    <th>time</th>
+    <th>&nbsp;&nbsp;time</th>
     @for(k <- timeList){
         <td> @k</td> 
      }
 </tr>
 <tr class="data">
-    <th>date</th> 
+    <th>&nbsp;&nbsp;date</th> 
     @for(q <- dateList){ 
     <td>@q </td>
     }
  </tr>
   
 </table>
+</div>
 
 <div id="chartdiv"></div> 
 <style type="text/css">
-  
-
+.tabel-val{
+  width: 1160px;
+  height: 130px;
+  overflow: scroll;
+  overflow-y:hidden;
+}
+.tabel-val::-webkit-scrollbar-thumb {
+visibility: hidden;
+}
 body {
   font-family: Lato;
+  overflow-y:scroll;
 }
 
 table {
@@ -184,96 +317,6 @@ function generateChartData() {
 </div><!--row-->
 
 <!-- dhdhdhddd -->
-
-<!-- real time graphic -->
-
-<script src="http://code.highcharts.com/highcharts.js"></script>
-<script src="http://code.highcharts.com/modules/exporting.js"></script>
-<div class="row">
-<div class="col-md-offset-1 col-md-10">
-<div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
-<br><br><br><br>
-</div>
-</div>
-
-<script type="text/javascript">
-    $(function () {
-    $(document).ready(function () {
-        Highcharts.setOptions({
-            global: {
-                useUTC: false
-            }
-        });
-
-        $('#container').highcharts({
-            chart: {
-                type: 'spline',
-                animation: Highcharts.svg, // don't animate in old IE
-                marginRight: 10,
-                events: {
-                    load: function () {
-
-                        // set up the updating of the chart each second
-                        var series = this.series[0];
-                        setInterval(function () {
-                            var x = (new Date()).getTime(), // current time
-                                y = Math.random();
-                            series.addPoint([x, y], true, true);
-                        }, 1000);
-                    }
-                }
-            },
-            title: {
-                text: 'Environment Thing'
-            },
-            xAxis: {
-                type: 'datetime',
-                tickPixelInterval: 150
-            },
-            yAxis: {
-                title: {
-                    text: 'Thing'
-                },
-                plotLines: [{
-                    value: 26,
-                    width: 28,
-                    color: '#808080'
-                }]
-            },
-            tooltip: {
-                formatter: function () {
-                    return '<b>' + this.series.name + '</b><br/>' +
-                        Highcharts.dateFormat('%Y-%m-%d %H:%M:%S', this.x) + '<br/>' +
-                        Highcharts.numberFormat(this.y, 26);
-                }
-            },
-            legend: {
-                enabled: false
-            },
-            exporting: {
-                enabled: false
-            },
-            series: [{
-                name: 'Random data',
-                data: (function () {
-                    // generate an array of random data
-                    var data = [],
-                        time = (new Date()).getTime(),
-                        i;
-
-                    for (i = -19; i <= 0; i += 1) {
-                        data.push({
-                            x: time + i * 1000,
-                            y: Math.random()
-                        });
-                    }
-                    return data;
-                }())
-            }]
-        });
-    });
-});
-</script>
 
 
 }
