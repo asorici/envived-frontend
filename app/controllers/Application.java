@@ -2743,11 +2743,6 @@ public class Application extends Controller {
 	   return redirect(routes.Application.ManualThingEnv(id));
    }
    
-   
-   public static Result envArduino(String id){
-	   return ok(envarduinopage.render(id));
-   }
-   
    /**
     * Areat things 
     * */
@@ -2964,6 +2959,18 @@ public class Application extends Controller {
 	   	System.out.println("val::: "+value+"\n");	 
 	   		   
 	   return ok(graphicAreaThing.render(hash,idenv,id,timeList,dateList));
+   }
+   
+   /**
+    * Return env Arduino page
+    * */
+   
+   public static Result envArduino(String id){
+	   return ok(envarduinopage.render(id));
+   }
+   
+   public static Result areaArduino(String idenv, String id){
+	   return ok(areaarduinopage.render(idenv,id));
    }
 }
 

@@ -1,8 +1,3 @@
-if (window.console) {
-  console.log("Welcome to your Play application's JavaScript!");
-}
-});
-$('[data-toggle="tooltip"]').tooltip({ container: 'body' }) 
 
 $(function () {
 $('[data-toggle="tooltip"]').tooltip()
@@ -48,11 +43,6 @@ $(function(){
     $("#modal-content-edit,#modal-background-edit,#modal-header-edit").toggleClass("active");
     $("#modal-load-page-edit").load("@routes.Application.areaDescription(id,idenv)");
   });
-});
-
-/*area tab left*/
-$(document).ready(function() {
-  $('#rootwizard').bootstrapWizard({'tabClass': 'nav nav-tabs'});
 });
 
 /*edit area*/
