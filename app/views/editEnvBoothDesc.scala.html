@@ -3,23 +3,35 @@
 
 
   <!-- <div class="col-md-offset-1 col-md-5"> -->
+<div class="path">
+ &nbsp;&nbsp;<i class="fa fa-paw"> to edit, just click on the text. Don't forget to save the changes.</i>
+</div>
+
 <form action="@routes.Application.editBoothEnv(id)" method="POST">
 <div class="col-md-offset-1 col-md-10">
         <!-- <div class="row"> -->
        <br><br>
-       <div class="inputs">
-	       <label> Contact Email : </label><br>
-			<input name="contact_email" class="form-control" value="@contact_email" data-toggle="tooltip" data-placement="left" title="click to edit"><br>
+     <div class="row">
+     <div class="inputs">
+
+     <div class="col-md-6">
+	   <label> Contact Email : </label><br>
+			<input name="contact_email" class="form-control" value="@contact_email" placeholder="enter an email address..." title="click to edit"><br>
+      </div>
+
+      <div class="col-md-6">
 			<label>Contact Website : <br></label>
-			<input name="contact_website" class="form-control" value="@contact_website" data-toggle="tooltip" data-placement="left" title="click to edit"><br>
-			<label>Image Url:</label>
-		    <input name="image_url" class="form-control" value="@image_url" data-toggle="tooltip" data-placement="left" title="click to edit"><br>
+			<input name="contact_website" class="form-control" value="@contact_website" placeholder="enter contact website..." title="click to edit"><br>
+      </div>
+			<!-- <label>Image Url:</label> -->
+		    <!-- <input name="image_url" class="form-control" value="@image_url" data-toggle="tooltip" data-placement="left" title="click to edit"><br> -->
 	    </div>
+      </div>
 
 	    <div class="textarea">
 	   <label> Product Description : <br></label>
 	
-   		<textarea class="form-control" name="description" cols="50" rows="5" data-toggle="tooltip" data-placement="left" title="click to edit">@description</textarea>
+   		<textarea class="form-control" name="description" cols="40" rows="4" placeholder="enter a description..." title="click to edit">@description</textarea>
    		<br><br>
    		</div>
 
@@ -39,7 +51,9 @@
         </form>
         <style type="text/css">
         label{
-        font-family: 'Open Sans Condensed', sans-serif;
+           font-family: 'Open Sans Condensed', sans-serif;
+            color: #C1C3C0;
+            text-shadow: 2px 2px 4px #000000;
           }
         .inputs input, .textarea textarea{
         	background-color: transparent;

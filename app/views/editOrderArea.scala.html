@@ -1,10 +1,14 @@
 @(description:String, id:String, idenv:String)
 @Main("order ") {
+<div class="path">
+ &nbsp;&nbsp;<i class="fa fa-paw"> to edit, just click on the order. Don't forget to save the changes.</i>
+</div>
+
 <form action="@routes.Application.updateDeleteAreaOrder(id,idenv)" method="POST">
 
  <!-- Order  -->
-<div class="order">
-<textarea class="form-control" name="description" rows="5" cols="40">@description</textarea>
+<div class="order text">
+<textarea class="form-control" name="description" rows="5" cols="40" placeholder="enter order here...">@description</textarea>
 </div>
 <br>
    		<div class="row">
@@ -27,6 +31,28 @@
 		border: none;
 		color: #FFF;
 	}
+</style>
+
+<style type="text/css">
+	form .text textarea{
+		    background-color: transparent;
+        	border: none;
+        	color: #FFF;
+        	box-shadow: none;
+	}
+	form .text textarea:hover{
+		cursor: pointer;
+	}
+	form .text textarea:focus{
+		    background-color: #FFF;
+        	border: 1px solid #000;
+        	color: #000;
+	}
+	 label{
+           font-family: 'Open Sans Condensed', sans-serif;
+            color: #C1C3C0;
+            text-shadow: 2px 2px 4px #000000;
+          }
 </style>
 
 }

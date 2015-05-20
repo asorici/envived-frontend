@@ -36,7 +36,11 @@
 </nav>
 
 
-
+<script type="text/javascript">
+$(function () {
+$('[data-toggle="tooltip"]').tooltip()
+})
+</script>
 <div class="col-md-offset-1 col-md-11">
   <div class="path">
   Path : <a href="@routes.Application.welcome()">Profile </a> >> <a href="@routes.Application.viewEnv(id)">View Environmnet</a> >> Things (manual)

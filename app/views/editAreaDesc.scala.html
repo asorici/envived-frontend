@@ -2,7 +2,10 @@
 @Main("view description"){
 
 
-  <div class="col-md-offset-1 col-md-11">
+<div class="col-md-offset-1 col-md-11">
+<div class="path">
+ <i class="fa fa-paw"> to edit, just click on the description. Don't forget to save the changes.</i>
+</div>
         <form action="@routes.Application.saveDeleteDescArea(k,idenv)" method="POST">
 
          <!-- <div class="border-input"></div> -->
@@ -34,13 +37,31 @@
  </div>
 
  <style type="text/css">
-	.edit-input-container textarea{
-		background: transparent;
-		border: none;
-		color:#FFF;
+.edit-input-container textarea:hover{
+	cursor: pointer;
+}
 
+.edit-input-container textarea{
+	position: relative;
+	top: 30px;
+	bottom: 10px;
+
+	    color: #FFF;
+	    text-shadow: 0 0 3px #000, 0 0 5px #DDDEDB; 
+		border: none;
+		background-color: transparent;
+		box-shadow: none;
+	}
+
+.edit-input-container textarea:focus{
+		color: #000;
+		border: 1px solid #000;
+		background-color: #FFF;
+		border-radius: 7px;
+	}
+	.edit-btns-save-delete{
 		position: relative;
-		top: 30px;
+		top: 20px;
 	}
 	.edit-btns-save-delete{
 		position: relative;

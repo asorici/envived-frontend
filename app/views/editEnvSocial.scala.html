@@ -1,12 +1,16 @@
 @(facebook_url:String, twitter_url:String, google_plus_url:String, internal_forum_url:String,id:String)
 
 @Main("social media") {
+<div class="path">
+<i class="fa fa-paw"> to edit, just click on the link. Don't forget to save the changes.</i><br>
+<i class="fa fa-paw"> to access the link, click the icon.</i>
+</div>
 
 <form action="@routes.Application.editSocialEnv(id)" method="POST">
 
 <div class="row paddy">
 	<div class="col-md-offset-1 col-md-2">
-		<i class="fa fa-facebook-square"></i> 
+		<a href="@facebook_url"><i class="fa fa-facebook-square"></i> </a>
 	</div>
 	<div class="col-md-8">
 		<input type="text" class="form-control" name="facebook_url" value="@facebook_url" placeholder="insert facebook url">
@@ -14,7 +18,7 @@
 </div>
 <div class="row paddy">
 	<div class="col-md-offset-1 col-md-2">
-		<i class="fa fa-twitter"></i> 
+		<a href="@twitter_url"><i class="fa fa-twitter"></i> </a>
 	</div>
 	<div class="col-md-8">
 		<input type="text" class="form-control" name="twitter_url" value="@twitter_url" placeholder="insert twitter url">
@@ -22,7 +26,7 @@
 </div>
 <div class="row paddy">
 	<div class="col-md-offset-1 col-md-2">
-		<i class="fa fa-google-plus"></i>
+		<a href="@google_plus_url"><i class="fa fa-google-plus"></i></a>
 	</div> 
 	<div class="col-md-8">
 		<input type="text" class="form-control" name="google_plus_url" value="@google_plus_url" placeholder="insert google plus url">
@@ -30,7 +34,7 @@
 </div>
 <div class="row paddy">
 	<div class="col-md-offset-1 col-md-2">
-		<i class="fa fa-weixin"></i> 
+		<a href="@internal_forum_url"><i class="fa fa-weixin"></i> </a>
 	</div>
 	<div class="col-md-8">
 		<input type="text" class="form-control" name="internal_forum_url" value="@internal_forum_url" placeholder="insert internal forum url">
@@ -63,6 +67,28 @@
 		font-size: 30px;
 		color: #C1C3C0;
         text-shadow: 2px 2px 4px #000000;
+	}
+
+	form .paddy input{
+		    background-color: transparent;
+        	border: none;
+        	color: #FFF;
+        	box-shadow: none;
+	}
+	form .paddy input:hover{
+		cursor: pointer;
+	}
+	form .paddy input:focus{
+		    background-color: #FFF;
+        	border: 1px solid #000;
+        	color: #000;
+	}
+	.path{
+		font-size: 10px;
+	}
+	.paddy i:hover{
+	 color:#FFF;
+	text-shadow: 0 0 3px #000, 0 0 5px #DDDEDB; 
 	}
 </style>
 

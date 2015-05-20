@@ -1820,7 +1820,7 @@ public class Application extends Controller {
     		default: break;	
     	
     	}
-    	return redirect(routes.Application.checkfeatarea(id,idenv));
+    	return redirect(routes.Application.viewArea(id,idenv));
     }
     
     //Post the new area description
@@ -1844,7 +1844,7 @@ public class Application extends Controller {
   		 System.out.println("add area description status result:" + postResult.getStatus());
   		 System.out.println("userid:" + session("userid") + "\nsessionid:" + session("sessionid") + " \nJson result: " + jsonParams);
  		 		
-  		return redirect(routes.Application.checkfeatarea(id,idenv));
+  		return redirect(routes.Application.viewArea(id,idenv));
     }
     
     //view area description if it has one, if not redirect to add one :) :: i won't need this anymore ~
@@ -1962,7 +1962,7 @@ public class Application extends Controller {
   		 System.out.println("Add area booth description status result:" + postResult.getStatus());
   		 System.out.println("userid:" + session("userid") + "\nsessionid:" + session("sessionid") + " \nJson result: " + jsonParams);
  				
-  		return redirect(routes.Application.checkfeatarea(id,idenv));
+  		return redirect(routes.Application.viewArea(id,idenv));
    
     }
     
@@ -2040,7 +2040,7 @@ public class Application extends Controller {
     		break;
     		default: break;	    	
     	}	
-    	return redirect(routes.Application.checkfeatarea(id,idenv));
+    	return redirect(routes.Application.viewArea(id,idenv));
     }
           
     /**
@@ -2075,7 +2075,7 @@ public class Application extends Controller {
   		System.out.println("add area conference-role status result:" + postResult.getStatus());
   		System.out.println("userid:" + session("userid") + "\nsessionid:" + session("sessionid") + " \nJson result: " + jsonParams);	
   		
-  		return redirect(routes.Application.checkfeatarea(id,idenv)); 
+  		return redirect(routes.Application.viewArea(id,idenv)); 
     }  
     
     /**
@@ -2130,7 +2130,7 @@ public class Application extends Controller {
  	 System.out.println("add area program status result:" + postResult.getStatus());
  	 System.out.println("userid:" + session("userid") + "\nsessionid:" + session("sessionid") + " \nJson result: " + jsonParams);	
  		
- 	return redirect(routes.Application.checkfeatarea(id,idenv));
+ 	return redirect(routes.Application.viewArea(id,idenv));
   
    }
    
@@ -2181,7 +2181,7 @@ public class Application extends Controller {
    		default: break;	    	
    	}
    	
-   	return redirect(routes.Application.checkfeatarea(id,idenv));
+   	return redirect(routes.Application.viewArea(id,idenv));
    	
    }
    
@@ -2258,7 +2258,7 @@ public class Application extends Controller {
 	 	 System.out.println("add area order status result:" + postResult.getStatus());
 	 	 System.out.println("userid:" + session("userid") + "\nsessionid:" + session("sessionid") + " \nJson result: " + jsonParams);	
 	 		
-	 	return redirect(routes.Application.checkfeatarea(id,idenv));
+	 	return redirect(routes.Application.viewArea(id,idenv));
 	  
    }
    
@@ -2309,7 +2309,7 @@ public class Application extends Controller {
 	   		default: break;	    	
 	   	}
 	   	
-	   	return redirect(routes.Application.checkfeatarea(id,idenv));
+	   	return redirect(routes.Application.viewArea(id,idenv));
 	   	
 	   }
   
@@ -2373,7 +2373,7 @@ public class Application extends Controller {
 	 	 System.out.println("add area social media status result:" + postResult.getStatus());
 	 	 System.out.println("userid:" + session("userid") + "\nsessionid:" + session("sessionid") + " \nJson result: " + jsonParams);	
 	 		
-	 	return redirect(routes.Application.checkfeatarea(id,idenv));
+	 	return redirect(routes.Application.viewArea(id,idenv));
    }
    
    public static Result editSocialArea(String id, String idenv){
@@ -2425,7 +2425,7 @@ public class Application extends Controller {
 	   		default: break;	    	
 	   	}
 	   	
-	   	return redirect(routes.Application.checkfeatarea(id,idenv));
+	   	return redirect(routes.Application.viewArea(id,idenv));
    }
    
    /**

@@ -4,19 +4,26 @@
 
 <form action="@routes.Application.PostBoothAreaDesc(id,idenv)" method="POST">
 
-<br>
 <div class="col-md-offset-1 col-md-10">
+<br><br>
+<br>
+<div class="row">
+<div class="col-md-6">
 
-	Contact Email : <br>
+	 <label>Contact Email :</label> <br>
 	<input name="contact_email" class="form-control"><br>
-	Contact Website : <br>
+</div>
+<div class="col-md-6">
+	<label>Contact Website : </label><br>
 	<input name="contact_website" class="form-control"><br>
-	  Image Url:
+</div>
+	 <!--  Image Url:
 	  <input name="image_url" class="form-control"><br>
-	 
-	Product Description : <br>
+	  -->
+</div>
+	<label>Product Description : </label><br>
 
-   <textarea class="form-control" name="description" cols="50" rows="10"></textarea>
+   <textarea class="form-control" name="description" cols="40" rows="6"></textarea>
 
 <br>
 
@@ -24,7 +31,13 @@
 <input type="submit" class="btn-edit" value="done">
 <br>
 </div>
-
+<style type="text/css">
+	label{
+		    font-family: 'Open Sans Condensed', sans-serif;
+            color: #C1C3C0;
+            text-shadow: 2px 2px 4px #000000;
+	}
+</style>
 </form>
 
 }

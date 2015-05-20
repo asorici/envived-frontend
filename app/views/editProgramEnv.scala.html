@@ -1,10 +1,14 @@
 @(description:String, id:String)
 @Main("Program ") {
+<div class="path">
+ &nbsp;&nbsp;<i class="fa fa-paw"> to edit, just click on the program. Don't forget to save the changes.</i>
+</div>
 <form action="@routes.Application.updateDeleteEnvProgram(id)" method="POST">
 
- Program 
-
-<textarea class="form-control" name="description" rows="5" cols="40">@description</textarea>
+ <label>Program </label>
+<div class="text">
+<textarea class="form-control" name="description" rows="5" cols="40" placeholder="enter a program ...">@description</textarea>
+</div>
 <br>
    		<div class="row">
    		
@@ -20,5 +24,26 @@
 		</div>
 
 </form>
+<style type="text/css">
+	form .text textarea{
+		    background-color: transparent;
+        	border: none;
+        	color: #FFF;
+        	box-shadow: none;
+	}
+	form .text textarea:hover{
+		cursor: pointer;
+	}
+	form .text textarea:focus{
+		    background-color: #FFF;
+        	border: 1px solid #000;
+        	color: #000;
+	}
+	 label{
+           font-family: 'Open Sans Condensed', sans-serif;
+            color: #C1C3C0;
+            text-shadow: 2px 2px 4px #000000;
+          }
+</style>
 
 }

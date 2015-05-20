@@ -1,12 +1,20 @@
 @(id:String)
 @Main("order") {
 <form action="@routes.Application.postOrderEnv(id)" method="POST">
-
+<label>
 Add Order 
-
+</label>
 <textarea class="form-control" name="description" rows="5" cols="40"></textarea>
 <br>
 <input type="submit" class="btn-edit" value="done">
 </form>
+
+<style type="text/css">
+	 label{
+           font-family: 'Open Sans Condensed', sans-serif;
+            color: #C1C3C0;
+            text-shadow: 2px 2px 4px #000000;
+          }
+</style>
 
 }

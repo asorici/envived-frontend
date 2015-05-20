@@ -39,6 +39,8 @@
   </div><!-- /.container-fluid -->
 </nav>
 
+
+
 <div class="row"> 
 <div class="col-md-offset-1 col-md-11">
   <div class="path">
@@ -204,7 +206,7 @@
 
   $(function(){
       // $('#demo_box').popmenu({'background':'rgb(124, 166, 0)','focusColor':'rgb(204, 204, 0)'});
-      $('#demo_box').popmenu({'background':'rgb(204, 204, 0)','focusColor':'rgb(138, 184, 0)'});
+      $('#demo_box').popmenu({'background':'#004C4C','focusColor':'rgb(138, 184, 0)'});
   })
 </script>
 
@@ -237,10 +239,11 @@ right: 10px
 }
 
 .display{
-    position: relative;
-    top: 10px;
-    bottom: 30px;
-    background: transparent;
+   position: relative;
+   top: 10px;
+   bottom: 30px;
+    /*background: transparent;*/
+    background:#334C4C;
     border: none;
     border-radius: 7px;
     width: 220px;
@@ -252,29 +255,38 @@ right: 10px
     transition: all 0.5s;
   }
 
-  .unu{
-    background-color: #003300;
-    -webkit-transition: all 0.5s;
-    transition: all 0.5s;
-  }
-
-   .doi{
-    background-color: #194719;
-     -webkit-transition: all 0.5s;
-    transition: all 0.5s;
-  }
-
-   .trei{
-    background-color: #335C33;
-     -webkit-transition: all 0.5s;
-    transition: all 0.5s;
-  }
-
  .display:hover{
   color:#FFF;
   border: none;
   background-color:#334C4C;
   text-shadow: 0 0 3px #000, 0 0 5px #DDDEDB;
+  }
+
+  .unu{
+    /*background-color: #003300;*/
+    background-color: #CCCC00;
+    color: #FFF;
+    text-shadow: 2px 2px 4px #000000;
+    -webkit-transition: all 0.5s;
+    transition: all 0.5s;
+  }
+
+   .doi{
+    /*background-color: #194719;*/
+    background-color: #999900;
+    color: #FFF;
+    text-shadow: 2px 2px 4px #000000;
+     -webkit-transition: all 0.5s;
+    transition: all 0.5s;
+  }
+
+   .trei{
+    /*background-color: #335C33;*/
+    background-color: #666600;
+    color: #FFF;
+    text-shadow: 2px 2px 4px #000000;
+     -webkit-transition: all 0.5s;
+    transition: all 0.5s;
   }
 
  .unu:hover{
@@ -370,6 +382,7 @@ right connector from last child*/
   text-align: center;
   vertical-align: middle;
   position: relative;
+  background-color:#334C4C;
   box-shadow: inset -10px -10px 100px #000, 10px 10px 20px black, inset 0px 0px 10px black;
   display: inline-block;
   margin: 5%;
@@ -419,6 +432,7 @@ right connector from last child*/
 }
 
 </style>
+
 
 <!-- modals -->
 
