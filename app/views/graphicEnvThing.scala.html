@@ -82,7 +82,7 @@ function GetData() {
     data.shift();
 
     while (data.length < totalPoints) {     
-        var y = Math.random() * 100;
+        var y = Math.random() * 30;
         var temp = [now += updateInterval, y];
 
         data.push(temp);
@@ -121,11 +121,11 @@ var options = {
     },
     yaxis: {
         min: 0,
-        max: 100,        
+        max: 50,        
         tickSize: 5,
         tickFormatter: function (v, axis) {
             if (v % 10 == 0) {
-                return v + "%";
+                return v + ""; //units
             } else {
                 return "";
             }
@@ -150,7 +150,7 @@ $(document).ready(function () {
     GetData();
 
     dataset = [
-        { label: "CPU", data: data, color: "#00FF00" }
+        { label: "", data: data, color: "#00FF00" }
     ];
 
     $.plot($("#flot-placeholder1"), dataset, options);
