@@ -2,12 +2,13 @@
 
 @Main("Manual command") {
 
+
 <div class="contente">
 @for((c,w)<- map){
 <div class="loop">
   <div class="col-md-offset-1 col-md-2">
   		<!-- thing type = c: -->
-     <a href="@routes.Application.RemoveTingEnv(c,w,id)" data-toggle="tooltip" data-placement="top" title="remove"><i class="fa fa-times"></i></a> &nbsp;&nbsp;&nbsp;<label>@c</label>
+     <a href="@routes.Application.RemoveTingEnv(c,w,id)"  data-toggle="tooltip" data-placement="top" title="remove"><i class="fa fa-times"></i></a> &nbsp;&nbsp;&nbsp;<label>@c</label>
   		<!-- id thing = w: @w<br>	 -->
   </div>
 

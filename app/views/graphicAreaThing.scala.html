@@ -64,7 +64,32 @@ Path : <a href="@routes.Application.welcome()">Profile </a> >> <a  href="@routes
 <div class="row">
 <div class="col-md-offset-1 col-md-10">
 
+
+<div class="tabel-val">
+<table id= "myTable" style="width:100%">
+<tr  class="val">
+    <th>&nbsp;&nbsp;value</th>
+    @for((c,w)<- map){
+    <td>@c</td>
+     }
+</tr>
+<tr class="timp">
+    <th>&nbsp;&nbsp;time</th>
+    @for(k <- timeList){
+        <td> @k</td> 
+     }
+</tr>
+<tr class="data">
+    <th>&nbsp;&nbsp;date</th> 
+    @for(q <- dateList){ 
+    <td>@q </td>
+    }
+ </tr>
+  
+</table>
+</div>
 <!-- real time -->
+
 <br>
 <script>
 var data = [];
@@ -75,13 +100,25 @@ var now = new Date().getTime();
 
 
 function GetData() {
-    data.shift();
+  data.shift();
 
-    while (data.length < totalPoints) {     
-        var y = Math.random() * 100;
+      // get the table
+  var table = document.getElementById( 'myTable' );
+  
+  // get table rows
+  var rows = table.getElementsByTagName( 'tr' );
+  
+  // iterate through the <td> elements of the first row
+  // and construct chart data out of other rows as well
+  var values = rows[ 0 ].getElementsByTagName( 'td' );
+
+    while (data.length < totalPoints) { 
+    for(var i=0; i < values.length; i++){    
+        var y = Math.random() * values[ i ].innerHTML;
         var temp = [now += updateInterval, y];
 
         data.push(temp);
+      }
     }
 }
 
@@ -117,11 +154,11 @@ var options = {
     },
     yaxis: {
         min: 0,
-        max: 100,        
+        max: 70,        
         tickSize: 5,
         tickFormatter: function (v, axis) {
             if (v % 10 == 0) {
-                return v + "%";
+                return v + ""; //units
             } else {
                 return "";
             }
@@ -146,7 +183,7 @@ $(document).ready(function () {
     GetData();
 
     dataset = [
-        { label: "CPU", data: data, color: "#00FF00" }
+        { label: "", data: data, color: "#00FF00" }
     ];
 
     $.plot($("#flot-placeholder1"), dataset, options);
@@ -171,31 +208,10 @@ $(document).ready(function () {
 <!-- real tim -->
 
 <br><br><br>
-<div class="tabel-val">
-<table id= "myTable" style="width:100%">
-<tr  class="val">
-    <th>&nbsp;&nbsp;value</th>
-    @for((c,w)<- map){
-    <td>@c</td>
-     }
-</tr>
-<tr class="timp">
-    <th>&nbsp;&nbsp;time</th>
-    @for(k <- timeList){
-        <td> @k</td> 
-     }
-</tr>
-<tr class="data">
-    <th>&nbsp;&nbsp;date</th> 
-    @for(q <- dateList){ 
-    <td>@q </td>
-    }
- </tr>
-  
-</table>
-</div>
 
-<div id="chartdiv"></div> 
+
+<!-- <div id="chartdiv"></div>  -->
+
 <style type="text/css">
 .tabel-val{
   width: 1160px;
@@ -207,7 +223,7 @@ $(document).ready(function () {
 visibility: hidden;
 }
 body {
-  font-family: Lato;
+  /*font-family: Lato;*/
   overflow-y:scroll;
 }
 

@@ -2679,7 +2679,7 @@ public class Application extends Controller {
 	   System.out.println("userid:" + session("userid") + "\nsessionid:" + session("sessionid") + " \nJson result: " + jsonParams);	
 	   System.out.println("add properties thing environment result ******:" + postResult.getStatus());
 	   
-	   return redirect(routes.Application.graphicThingEnv(id,id_thing,type));
+	   return redirect(routes.Application.ManualThingEnv(id));
    }
    
    public static Result graphicThingEnv(String id,String id_thing, String type){
@@ -2906,7 +2906,7 @@ public class Application extends Controller {
 	   System.out.println("userid:" + session("userid") + "\nsessionid:" + session("sessionid") + " \nJson result: " + jsonParams);	
 	   System.out.println("add properties thing area result ******:" + postResult.getStatus());
 	   
-	   return redirect(routes.Application.graphicThingArea(idenv,id,id_thing,type));
+	   return redirect(routes.Application.ManualThingArea(idenv,id));
    }
  
    
