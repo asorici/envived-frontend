@@ -1,4 +1,4 @@
-@(id:String)
+@(id:String, map: Map[String, String])
 @Main("Things Area") {
 <nav id="css" class="navbar navbar-default">
   <div class="container-fluid">
@@ -46,6 +46,37 @@
    $('[data-toggle="tooltip"]').tooltip({ container: 'body' })
 </script>
 
+
+
+<div class="id-thing">
+@for((k,v)<- map){
+<br>
+@if(k == "humidity") {
+                      <button id="hum">@k</button> &nbsp;&nbsp;
+                      <button id="h_id">@v</button>
+                     }else{
+                    
+                     }
+                     
+@if(k == "temperature"){
+                      <button id="temp">@k</button> &nbsp;&nbsp;
+                      <button id="t_id">@v</button>
+                    }else{
+                    
+                    }
+                    
+@if(k == "luminosity"){
+                      <button id="lum">@k</button> &nbsp;&nbsp;
+                      <button id="l_id">@v</button>
+                    }else{
+                    
+                    }
+}
+</div>
+<style type="text/css">
+  
+</style>
+
 <div class="row">
 <div class="col-md-offset-1">
 <div class="light">
@@ -80,10 +111,10 @@
   <option id="7" class="temp" value="data-pin">7</option>
   <option id="8" class="temp" value="data-pin">8</option>
   <option id="9" class="temp" value="data-pin">~9</option>
-  <!-- <option id="10" class="temp" value="data-pin">~10</option> -->
-  <!-- <option id="11" class="temp" value="data-pin">~11</option> -->
-  <!-- <option id="12" class="temp" value="data-pin">12</option> -->
-  <!-- <option id="13" class="temp" value="data-pin">13</option> -->
+  <option id="10" class="temp" value="data-pin">~10</option>
+  <option id="11" class="temp" value="data-pin">~11</option>
+  <option id="12" class="temp" value="data-pin">12</option>
+  <option id="13" class="temp" value="data-pin">13</option>
 </select>
 <label>NC</label>
 <select class="form-control">
@@ -116,10 +147,10 @@
   <option id="7" class="hum" value="data-pin">7</option>
   <option id="8" class="hum" value="data-pin">8</option>
   <option id="9" class="hum" value="data-pin">~9</option>
-  <!-- <option id="10" class="hum" value="data-pin">~10</option> -->
-  <!-- <option id="11" class="hum" value="data-pin">~11</option> -->
-  <!-- <option id="12" class="hum" value="data-pin">12</option> -->
-  <!-- <option id="13" class="hum" value="data-pin">13</option> -->
+  <option id="10" class="hum" value="data-pin">~10</option>
+  <option id="11" class="hum" value="data-pin">~11</option>
+  <option id="12" class="hum" value="data-pin">12</option>
+  <option id="13" class="hum" value="data-pin">13</option>
 </select>
 
 <label>NC</label>
@@ -171,13 +202,12 @@
 <div class="butoane">
 <div class="col-md-offset-1 col-md-10">
 <div class="row">
+
 <div class="col-md-4">
-<button class="temp">Send</button>
+<button class="send-data">Send</button>
 </div>
 
-
-
-<div class="col-md-4">
+<!-- <div class="col-md-4">
 <button>Send</button>
 </div>
 
@@ -185,27 +215,34 @@
 <div class="col-md-4">
 <button>Send</button>
 </div>
-
+ -->
 
  <script type="text/javascript">
     $(document).ready(function(){
       $(".led").click(function(){
         // alert("wooooo");
         var p = $(this).attr('id'); 
-        var t = $('.temp').attr('id');
-        var l = $('.lum').attr('id');
+        // var t = $('.temp').attr('id');
+        // var l = $('.lum').attr('id');
 
         // get id value (i.e. pin13, pin12, or pin11)
         // send HTTP GET request to the IP address with the parameter "pin" and value "p", then execute the function
         $.get("http://192.168.4.1:80/", {pin:p});
-        // $.get("http://192.168.4.1:80/", {hum:h});
-        // $.get("http://192.168.4.1:80/", {lum:l});
-        // $.get("http://192.168.4.1:80/", {temp:t});
-         // execute get request
-
 
       });
     });
+  </script>
+  <script type="text/javascript">
+  $(document).ready(function(){
+    $(".send-data").click(function(){
+      var id_t = $("#t_id").val().innerHTML;
+      var id_h = $("#h_id").val();
+      var id_l = $("#l_id").val();
+
+      $.get("http://192.168.4.1:80/",{temp:id_t,hum:id_h,lun:id_l});
+    });
+  });
+
   </script>
 
 </div><!--row-->

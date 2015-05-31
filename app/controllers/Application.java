@@ -2859,12 +2859,12 @@ public class Application extends Controller {
    	     HashMap<String, String>hash=new HashMap<String, String>();
 	   	 
    	     String thng_id;
-	   	    for(int i=0;i<type.size();i++){
-			   		hash.put(type.get(i),idthing.get(i).split("/")[6]);		
+	   	 for(int i=0;i<type.size();i++){
+	   		hash.put(type.get(i),idthing.get(i).split("/")[6]);		
 	   	  }
 	   	 
-	   	System.out.println("thing-uri: "+type+"\n");
-	   	System.out.println("area: " + area);   	   	   	
+	   	 System.out.println("thing-uri: "+type+"\n");
+	   	 System.out.println("area: " + area);   	   	   	
     	 
  	   return ok(viewThingsManArea.render(hash, idenv, id));    
  }
@@ -2966,7 +2966,33 @@ public class Application extends Controller {
     * */
    
    public static Result envArduino(String id){
-	   return ok(envarduinopage.render(id));
+	   // now i have to find the id for the humidity, luminosity and temperature thing
+	   String url = "http://localhost:8080/envived/client/v2/resources/things/?clientrequest=true&virtual=true&format=json&environment="+id;
+       WSRequestHolder holder = WS.url(url);
+     
+	    holder.setHeader("Cookie","sessionid="+session("sessionid"));
+  	 	holder.setContentType(Url.appjson);
+  	
+  	 	WSResponse ListResponse = holder.get().get(200000);
+  	 	JsonNode content = ListResponse.asJson();
+  	 	   	
+	    List<String> type = content.findValuesAsText("thing_type");
+ 	    	
+	    session("userid",id);
+
+	   	HashMap<String, String>hash=new HashMap<String, String>();
+	   	   	
+	   	for (int i=0;i<type.size();i++){
+	   		
+	   	List<String> idthing = content.findValuesAsText("resource_uri");
+	   	hash.put(type.get(i),idthing.get(i).split("/")[6]);		
+
+	   	}
+	   	
+	   	System.out.println("\n type: " + type);
+	   	System.out.println("hash " + hash);
+//	   	
+  return ok(envarduinopage.render(id, hash));
    }
    
    public static Result areaArduino(String idenv, String id){
