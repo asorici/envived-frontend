@@ -3,20 +3,19 @@ import requests
 import time
 import json
 
-ser = serial.Serial('/dev/ttyACM1', 9600, timeout = 1)
-
-
+ser = serial.Serial('/dev/ttyACM0', 9600, timeout = 1)
 
 i = 0
 collected = []
-while (i < 10):
+while (i < 15):
     line  = ser.readline()
     if (line[:3] == '***'):
         #print line
         line = line.strip('*')
         tokens = line[:-2].split('|')
         #print tokens
-        list_tuple = (float(tokens[0]) , float(tokens[1]), float(tokens[2]) )
+        list_tuple = (float(tokens[0]) , float(tokens[1]), float(tokens[2]), int(tokens[3]), int(tokens[4]), int(tokens[5]) )
+     
         #print list_tuple
         collected.append(list_tuple)
         
@@ -25,19 +24,25 @@ while (i < 10):
 avg_temp = 0
 avg_hum = 0
 avg_lum = 0
+id_t=0
+id_h=0
+id_l=0
 for c in collected:
     avg_temp += c[0]
     avg_hum += c[1]
     avg_lum += c[2]
+    id_t = c[3]
+    id_h = c[4]
+    id_l = c[5]
     
 avg_temp = avg_temp/len(collected)
 avg_hum = avg_hum/len(collected)
 avg_lum = avg_lum/len(collected)
 
 print "AVT: %.2f AVH: %.2f AVL: %.2f" % (avg_temp, avg_hum, avg_lum)
-id_thing = 94
-id_thing_h = 93
-id_thing_l = 95
+id_thing = id_t
+id_thing_h = id_h
+id_thing_l = id_l
 v_type = 'temperature'
 v_type_h = 'humidity'
 v_type_l = 'luminosity'

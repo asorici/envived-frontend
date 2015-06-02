@@ -48,31 +48,6 @@
 
 
 
-<div class="id-thing">
-@for((k,v)<- map){
-<br>
-@if(k == "humidity") {
-                      <button id="hum">@k</button> &nbsp;&nbsp;
-                      <button id="h_id">@v</button>
-                     }else{
-                    
-                     }
-                     
-@if(k == "temperature"){
-                      <button id="temp">@k</button> &nbsp;&nbsp;
-                      <button id="t_id">@v</button>
-                    }else{
-                    
-                    }
-                    
-@if(k == "luminosity"){
-                      <button id="lum">@k</button> &nbsp;&nbsp;
-                      <button id="l_id">@v</button>
-                    }else{
-                    
-                    }
-}
-</div>
 <style type="text/css">
   
 </style>
@@ -198,13 +173,17 @@
 </div><!--row-->
 
 
-<div class="row">
+<!-- <div class="row">
 <div class="butoane">
 <div class="col-md-offset-1 col-md-10">
-<div class="row">
+<div class="row"> -->
+
+
+
+
 
 <div class="col-md-4">
-<button class="send-data">Send</button>
+<!-- <button class="send-data">Send</button> -->
 </div>
 
 <!-- <div class="col-md-4">
@@ -217,29 +196,91 @@
 </div>
  -->
 
+
+<div class="id-thing">
+
+<div class="row">
+
+<div class="col-md-offset-1">
+<br><br>
+<label>info :</label>
+@for((k,v)<- map){
+
+@if(k == "humidity") {
+                      <button id="hum">@k</button> &nbsp;&nbsp;
+                      <button id="@v" class="h_id">@v</button>
+                     }else{
+                    
+                     }
+<!-- </div > -->
+<!-- <div class="col-md-3"> -->
+@if(k == "temperature"){
+                      <button id="temp">@k</button> &nbsp;&nbsp;
+                      <button id="@v" class="t_id">@v</button>
+                    }else{
+                    
+                    }
+<!-- </div> -->
+<!-- <div class="col-md-3"> -->
+@if(k == "luminosity"){
+                      <button id="lum">@k</button> &nbsp;&nbsp;
+                      <button id="@v" class="l_id">@v</button>
+                    }else{
+                    
+                    }
+}
+<br><br>
+</div>
+
+</div>
+</div>
+
+
+
+<div class="row">
+<div class="col-md-offset-1 col-md-4">
+<button class="send-data">Send</button>
+</div>
+</div>
+
+
  <script type="text/javascript">
     $(document).ready(function(){
       $(".led").click(function(){
-        // alert("wooooo");
+        
         var p = $(this).attr('id'); 
+        // alert(p);
         // var t = $('.temp').attr('id');
         // var l = $('.lum').attr('id');
+        // $(".send-data").click(function(){
+          var id_t = $(".t_id").attr('id');
+          
+          var id_h = $(".h_id").attr('id');
+          var id_l = $(".l_id").attr('id');
 
+          // alert("temp "+id_t+" hum "+id_h+" lum "+id_l);
+          $.get("http://192.168.4.1:80/",{pin:p,temp:id_t,hum:id_h,lum:id_l});
+          // $.get("http://192.168.4.1:80/", {temp:id_t});
+        // });
         // get id value (i.e. pin13, pin12, or pin11)
         // send HTTP GET request to the IP address with the parameter "pin" and value "p", then execute the function
-        $.get("http://192.168.4.1:80/", {pin:p});
+        // $.get("http://192.168.4.1:80/", {pin:p});
 
       });
     });
   </script>
   <script type="text/javascript">
   $(document).ready(function(){
-    $(".send-data").click(function(){
-      var id_t = $("#t_id").val().innerHTML;
-      var id_h = $("#h_id").val();
-      var id_l = $("#l_id").val();
 
-      $.get("http://192.168.4.1:80/",{temp:id_t,hum:id_h,lun:id_l});
+    $(".send-data").click(function(){
+
+      var id_t = $(".t_id").attr('id');
+      var id_h = $(".h_id").attr('id');
+      var id_l = $(".l_id").attr('id');
+
+      // alert("temp "+id_t+" hum "+id_h+" lum "+id_l);
+      $.get("http://192.168.4.1:80/",{pin:10,temp:id_t,hum:id_h,lum:id_l});
+      // $.get("http://192.168.4.1:80/", {temp:id_t});
     });
   });
 
