@@ -1,5 +1,5 @@
-@(idenv:String, id:String)
-@Main("Things Area") {
+@(idenv:String, id:String, map: Map[String, String])
+@Main("Arduino") {
 <nav id="css" class="navbar navbar-default">
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
@@ -52,9 +52,18 @@ Path : <a href="@routes.Application.welcome()">Profile </a> >> <a  href="@routes
 
 
 
+<script type="text/javascript">
+   $('[data-toggle="tooltip"]').tooltip({ container: 'body' })
+</script>
+
+
+
+<style type="text/css">
+  
+</style>
 
 <div class="row">
-<div class="col-md-offset-1">
+<div class="col-md-offset-1 col-md-4">
 <div class="light">
   <label> Light Control</label>
 </div><!--light-->
@@ -63,19 +72,12 @@ Path : <a href="@routes.Application.welcome()">Profile </a> >> <a  href="@routes
   <button id="12" class="led led12">Green</button> <!-- button for pin 12 -->
   <button id="13" class="led led13">Yellow</button> <!-- button for pin 13 -->
 </div> <!--offset-->   
+
+<div class="col-md-3">
+  <div class="msg-data-send"> <br><label>Data sent successfully !</label></div>
+</div>
+
 </div><!--row-->
-
-  <script type="text/javascript">
-    $(document).ready(function(){
-      $(".led").click(function(){
-        // alert("wooooo");
-        var p = $(this).attr('id'); // get id value (i.e. pin13, pin12, or pin11)
-        // send HTTP GET request to the IP address with the parameter "pin" and value "p", then execute the function
-        $.get("http://192.168.4.1:80/", {pin:p}); // execute get request
-      });
-    });
-  </script>
-
 
 <div class="row">
 <div class="col-md-offset-1 col-md-10">
@@ -90,19 +92,19 @@ Path : <a href="@routes.Application.welcome()">Profile </a> >> <a  href="@routes
   <option value="null">---</option>
 </select>
 <label>DATA</label>
-<select class="form-control" placeholder="digital pin">
-  <option value="data-pin">4</option>
-  <option value="data-pin">2</option>
-  <option value="data-pin">~3</option>
-  <option value="data-pin">~5</option>
-  <option value="data-pin">~6</option>
-  <option value="data-pin">7</option>
-  <option value="data-pin">8</option>
-  <option value="data-pin">~9</option>
-  <option value="data-pin">~10</option>
-  <option value="data-pin">~11</option>
-  <option value="data-pin">12</option>
-  <option value="data-pin">13</option>
+<select class="form-control temp-pin" placeholder="digital pin">
+  <option id="4" class="temp" value="data-pin">4</option>
+  <option id="2" class="temp" value="data-pin">2</option>
+  <option id="3" class="temp" value="data-pin">3</option>
+  <option id="5" class="temp" value="data-pin">5</option>
+  <option id="6" class="temp" value="data-pin">6</option>
+  <option id="7" class="temp" value="data-pin">7</option>
+  <option id="8" class="temp" value="data-pin">8</option>
+  <option id="9" class="temp" value="data-pin">9</option>
+  <!-- <option id="10" class="temp" value="data-pin">10</option> -->
+  <!-- <option id="11" class="temp" value="data-pin">11</option> -->
+  <!-- <option id="12" class="temp" value="data-pin">12</option> -->
+  <!-- <option id="13" class="temp" value="data-pin">13</option> -->
 </select>
 <label>NC</label>
 <select class="form-control">
@@ -126,19 +128,19 @@ Path : <a href="@routes.Application.welcome()">Profile </a> >> <a  href="@routes
 </select>
 
 <label>DATA</label>
-<select class="form-control" >
-  <option value="data-pin">4</option>
-  <option value="data-pin">2</option>
-  <option value="data-pin">~3</option>
-  <option value="data-pin">~5</option>
-  <option value="data-pin">~6</option>
-  <option value="data-pin">7</option>
-  <option value="data-pin">8</option>
-  <option value="data-pin">~9</option>
-  <option value="data-pin">~10</option>
-  <option value="data-pin">~11</option>
-  <option value="data-pin">12</option>
-  <option value="data-pin">13</option>
+<select class="form-control hum-pin" >
+  <option id="4" class="hum" value="data-pin">4</option>
+  <option id="2" class="hum" value="data-pin">2</option>
+  <option id="3" class="hum" value="data-pin">3</option>
+  <option id="5" class="hum" value="data-pin">5</option>
+  <option id="6" class="hum" value="data-pin">6</option>
+  <option id="7" class="hum" value="data-pin">7</option>
+  <option id="8" class="hum" value="data-pin">8</option>
+  <option id="9" class="hum" value="data-pin">9</option>
+  <!-- <option id="10" class="hum" value="data-pin">10</option> -->
+  <!-- <option id="11" class="hum" value="data-pin">11</option> -->
+  <!-- <option id="12" class="hum" value="data-pin">12</option> -->
+  <!-- <option id="13" class="hum" value="data-pin">13</option> -->
 </select>
 
 <label>NC</label>
@@ -163,13 +165,13 @@ Path : <a href="@routes.Application.welcome()">Profile </a> >> <a  href="@routes
 </select>
 
 <label>Analogic PIN</label>
-<select class="form-control">
-  <option value="vcc">A0</option>
-  <option value="null">A1</option>
-  <option value="vcc">A2</option>
-  <option value="null">A3</option>
-  <option value="null">A4</option>
-  <option value="null">A5</option>
+<select class="form-control lum-pin" name="pin_select">
+  <option id="0" class="lum" value="vcc">0</option>
+  <option id="1" class="lum" value="null">1</option>
+  <option id="2" class="lum" value="vcc">2</option>
+  <option id="3" class="lum" value="null">3</option>
+  <option id="4" class="lum" value="null">4</option>
+  <option id="5" class="lum" value="null">5</option>
 
 </select>
 
@@ -186,37 +188,142 @@ Path : <a href="@routes.Application.welcome()">Profile </a> >> <a  href="@routes
 </div><!--row-->
 
 
-<div class="row">
+<!-- <div class="row">
 <div class="butoane">
 <div class="col-md-offset-1 col-md-10">
-<div class="row">
+<div class="row"> -->
+
+
+
+
+
 <div class="col-md-4">
-<button onclick="location.href = '@routes.Application.error()';" >Send</button>
+<!-- <button class="send-data">Send</button> -->
 </div>
+
 <!-- <div class="col-md-4">
 <button>Send</button>
 </div>
+
+
 <div class="col-md-4">
 <button>Send</button>
-</div> -->
+</div>
+ -->
+
+
+<div class="id-thing">
+
+<div class="row">
+
+<div class="col-md-offset-1">
+<br><br>
+<label>info :</label>
+@for((k,v)<- map){
+
+@if(k == "humidity") {
+                      <button id="hum">@k</button> &nbsp;&nbsp;
+                      <button id="@v" class="h_id">@v</button>
+                     }else{
+                    
+                     }
+<!-- </div > -->
+<!-- <div class="col-md-3"> -->
+@if(k == "temperature"){
+                      <button id="temp">@k</button> &nbsp;&nbsp;
+                      <button id="@v" class="t_id">@v</button>
+                    }else{
+                    
+                    }
+<!-- </div> -->
+<!-- <div class="col-md-3"> -->
+@if(k == "luminosity"){
+                      <button id="lum">@k</button> &nbsp;&nbsp;
+                      <button id="@v" class="l_id">@v</button>
+                    }else{
+                    
+                    }
+}
+<br><br>
+</div>
+
+</div>
+</div>
+
+
+
+<div class="row">
+<div class="col-md-offset-1 col-md-1">
+<button class="send-data">Send</button>
+</div>
+<div class="col-md-1">
+ <button class="chart" onClick="location.href='@routes.Application.arduinoChartarea(idenv,id)'">Chart</button>
+</div>
+</div>
+</div>
+
+
+ <script type="text/javascript">
+    $(document).ready(function(){
+      $(".led").click(function(){
+        
+        var p = $(this).attr('id'); 
+        // alert(p);
+        // var t = $('.temp').attr('id');
+        // var l = $('.lum').attr('id');
+        // $(".send-data").click(function(){
+          var id_t = $(".t_id").attr('id');
+          
+          var id_h = $(".h_id").attr('id');
+          var id_l = $(".l_id").attr('id');
+
+          var pin_t = $('.temp-pin option:selected').text();
+          var pin_l = $('.lum-pin option:selected').text();
+          var pin_h = $('.hum-pin option:selected').text();
+
+          // alert("pin temp : "+pin_t+" pin lum : "+pin_l+" pin hum : "+pin_h);
+          // alert("temp "+id_t+" hum "+id_h+" lum "+id_l);
+          $.get("http://192.168.4.1:80/",{pin:p,temp:id_t,hum:id_h,lum:id_l,pint:pin_t,pinl:pin_l,pinh:pin_h});
+          // $.get("http://192.168.4.1:80/", {temp:id_t});
+        // });
+        // get id value (i.e. pin13, pin12, or pin11)
+        // send HTTP GET request to the IP address with the parameter "pin" and value "p", then execute the function
+        // $.get("http://192.168.4.1:80/", {pin:p});
+
+      });
+    });
+  </script>
+  <script type="text/javascript">
+  $(document).ready(function(){
+
+    $(".send-data").click(function(){
+
+      var id_t = $(".t_id").attr('id');
+      var id_h = $(".h_id").attr('id');
+      var id_l = $(".l_id").attr('id');
+
+      var pin_t = $('.temp-pin option:selected').text();
+      var pin_l = $('.lum-pin option:selected').text();
+      var pin_h = $('.hum-pin option:selected').text();
+
+      // alert("temp "+id_t+" hum "+id_h+" lum "+id_l);
+
+      $.get("http://192.168.4.1:80/",{pin:10,temp:id_t,hum:id_h,lum:id_l,pint:pin_t,pinl:pin_l,pinh:pin_h});
+      // $.get("http://192.168.4.1:80/", {temp:id_t});
+      $( ".msg-data-send" ).show( "slow" );
+      $(".chart").addClass("see-me");
+    });
+  });
+
+  </script>
+
 </div><!--row-->
 </div><!--offse-->
 </div><!--butoane-->
 </div><!--row-->
 
+
 <style type="text/css">
-#thing{
-  background-color: transparent;
-  border: none;
-  color: #C1C3C0;
-  text-shadow: 2px 2px 4px #000000;
-  -webkit-transition: all 0.5s;
-  transition: all 0.5s;
-}
-#thing:hover{
-	color:#FFF;
-	text-shadow: 0 0 3px #000, 0 0 5px #DDDEDB; 
-}
 .led{
   -webkit-transition: all 0.5s;
   transition: all 0.5s;
@@ -265,5 +372,39 @@ Path : <a href="@routes.Application.welcome()">Profile </a> >> <a  href="@routes
   .butoane button:hover{
     background-color: #007ACC;
   }
+  #thing{
+    background-color: transparent;
+    color: #C1C3C0;
+    text-shadow: 2px 2px 4px #000000;
+    
+  -webkit-transition: color 0.5s;
+  transition: color 0.5s;
+  }
+   #thing:hover{
+  color:#FFF;
+  text-shadow: 0 0 3px #000, 0 0 5px #DDDEDB; 
+   }
+   .send-data, .chart{
+    width: 80px;
+    height: 40px;
+
+  -webkit-transition: all 0.5s;
+  transition: all 0.5s;
+   }
+   .send-data:hover, .chart:hover{
+    background-color:#29A3A3;
+   }
+
+   .msg-data-send{
+    color: #CCCC00;
+    text-shadow: 2px 2px 4px #000000;
+    font-size: 20px;
+    display: none;
+   }
+   .see-me{
+   color:#FFF;
+   text-shadow: 0 0 3px #000, 0 0 5px #008A00; 
+   background-color: #CCCC00;    
+   }
 </style>
 }

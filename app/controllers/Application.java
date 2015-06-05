@@ -1,49 +1,32 @@
 package controllers;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.io.PrintWriter;
-import java.io.UnsupportedEncodingException;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.InputMismatchException;
 import java.util.Iterator;
 import java.util.List;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import models.Area;
 import models.BoothDescription;
 import models.Environment;
 import models.UserProfile;
 
-import com.fasterxml.jackson.core.JsonParseException;
-import com.fasterxml.jackson.core.util.BufferRecycler;
-import com.fasterxml.jackson.databind.JsonMappingException;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.node.ObjectNode;
-import com.sun.net.ssl.HttpsURLConnection;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
-import play.*;
 import play.data.DynamicForm;
 import play.data.Form;
-import play.libs.Akka;
 import play.libs.Json;
 import play.libs.ws.WS;
 import play.libs.ws.WSRequestHolder;
 import play.libs.ws.WSResponse;
-import play.mvc.*;
-import scala.collection.immutable.Stream.Cons;
+import play.mvc.Controller;
+import play.mvc.Result;
 import views.html.*;
-import views.html.helper.form;
+
+
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 
 
 public class Application extends Controller {
@@ -859,7 +842,7 @@ public class Application extends Controller {
 	}
 
     /**
-     * Program environment
+     * Program : environment
      * */
     
    public static Result envProgram(String id){
@@ -1425,7 +1408,11 @@ public class Application extends Controller {
  	
  	  return ok(areafeat.render(d,bd,p,o,s,id,idenv));
     }
-    //view one area
+    
+  /**
+   * View one area
+   * */
+    
     public static Result viewArea(String id, String idenv){
      //String id = id area ;
     	
@@ -1620,7 +1607,10 @@ public class Application extends Controller {
     	  	
     }
     
-    //view all areas
+    /**
+     * view all areas
+     * */
+    
     public static Result viewAreas(String id){
     	//String id = id env
     	String url = Url.host+":"+Url.port+Url.area+Url.vTcrTfJ;
@@ -1660,7 +1650,6 @@ public class Application extends Controller {
      * Edit Area
      * */
     
-    //edit area
     public static Result editArea(String id, String idenv){
     	
     	//String id = id area ; 
@@ -1848,37 +1837,37 @@ public class Application extends Controller {
     }
     
     //view area description if it has one, if not redirect to add one :) :: i won't need this anymore ~
-    public static Result viewDescription(String id,String idenv){
-    	
-    	 String descrUrl =Url.host+":"+Url.port+Url.description+Url.vFcrTfj+"&area="+id;
-    	
-    	 WSRequestHolder holder=WS.url(descrUrl);
-    	 holder.setHeader("Cookie","sessionid="+session("sessionid"));
-    	 holder.setContentType(Url.appjson);
-    	 
-    	 WSResponse response = holder.get().get(20000);
-    	 System.out.println("i'm in view area description");
-    	 System.out.println("view description area response status:"+response.getStatus());
-    	
-    	 JsonNode content = response.asJson();
-    	 List<String> description = content.findValuesAsText("description");
-
-    try{
-    	 if(description.get(0) != null){ 		 
-    		 System.out.println("you have a description ...: "+description.get(0));
-    	    return ok(viewAreaDesc.render(description.get(0),id,idenv));
-    	 	}
-    	}catch(InputMismatchException ex){
-    		System.out.println("****InputMismatchException****");
-		   }catch (IndexOutOfBoundsException ex )
-	    {   
-			  System.out.println(":(IndexOutOfBoundsException):");
-	     } 
-    	    
-    return redirect(routes.Application.areaDescription(id,idenv));
+//    public static Result viewDescription(String id,String idenv){
+//    	
+//    	 String descrUrl =Url.host+":"+Url.port+Url.description+Url.vFcrTfj+"&area="+id;
+//    	
+//    	 WSRequestHolder holder=WS.url(descrUrl);
+//    	 holder.setHeader("Cookie","sessionid="+session("sessionid"));
+//    	 holder.setContentType(Url.appjson);
+//    	 
+//    	 WSResponse response = holder.get().get(20000);
+//    	 System.out.println("i'm in view area description");
+//    	 System.out.println("view description area response status:"+response.getStatus());
+//    	
+//    	 JsonNode content = response.asJson();
+//    	 List<String> description = content.findValuesAsText("description");
+//
+//    try{
+//    	 if(description.get(0) != null){ 		 
+//    		 System.out.println("you have a description ...: "+description.get(0));
+//    	    return ok(viewAreaDesc.render(description.get(0),id,idenv));
+//    	 	}
+//    	}catch(InputMismatchException ex){
+//    		System.out.println("****InputMismatchException****");
+//		   }catch (IndexOutOfBoundsException ex )
+//	    {   
+//			  System.out.println(":(IndexOutOfBoundsException):");
+//	     } 
+//    	    
+//    return redirect(routes.Application.areaDescription(id,idenv));
 //    	   return ok();
     
-    }
+//    }
        
     /**
      * Area Booth Description
@@ -1967,30 +1956,30 @@ public class Application extends Controller {
     }
     
     //view-booth description if i have one, if not, redirect to add one  
-    public static Result viewBoothArea(String id, String idenv){
-    
-     String descrUrl =Url.host+":"+Url.port+Url.boo_description+Url.vFcrTfj+"&area="+id;
-     WSRequestHolder holder=WS.url(descrUrl);
-	 holder.setHeader("Cookie","sessionid="+session("sessionid"));
-	 holder.setContentType(Url.appjson);
-	 
-	 WSResponse response = holder.get().get(20000);
-	 System.out.println("i'm in view area booth description");
-	 System.out.println("view description booth area response status:"+response.getStatus());
-	
-	 JsonNode content = response.asJson();
-
-   	 List<String> description = content.findValuesAsText("description");
-   	 List<String> contact_email = content.findValuesAsText("contact_email");
-   	 List<String> contact_website = content.findValuesAsText("contact_website");
-   	 List<String> image_url = content.findValuesAsText("image_url");
- 
-	 System.out.println("area id : "+id);
-	 
-	return ok(viewareabooth.render(description.get(0),contact_email.get(0),contact_website.get(0),image_url.get(0),id,idenv));
-	    	    
-    }
-    
+//    public static Result viewBoothArea(String id, String idenv){
+//    
+//     String descrUrl =Url.host+":"+Url.port+Url.boo_description+Url.vFcrTfj+"&area="+id;
+//     WSRequestHolder holder=WS.url(descrUrl);
+//	 holder.setHeader("Cookie","sessionid="+session("sessionid"));
+//	 holder.setContentType(Url.appjson);
+//	 
+//	 WSResponse response = holder.get().get(20000);
+//	 System.out.println("i'm in view area booth description");
+//	 System.out.println("view description booth area response status:"+response.getStatus());
+//	
+//	 JsonNode content = response.asJson();
+//
+//   	 List<String> description = content.findValuesAsText("description");
+//   	 List<String> contact_email = content.findValuesAsText("contact_email");
+//   	 List<String> contact_website = content.findValuesAsText("contact_website");
+//   	 List<String> image_url = content.findValuesAsText("image_url");
+// 
+//	 System.out.println("area id : "+id);
+//	 
+//	return ok(viewareabooth.render(description.get(0),contact_email.get(0),contact_website.get(0),image_url.get(0),id,idenv));
+//	    	    
+//    }
+//    
     //save-delete booth description:  	
     public static Result editBoothArea(String id, String idenv){
     	DynamicForm mySaveForm;
@@ -2185,26 +2174,26 @@ public class Application extends Controller {
    	
    }
    
-   public static Result viewAreaProgram(String id, String idenv){
-	   
-	     String descrUrl = Url.host + ":" + Url.port + Url.program + Url.vFcrTfj + "&area=" +id;
-	     WSRequestHolder holder=WS.url(descrUrl);
-		 holder.setHeader("Cookie","sessionid="+session("sessionid"));
-		 holder.setContentType(Url.appjson);
-		 
-		 WSResponse response = holder.get().get(20000);
-		 System.out.println("i'm in view area program");
-		 System.out.println("view program area response status:"+response.getStatus());
-		
-		 JsonNode content = response.asJson();
-
-	   	 List<String> description = content.findValuesAsText("description");
-	 
-		 System.out.println("area id : "+id);
-		 
-		return ok(viewAreaProgram.render(description.get(0),id,idenv));
-		   
-   }
+//   public static Result viewAreaProgram(String id, String idenv){
+//	   
+//	     String descrUrl = Url.host + ":" + Url.port + Url.program + Url.vFcrTfj + "&area=" +id;
+//	     WSRequestHolder holder=WS.url(descrUrl);
+//		 holder.setHeader("Cookie","sessionid="+session("sessionid"));
+//		 holder.setContentType(Url.appjson);
+//		 
+//		 WSResponse response = holder.get().get(20000);
+//		 System.out.println("i'm in view area program");
+//		 System.out.println("view program area response status:"+response.getStatus());
+//		
+//		 JsonNode content = response.asJson();
+//
+//	   	 List<String> description = content.findValuesAsText("description");
+//	 
+//		 System.out.println("area id : "+id);
+//		 
+//		return ok(viewAreaProgram.render(description.get(0),id,idenv));
+//		   
+//   }
    
    /***
     * Order Area
@@ -2431,6 +2420,7 @@ public class Application extends Controller {
    /**
     * Things AREA
     * */
+   
    //area things page
    public static Result AreaThing (String id,String idenv){
 	   
@@ -2438,104 +2428,104 @@ public class Application extends Controller {
    } 
    
    //area temperaure get it
-   public static Result areatemp(String id, String idenv){
-   	  
-  	 String descrUrl =Url.host+":"+Url.port+Url.temperature+Url.vFcrTfj+"&area="+id;
-	
-  	 WSRequestHolder holder=WS.url(descrUrl);
-  	 holder.setHeader("Cookie","sessionid="+session("sessionid"));
-  	 holder.setContentType("application/json");
-  	 
-  	 WSResponse response = holder.get().get(20000);
-  	 System.out.println("area temperature . . . . . . . . ");
-  	 System.out.println("area temperature status response: "+response.getStatus());
-  	
-  	 JsonNode content = response.asJson();
-  	 List<String> sensed_info = content.findValuesAsText("sensed_info");
-
-  try{
-	   
-  	 if(sensed_info.get(0) != null){ 		 
-  		 System.out.println("you have a temperature thing ...");
-  	    return ok(areatemp.render(sensed_info.get(0),id,idenv));
-  	 	}
-  	}catch(InputMismatchException ex){
-  		System.out.println("--InputMismatchException--");
-		   }catch (IndexOutOfBoundsException ex )
-	    {   
-			 System.out.println("$$$$ IndexOutOfBoundsException $$$$");
-	     } 
-   	
-  	return redirect(routes.Application.viewArea(id,idenv)); //todo :page with message you don't have temp
-   	
-   }
+//   public static Result areatemp(String id, String idenv){
+//   	  
+//  	 String descrUrl =Url.host+":"+Url.port+Url.temperature+Url.vFcrTfj+"&area="+id;
+//	
+//  	 WSRequestHolder holder=WS.url(descrUrl);
+//  	 holder.setHeader("Cookie","sessionid="+session("sessionid"));
+//  	 holder.setContentType("application/json");
+//  	 
+//  	 WSResponse response = holder.get().get(20000);
+//  	 System.out.println("area temperature . . . . . . . . ");
+//  	 System.out.println("area temperature status response: "+response.getStatus());
+//  	
+//  	 JsonNode content = response.asJson();
+//  	 List<String> sensed_info = content.findValuesAsText("sensed_info");
+//
+//  try{
+//	   
+//  	 if(sensed_info.get(0) != null){ 		 
+//  		 System.out.println("you have a temperature thing ...");
+//  	    return ok(areatemp.render(sensed_info.get(0),id,idenv));
+//  	 	}
+//  	}catch(InputMismatchException ex){
+//  		System.out.println("--InputMismatchException--");
+//		   }catch (IndexOutOfBoundsException ex )
+//	    {   
+//			 System.out.println("$$$$ IndexOutOfBoundsException $$$$");
+//	     } 
+//   	
+//  	return redirect(routes.Application.viewArea(id,idenv)); //todo :page with message you don't have temp
+//   	
+//   }
    
    //area humidity get it
-   public static Result areahum(String id, String idenv){
-   	  
-  	 String descrUrl =Url.host+":"+Url.port+Url.humidity+Url.vFcrTfj+"&area="+id;
-	
-  	 WSRequestHolder holder=WS.url(descrUrl);
-  	 holder.setHeader("Cookie","sessionid="+session("sessionid"));
-  	 holder.setContentType("application/json");
-  	 
-  	 WSResponse response = holder.get().get(20000);
-  	 System.out.println("area humidity . . . . . . . . ");
-  	 System.out.println("area humidity status response: "+response.getStatus());
-  	
-  	 JsonNode content = response.asJson();
-  	 List<String> sensed_info = content.findValuesAsText("sensed_info");
-	  	 
-	  try{
-		   
-	  	 if(sensed_info.get(0) != null){ 		 
-	  		 System.out.println("you have a humidity thing ...");
-	  	    return ok(areahum.render(sensed_info.get(0),id,idenv));
-	  	 	}
-	  	}catch(InputMismatchException ex){
-	  		System.out.println("---InputMismatchException---");
-			   }catch (IndexOutOfBoundsException ex )
-		    {  
-			   System.out.println("===IndexOutOfBoundsException==");
-		     } 
-	   	 System.out.println("no humidity");
-	  	 return redirect(routes.Application.viewArea(id,idenv)); //todo :page with message you don't have hum
-	   	
-	   }
-   
+//   public static Result areahum(String id, String idenv){
+//   	  
+//  	 String descrUrl =Url.host+":"+Url.port+Url.humidity+Url.vFcrTfj+"&area="+id;
+//	
+//  	 WSRequestHolder holder=WS.url(descrUrl);
+//  	 holder.setHeader("Cookie","sessionid="+session("sessionid"));
+//  	 holder.setContentType("application/json");
+//  	 
+//  	 WSResponse response = holder.get().get(20000);
+//  	 System.out.println("area humidity . . . . . . . . ");
+//  	 System.out.println("area humidity status response: "+response.getStatus());
+//  	
+//  	 JsonNode content = response.asJson();
+//  	 List<String> sensed_info = content.findValuesAsText("sensed_info");
+//	  	 
+//	  try{
+//		   
+//	  	 if(sensed_info.get(0) != null){ 		 
+//	  		 System.out.println("you have a humidity thing ...");
+//	  	    return ok(areahum.render(sensed_info.get(0),id,idenv));
+//	  	 	}
+//	  	}catch(InputMismatchException ex){
+//	  		System.out.println("---InputMismatchException---");
+//			   }catch (IndexOutOfBoundsException ex )
+//		    {  
+//			   System.out.println("===IndexOutOfBoundsException==");
+//		     } 
+//	   	 System.out.println("no humidity");
+//	  	 return redirect(routes.Application.viewArea(id,idenv)); //todo :page with message you don't have hum
+//	   	
+//	   }
+//   
    //if i have description : return edit page if not : return add description page
-   public static Result arealum(String id, String idenv){
-   	  
-  	 String descrUrl =Url.host+":"+Url.port+Url.luminosity+Url.vFcrTfj+"&area="+id;
-	
-  	 WSRequestHolder holder=WS.url(descrUrl);
-  	 holder.setHeader("Cookie","sessionid="+session("sessionid"));
-  	 holder.setContentType("application/json");
-  	 
-  	 WSResponse response = holder.get().get(20000);
-  	 System.out.println("area luminosity . . . . . . . . ");
-  	 System.out.println("area luminosity status response: "+response.getStatus());
-  	
-  	 JsonNode content = response.asJson();
-  	 List<String> sensed_info = content.findValuesAsText("sensed_info");
-
-  try{
-	   
-  	 if(sensed_info.get(0) != null){ 		 
-  		System.out.println("you have a luminosity thing ...");
-  	    return ok(arealum.render(sensed_info.get(0),id,idenv));
-  	 	}
-  	}catch(InputMismatchException ex){
-  		System.out.println("--InputMismatchException----");
-		   }catch (IndexOutOfBoundsException ex )
-	    {  
-			System.out.println("==IndexOutOfBoundsException===");
-	     } 
-   	
-  	return redirect(routes.Application.viewArea(id,idenv)); 
-   	
-   }
-   
+//   public static Result arealum(String id, String idenv){
+//   	  
+//  	 String descrUrl =Url.host+":"+Url.port+Url.luminosity+Url.vFcrTfj+"&area="+id;
+//	
+//  	 WSRequestHolder holder=WS.url(descrUrl);
+//  	 holder.setHeader("Cookie","sessionid="+session("sessionid"));
+//  	 holder.setContentType("application/json");
+//  	 
+//  	 WSResponse response = holder.get().get(20000);
+//  	 System.out.println("area luminosity . . . . . . . . ");
+//  	 System.out.println("area luminosity status response: "+response.getStatus());
+//  	
+//  	 JsonNode content = response.asJson();
+//  	 List<String> sensed_info = content.findValuesAsText("sensed_info");
+//
+//  try{
+//	   
+//  	 if(sensed_info.get(0) != null){ 		 
+//  		System.out.println("you have a luminosity thing ...");
+//  	    return ok(arealum.render(sensed_info.get(0),id,idenv));
+//  	 	}
+//  	}catch(InputMismatchException ex){
+//  		System.out.println("--InputMismatchException----");
+//		   }catch (IndexOutOfBoundsException ex )
+//	    {  
+//			System.out.println("==IndexOutOfBoundsException===");
+//	     } 
+//   	
+//  	return redirect(routes.Application.viewArea(id,idenv)); 
+//   	
+//   }
+//   
    /**
     * Environment Things
     * */
@@ -2992,12 +2982,373 @@ public class Application extends Controller {
 	   	System.out.println("\n type: " + type);
 	   	System.out.println("hash " + hash);
 //	   	
-  return ok(envarduinopage.render(id, hash));
+	   return ok(envarduinopage.render(id, hash));
    }
    
    public static Result areaArduino(String idenv, String id){
-	   return ok(areaarduinopage.render(idenv,id));
+	// now i have to find the id for the humidity, luminosity and temperature thing
+	   String url = "http://localhost:8080/envived/client/v2/resources/things/?clientrequest=true&virtual=true&format=json&area="+id;
+       WSRequestHolder holder = WS.url(url);
+     
+	    holder.setHeader("Cookie","sessionid="+session("sessionid"));
+  	 	holder.setContentType(Url.appjson);
+  	
+  	 	WSResponse ListResponse = holder.get().get(200000);
+  	 	JsonNode content = ListResponse.asJson();
+  	 	   	
+	    List<String> type = content.findValuesAsText("thing_type");
+ 	    	
+	    session("userid",id);
+
+	   	HashMap<String, String>hash=new HashMap<String, String>();
+	   	   	
+	   	for (int i=0;i<type.size();i++){
+	   		
+	   	List<String> idthing = content.findValuesAsText("resource_uri");
+	   	hash.put(type.get(i),idthing.get(i).split("/")[6]);		
+
+	   	}
+	   	
+	   	System.out.println("\n type: " + type);
+	   	System.out.println("hash " + hash);
+	   
+	   return ok(areaarduinopage.render(idenv,id,hash));
    }
+   
+   /**
+    * Arduino env charts
+    * */
+   
+   public static Result arduinoChartenv(String id){
+	   
+	   // now i have to find the id for the humidity, luminosity and temperature thing
+	   String url = "http://localhost:8080/envived/client/v2/resources/things/?clientrequest=true&virtual=true&format=json&environment="+id;
+       WSRequestHolder holder = WS.url(url);
+     
+	   holder.setHeader("Cookie","sessionid="+session("sessionid"));
+  	   holder.setContentType(Url.appjson);
+  	
+  	   WSResponse ListResponse = holder.get().get(200000);
+  	   JsonNode content = ListResponse.asJson();
+  	 	   	
+	   List<String> type = content.findValuesAsText("thing_type");
+ 	    	
+	   session("userid",id);
+
+	   	HashMap<String, String>hash=new HashMap<String, String>();
+	   	   	
+	   	for (int i=0;i<type.size();i++){	
+		   	List<String> idthing = content.findValuesAsText("resource_uri");
+		   	hash.put(type.get(i),idthing.get(i).split("/")[6]);	   	
+	   	}
+	   try{	
+	   	//id+type things to format url's - > we need the values to make some charts !
+	   	String t = hash.get("temperature");			//type = temperature , id_thing = t
+	   	String h = hash.get("humidity");			//type = humidity , id_thing = h
+	   	String l = hash.get("luminosity");			//type = luminosity , id-thing = l 
+	   	
+	   	System.out.println("temperature : "+t+" humidity : "+h+" luminosity : "+l);
+	   	
+	   	System.out.println("\n type: " + type);
+	   	System.out.println("hash " + hash);
+	   	
+	   	String url_t = "http://localhost:8080/envived/client/v2/resources/things/"+t+"/properties/?clientrequest=true&virtual=true&format=json&type=temperature";
+	   	String url_l = "http://localhost:8080/envived/client/v2/resources/things/"+l+"/properties/?clientrequest=true&virtual=true&format=json&type=luminosity";
+	   	String url_h = "http://localhost:8080/envived/client/v2/resources/things/"+h+"/properties/?clientrequest=true&virtual=true&format=json&type=humidity";
+	  
+	   //finding values for the temperature thing
+	   holder = WS.url(url_t);
+	      	 
+       holder.setHeader("Cookie","sessionid="+session("sessionid"));
+       holder.setContentType(Url.appjson);	      	
+       ListResponse = holder.get().get(200000);
+	   content = ListResponse.asJson();
+	   
+	   List<String> value_t = content.findValuesAsText("value");
+       List<String> timestamp_t = content.findValuesAsText("timestamp");
+
+       HashMap<String, String>hash_t=new HashMap<String, String>();
+		   	 
+       ArrayList<String> timeList_t = new ArrayList<String>();
+       ArrayList<String> dateList_t = new ArrayList<String>();
+	     	
+		   for(int i=0;i<value_t.size();i++){
+		   		 
+		 		 	String string = timestamp_t.get(i);	
+		   		 	String[] parts = string.split("T");
+		   		 		
+		   			String date = parts[0]; 
+		   			String time = parts[1]; 
+
+		   			if (string.contains("T")) {
+		   			   	    // Split it.
+		   			} else {
+		   				throw new IllegalArgumentException("String " + string + " does not contain T");
+		   			  }
+		   			  	
+		    timeList_t.add(time);
+		    dateList_t.add(date);
+		   			  
+			hash.put(value_t.get(i),null);
+		 }
+		   	System.out.println("val temp::: "+value_t+"\n");	
+		  //hash_t = the temperature thing hash; timeList_t = time hash; dateList_t = date hash
+		   	
+		 //finding values for the humidity thing
+		   holder = WS.url(url_h);
+		      	 
+		   holder.setHeader("Cookie","sessionid="+session("sessionid"));
+		   holder.setContentType(Url.appjson);	      	
+		   ListResponse = holder.get().get(200000);
+		   content = ListResponse.asJson();
+			   
+		   List<String> value_h = content.findValuesAsText("value");
+		   List<String> timestamp_h = content.findValuesAsText("timestamp");
+
+		  HashMap<String, String>hash_h=new HashMap<String, String>();
+				   	 
+		  ArrayList<String> timeList_h = new ArrayList<String>();
+		  ArrayList<String> dateList_h = new ArrayList<String>();
+			     	
+	      for(int i=0;i<value_h.size();i++){
+				   		 
+			String string = timestamp_t.get(i);	
+			String[] parts = string.split("T");
+				   		 		
+			String date = parts[0]; 
+			String time = parts[1]; 
+
+		   if (string.contains("T")) {
+				   // Split it.
+			 } else {
+				   	throw new IllegalArgumentException("String " + string + " does not contain T");
+				    }
+				   			  	
+			timeList_h.add(time);
+			dateList_h.add(date);
+				   			  
+			hash_h.put(value_t.get(i),null);
+		 }
+		   System.out.println("val hum::: "+value_h+"\n");	
+		//hash_h = the humidity thing hash; timeList_h = time hash; dateList_h = date hash
+		  
+		//finding values for the luminosity thing
+    	  holder = WS.url(url_l);
+			      	 
+		  holder.setHeader("Cookie","sessionid="+session("sessionid"));
+		  holder.setContentType(Url.appjson);	      	
+		  ListResponse = holder.get().get(200000);
+		  content = ListResponse.asJson();
+				   
+		  List<String> value_l = content.findValuesAsText("value");
+		  List<String> timestamp_l = content.findValuesAsText("timestamp");
+
+		  HashMap<String, String>hash_l=new HashMap<String, String>();
+					   	 
+		  ArrayList<String> timeList_l = new ArrayList<String>();
+		  ArrayList<String> dateList_l = new ArrayList<String>();
+				     	
+		  for(int i=0;i<value_l.size();i++){
+					   		 
+		    String string = timestamp_t.get(i);	
+			String[] parts = string.split("T");
+					   		 		
+			String date = parts[0]; 
+			String time = parts[1]; 
+
+			  if (string.contains("T")) {
+					   // Split it.
+				 } else {
+					   	throw new IllegalArgumentException("String " + string + " does not contain T");
+					    }
+					   			  	
+				timeList_l.add(time);
+				dateList_l.add(date);
+					   			  
+				hash_l.put(value_l.get(i),null);
+			 }
+			   System.out.println("val lum::: "+value_l+"\n");	
+			//hash_l = the luminosity thing hash; timeList_l = time hash; dateList_l = date hash
+			     	
+	   	return ok(arduinoenv.render(id,value_t,timeList_t,dateList_t,value_h,timeList_h,dateList_h,value_l,timeList_l,dateList_l));
+	   }catch(InputMismatchException ex){
+			
+		   }catch (IndexOutOfBoundsException ex )
+	    {  
+		   
+	     }catch (Exception ex){
+	    	 
+	     }
+		return  ok(error.render("Please add all the things to see this page !"));
+//	   	return  ok(arduinoenv.render(id,hash));
+   }
+   
+   /**
+    * Area Arduino charts
+    * */
+   public static Result arduinoChartarea(String id_env, String id){
+	   
+	   // now i have to find the id for the humidity, luminosity and temperature thing
+	   String url = "http://localhost:8080/envived/client/v2/resources/things/?clientrequest=true&virtual=true&format=json&area="+id;
+       WSRequestHolder holder = WS.url(url);
+     
+	   holder.setHeader("Cookie","sessionid="+session("sessionid"));
+  	   holder.setContentType(Url.appjson);
+  	
+  	   WSResponse ListResponse = holder.get().get(200000);
+  	   JsonNode content = ListResponse.asJson();
+  	 	   	
+	   List<String> type = content.findValuesAsText("thing_type");
+ 	    	
+	   session("userid",id);
+
+	   	HashMap<String, String>hash=new HashMap<String, String>();
+	   	   	
+	   	for (int i=0;i<type.size();i++){	
+		   	List<String> idthing = content.findValuesAsText("resource_uri");
+		   	hash.put(type.get(i),idthing.get(i).split("/")[6]);	   	
+	   	}
+   try{
+	   	//id+type things to format url's - > we need the values to make some charts !
+	   	String t = hash.get("temperature");			//type = temperature , id_thing = t
+	   	String h = hash.get("humidity");			//type = humidity , id_thing = h
+	   	String l = hash.get("luminosity");			//type = luminosity , id-thing = l 
+	   	
+	   	System.out.println("temperature : "+t+" humidity : "+h+" luminosity : "+l);
+	   	
+	   	System.out.println("\n type: " + type);
+	   	System.out.println("hash " + hash);
+	   	
+	   	String url_t = "http://localhost:8080/envived/client/v2/resources/things/"+t+"/properties/?clientrequest=true&virtual=true&format=json&type=temperature";
+	   	String url_l = "http://localhost:8080/envived/client/v2/resources/things/"+l+"/properties/?clientrequest=true&virtual=true&format=json&type=luminosity";
+	   	String url_h = "http://localhost:8080/envived/client/v2/resources/things/"+h+"/properties/?clientrequest=true&virtual=true&format=json&type=humidity";
+	  
+	   //finding values for the temperature thing
+	   holder = WS.url(url_t);
+	      	 
+       holder.setHeader("Cookie","sessionid="+session("sessionid"));
+       holder.setContentType(Url.appjson);	      	
+       ListResponse = holder.get().get(200000);
+	   content = ListResponse.asJson();
+	   
+	   List<String> value_t = content.findValuesAsText("value");
+       List<String> timestamp_t = content.findValuesAsText("timestamp");
+
+       HashMap<String, String>hash_t=new HashMap<String, String>();
+		   	 
+       ArrayList<String> timeList_t = new ArrayList<String>();
+       ArrayList<String> dateList_t = new ArrayList<String>();
+	     	
+		   for(int i=0;i<value_t.size();i++){
+		   		 
+		 		 	String string = timestamp_t.get(i);	
+		   		 	String[] parts = string.split("T");
+		   		 		
+		   			String date = parts[0]; 
+		   			String time = parts[1]; 
+
+		   			if (string.contains("T")) {
+		   			   	    // Split it.
+		   			} else {
+		   				throw new IllegalArgumentException("String " + string + " does not contain T");
+		   			  }
+		   			  	
+		    timeList_t.add(time);
+		    dateList_t.add(date);
+		   			  
+			hash.put(value_t.get(i),null);
+		 }
+		   	System.out.println("val temp::: "+value_t+"\n");	
+		  //hash_t = the temperature thing hash; timeList_t = time hash; dateList_t = date hash
+		   	
+		 //finding values for the humidity thing
+		   holder = WS.url(url_h);
+		      	 
+		   holder.setHeader("Cookie","sessionid="+session("sessionid"));
+		   holder.setContentType(Url.appjson);	      	
+		   ListResponse = holder.get().get(200000);
+		   content = ListResponse.asJson();
+			   
+		   List<String> value_h = content.findValuesAsText("value");
+		   List<String> timestamp_h = content.findValuesAsText("timestamp");
+
+		  HashMap<String, String>hash_h=new HashMap<String, String>();
+				   	 
+		  ArrayList<String> timeList_h = new ArrayList<String>();
+		  ArrayList<String> dateList_h = new ArrayList<String>();
+			     	
+	      for(int i=0;i<value_h.size();i++){
+				   		 
+			String string = timestamp_t.get(i);	
+			String[] parts = string.split("T");
+				   		 		
+			String date = parts[0]; 
+			String time = parts[1]; 
+
+		   if (string.contains("T")) {
+				   // Split it.
+			 } else {
+				   	throw new IllegalArgumentException("String " + string + " does not contain T");
+				    }
+				   			  	
+			timeList_h.add(time);
+			dateList_h.add(date);
+				   			  
+			hash_h.put(value_t.get(i),null);
+		 }
+		   System.out.println("val hum::: "+value_h+"\n");	
+		//hash_h = the humidity thing hash; timeList_h = time hash; dateList_h = date hash
+		  
+		//finding values for the luminosity thing
+    	  holder = WS.url(url_l);
+			      	 
+		  holder.setHeader("Cookie","sessionid="+session("sessionid"));
+		  holder.setContentType(Url.appjson);	      	
+		  ListResponse = holder.get().get(200000);
+		  content = ListResponse.asJson();
+				   
+		  List<String> value_l = content.findValuesAsText("value");
+		  List<String> timestamp_l = content.findValuesAsText("timestamp");
+
+		  HashMap<String, String>hash_l=new HashMap<String, String>();
+					   	 
+		  ArrayList<String> timeList_l = new ArrayList<String>();
+		  ArrayList<String> dateList_l = new ArrayList<String>();
+				     	
+		  for(int i=0;i<value_l.size();i++){
+					   		 
+		    String string = timestamp_t.get(i);	
+			String[] parts = string.split("T");
+					   		 		
+			String date = parts[0]; 
+			String time = parts[1]; 
+
+			  if (string.contains("T")) {
+					   // Split it.
+				 } else {
+					   	throw new IllegalArgumentException("String " + string + " does not contain T");
+					    }
+					   			  	
+				timeList_l.add(time);
+				dateList_l.add(date);
+					   			  
+				hash_l.put(value_l.get(i),null);
+			 }
+			   System.out.println("val lum::: "+value_l+"\n");	
+			//hash_l = the luminosity thing hash; timeList_l = time hash; dateList_l = date hash
+			     	
+	   	return ok(arduinoarea.render(id_env,id,value_t,timeList_t,dateList_t,value_h,timeList_h,dateList_h,value_l,timeList_l,dateList_l));
+	    }catch(InputMismatchException ex){
+	
+			   }catch (IndexOutOfBoundsException ex )
+		    {  
+			   
+		     }catch (Exception ex){
+		    	 
+		     }
+	   	return  ok(error.render("Please add all the things to see this page !"));
+   }
+ 
 }
 
 

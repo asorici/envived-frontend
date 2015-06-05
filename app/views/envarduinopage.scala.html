@@ -1,5 +1,5 @@
 @(id:String, map: Map[String, String])
-@Main("Things Area") {
+@Main("Arduino") {
 <nav id="css" class="navbar navbar-default">
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
@@ -53,7 +53,7 @@
 </style>
 
 <div class="row">
-<div class="col-md-offset-1">
+<div class="col-md-offset-1 col-md-4">
 <div class="light">
   <label> Light Control</label>
 </div><!--light-->
@@ -61,7 +61,13 @@
   <button id="11" class="led led11">Red</button> <!-- button for pin 11 -->
   <button id="12" class="led led12">Green</button> <!-- button for pin 12 -->
   <button id="13" class="led led13">Yellow</button> <!-- button for pin 13 -->
-</div> <!--offset-->   
+</div> <!--offset-->  
+
+
+<div class="col-md-3">
+  <div class="msg-data-send"> <br><label>Data sent successfully !</label></div>
+</div>
+
 </div><!--row-->
 
 <div class="row">
@@ -77,19 +83,19 @@
   <option value="null">---</option>
 </select>
 <label>DATA</label>
-<select class="form-control" placeholder="digital pin">
+<select class="form-control temp-pin" placeholder="digital pin">
   <option id="4" class="temp" value="data-pin">4</option>
   <option id="2" class="temp" value="data-pin">2</option>
-  <option id="3" class="temp" value="data-pin">~3</option>
-  <option id="5" class="temp" value="data-pin">~5</option>
-  <option id="6" class="temp" value="data-pin">~6</option>
+  <option id="3" class="temp" value="data-pin">3</option>
+  <option id="5" class="temp" value="data-pin">5</option>
+  <option id="6" class="temp" value="data-pin">6</option>
   <option id="7" class="temp" value="data-pin">7</option>
   <option id="8" class="temp" value="data-pin">8</option>
-  <option id="9" class="temp" value="data-pin">~9</option>
-  <option id="10" class="temp" value="data-pin">~10</option>
-  <option id="11" class="temp" value="data-pin">~11</option>
-  <option id="12" class="temp" value="data-pin">12</option>
-  <option id="13" class="temp" value="data-pin">13</option>
+  <option id="9" class="temp" value="data-pin">9</option>
+  <!-- <option id="10" class="temp" value="data-pin">10</option> -->
+  <!-- <option id="11" class="temp" value="data-pin">11</option> -->
+  <!-- <option id="12" class="temp" value="data-pin">12</option> -->
+  <!-- <option id="13" class="temp" value="data-pin">13</option> -->
 </select>
 <label>NC</label>
 <select class="form-control">
@@ -113,19 +119,19 @@
 </select>
 
 <label>DATA</label>
-<select class="form-control" >
+<select class="form-control hum-pin" >
   <option id="4" class="hum" value="data-pin">4</option>
   <option id="2" class="hum" value="data-pin">2</option>
-  <option id="3" class="hum" value="data-pin">~3</option>
-  <option id="5" class="hum" value="data-pin">~5</option>
-  <option id="6" class="hum" value="data-pin">~6</option>
+  <option id="3" class="hum" value="data-pin">3</option>
+  <option id="5" class="hum" value="data-pin">5</option>
+  <option id="6" class="hum" value="data-pin">6</option>
   <option id="7" class="hum" value="data-pin">7</option>
   <option id="8" class="hum" value="data-pin">8</option>
-  <option id="9" class="hum" value="data-pin">~9</option>
-  <option id="10" class="hum" value="data-pin">~10</option>
-  <option id="11" class="hum" value="data-pin">~11</option>
-  <option id="12" class="hum" value="data-pin">12</option>
-  <option id="13" class="hum" value="data-pin">13</option>
+  <option id="9" class="hum" value="data-pin">9</option>
+  <!-- <option id="10" class="hum" value="data-pin">10</option> -->
+  <!-- <option id="11" class="hum" value="data-pin">11</option> -->
+  <!-- <option id="12" class="hum" value="data-pin">12</option> -->
+  <!-- <option id="13" class="hum" value="data-pin">13</option> -->
 </select>
 
 <label>NC</label>
@@ -150,7 +156,7 @@
 </select>
 
 <label>Analogic PIN</label>
-<select class="form-control" name="pin_select">
+<select class="form-control lum-pin" name="pin_select">
   <option id="0" class="lum" value="vcc">0</option>
   <option id="1" class="lum" value="null">1</option>
   <option id="2" class="lum" value="vcc">2</option>
@@ -207,7 +213,7 @@
 @for((k,v)<- map){
 
 @if(k == "humidity") {
-                      <button id="hum">@k</button> &nbsp;&nbsp;
+                      <button id="hum" value="@k">@k</button> &nbsp;&nbsp;
                       <button id="@v" class="h_id">@v</button>
                      }else{
                     
@@ -215,7 +221,7 @@
 <!-- </div > -->
 <!-- <div class="col-md-3"> -->
 @if(k == "temperature"){
-                      <button id="temp">@k</button> &nbsp;&nbsp;
+                      <button id="temp" value="@k">@k</button> &nbsp;&nbsp;
                       <button id="@v" class="t_id">@v</button>
                     }else{
                     
@@ -223,7 +229,7 @@
 <!-- </div> -->
 <!-- <div class="col-md-3"> -->
 @if(k == "luminosity"){
-                      <button id="lum">@k</button> &nbsp;&nbsp;
+                      <button id="lum" value="@k">@k</button> &nbsp;&nbsp;
                       <button id="@v" class="l_id">@v</button>
                     }else{
                     
@@ -238,10 +244,48 @@
 
 
 <div class="row">
-<div class="col-md-offset-1 col-md-4">
+<div class="col-md-offset-1 col-md-1">
 <button class="send-data">Send</button>
 </div>
+<div class="col-md-1">
+  <button class="chart" onClick="location.href='@routes.Application.arduinoChartenv(id)'">Chart</button>
 </div>
+</div>
+<button id="@id" class="env_id"></button>
+
+<style type="text/css">
+.env_id{
+visibility: hidden;
+  }
+</style>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+
+    $(".chart").click(function(){
+//jQuery(".entry-title").html();
+
+      var id = $(".env_id").attr('id').toString();
+      var id_t = $(".t_id").attr('id').toString();
+      var t_v = $("#temp").val();
+      var id_h = $(".h_id").attr('id');
+      var h_v = $ ("#hum").val();
+      var id_l = $(".l_id").attr('id');
+      var l_l = $("#lum").val(); 
+       
+     //alert("id temp : "+id_t+" ; val temp: "+t_v+" ; id hum : "+id_h+" ; val hum : "+h_v+" ; id lum : "+id_l+" ; val lum : "+l_l+" ; id: "+id);
+      //window.location.href = "routes.Application.arduinoChartenv("id","id_t","t_v","id_h","h_v","id_l","l_l")";
+
+       //window.location.href = "routes.Application.arduinoChartenv(id,id_t,t_v,id_h,h_v,id_l,l_l)";
+       // return '<a href="javascript:void(0);" onclick="routes.Application.arduinoChartenv(\''+id+id_t+t_v+id_h+h_v+id_l+l_l+'\'); return false;"></a>';
+       // return '<a href="javascript:void(0);" onclick="routes.Application.arduinoChartenv(\''+type+'\'); return false;"></a>';
+        // return '<a href="javascript:void(0);" onclick="routes.Application.arduinoChartenv(&quot;'+type+'&quot;); return false;">some text here</a>';
+    });
+  });
+  
+
+
+</script>
 
 
  <script type="text/javascript">
@@ -258,8 +302,13 @@
           var id_h = $(".h_id").attr('id');
           var id_l = $(".l_id").attr('id');
 
+          var pin_t = $('.temp-pin option:selected').text();
+          var pin_l = $('.lum-pin option:selected').text();
+          var pin_h = $('.hum-pin option:selected').text();
+
+          // alert("pin temp : "+pin_t+" pin lum : "+pin_l+" pin hum : "+pin_h);
           // alert("temp "+id_t+" hum "+id_h+" lum "+id_l);
-          $.get("http://192.168.4.1:80/",{pin:p,temp:id_t,hum:id_h,lum:id_l});
+          $.get("http://192.168.4.1:80/",{pin:p,temp:id_t,hum:id_h,lum:id_l,pint:pin_t,pinl:pin_l,pinh:pin_h});
           // $.get("http://192.168.4.1:80/", {temp:id_t});
         // });
         // get id value (i.e. pin13, pin12, or pin11)
@@ -278,9 +327,18 @@
       var id_h = $(".h_id").attr('id');
       var id_l = $(".l_id").attr('id');
 
+      var pin_t = $('.temp-pin option:selected').text();
+      var pin_l = $('.lum-pin option:selected').text();
+      var pin_h = $('.hum-pin option:selected').text();
+
       // alert("temp "+id_t+" hum "+id_h+" lum "+id_l);
-      $.get("http://192.168.4.1:80/",{pin:10,temp:id_t,hum:id_h,lum:id_l});
+      $.get("http://192.168.4.1:80/",{pin:10,temp:id_t,hum:id_h,lum:id_l,pint:pin_t,pinl:pin_l,pinh:pin_h});
+   
+            $( ".msg-data-send" ).show( "slow" );
+            $(".chart").addClass("see-me");
+        
       // $.get("http://192.168.4.1:80/", {temp:id_t});
+
     });
   });
 
@@ -341,5 +399,27 @@
   .butoane button:hover{
     background-color: #007ACC;
   }
+
+.send-data,.chart{
+   width: 80px;
+   height: 40px;
+  -webkit-transition: all 0.5s;
+  transition: all 0.5s;
+   }
+.send-data:hover,.chart:hover{
+    background-color:#29A3A3;
+   }
+
+   .msg-data-send{
+    color: #CCCC00;
+    text-shadow: 2px 2px 4px #000000;
+    font-size: 20px;
+    display: none;
+   }
+   .see-me{
+   color:#FFF;
+   text-shadow: 0 0 3px #000, 0 0 5px #008A00; 
+   background-color: #CCCC00;    
+   }
 </style>
 }
